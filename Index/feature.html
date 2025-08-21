@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features - Advocate & Criminology Management System - আইনপ্রহরী</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-blue: #1a202c; /* blue-900 equivalent */
+            --secondary-blue: #2c5282; /* blue-700 equivalent */
+            --accent-blue: #3182ce; /* blue-600 equivalent */
+            --light-blue: #ebf8ff; /* blue-50 equivalent */
+            --lighter-blue: #e0f2fe; /* blue-100 equivalent */
+            --text-dark: #2d3748; /* gray-800 equivalent */
+            --text-medium: #4a5568; /* gray-700 equivalent */
+            --text-light: #718096; /* gray-600 equivalent */
+            --bg-light: #f7fafc; /* gray-50 equivalent */
+            --bg-white: #ffffff;
+            --bg-dark: #1a202c; /* gray-900 equivalent */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            padding-top: 76px; /* Adjust based on navbar height */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        .navbar {
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+        }
+
+        .navbar-brand {
+            color: var(--primary-blue) !important;
+            font-weight: 800;
+            font-size: 1.75rem;
+            border-radius: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            transition: background-color 0.3s ease;
+        }
+        .navbar-brand:hover {
+            background-color: var(--light-blue);
+        }
+
+        .nav-link {
+            color: var(--text-light) !important;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: var(--accent-blue) !important;
+        }
+
+        .btn-primary-custom {
+            background-color: var(--accent-blue);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+        .btn-primary-custom:hover {
+            background-color: #2b6cb0;
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        .btn-secondary-custom {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary-custom:hover {
+            background-color: white;
+            color: var(--secondary-blue);
+            transform: translateY(-2px);
+        }
+
+        .btn-light-custom {
+            background-color: white;
+            color: var(--secondary-blue);
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+        .btn-light-custom:hover {
+            background-color: var(--lighter-blue);
+            transform: translateY(-2px);
+            color: var(--secondary-blue);
+        }
+
+        .btn-secondary-outline-custom {
+            background-color: transparent;
+            color: var(--text-medium);
+            border: 1px solid var(--text-light);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary-outline-custom:hover {
+            background-color: var(--light-blue);
+            color: var(--accent-blue);
+            border-color: var(--accent-blue);
+        }
+
+        .section-heading {
+            color: var(--primary-blue);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        .section-subheading {
+            color: var(--text-medium);
+            margin-bottom: 3rem;
+            max-width: 50rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .feature-card {
+            background-color: var(--bg-white);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #f0f0f0;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            height: 100%;
+        }
+        .feature-card:hover {
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            background-color: var(--lighter-blue);
+            padding: 1rem;
+            border-radius: 9999px;
+            margin-bottom: 1.5rem;
+            color: var(--accent-blue);
+        }
+        .icon-size {
+            width: 36px;
+            height: 36px;
+        }
+
+        .bg-blue-50-custom {
+            background-color: var(--light-blue);
+        }
+        .bg-gray-900-custom {
+            background-color: var(--bg-dark);
+        }
+
+        /* Footer specific styling */
+        footer a {
+            transition: color 0.3s ease;
+        }
+        footer a:hover {
+            color: white !important;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <i data-lucide="gavel" class="me-2 text-primary-custom-icon"></i>
+                <span id="app-name">আইনপ্রহরী</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="feature.html" id="nav-features">বৈশিষ্ট্যসমূহ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="roles.html" id="nav-roles">ভূমিকা</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html" id="nav-contact">যোগাযোগ</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-primary-custom d-flex align-items-center" href="login.html" id="nav-login">
+                            <i data-lucide="log-in" class="me-2"></i> প্রবেশ করুন
+                        </a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-outline-primary d-flex align-items-center" href="signup.html" id="nav-signup">
+                            <i data-lucide="user-plus" class="me-2"></i> নিবন্ধন করুন
+                        </a>
+                    </li>
+                    <li class="nav-item ms-lg-4">
+                        <button class="btn btn-secondary-outline-custom" id="language-toggle">English</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="py-5 bg-blue-50-custom text-center">
+        <div class="container">
+            <h1 class="display-4 fw-bold section-heading" id="page-heading">আমাদের প্রধান বৈশিষ্ট্যসমূহ</h1>
+            <p class="lead section-subheading" id="page-subheading">আমাদের সিস্টেম আপনার আইনি ও অপরাধবিদ্যা কার্যক্রম পরিচালনার জন্য একটি বিস্তৃত টুলস সেট অফার করে।</p>
+        </div>
+    </section>
+
+    <!-- Features Content Section -->
+    <section class="py-5 py-md-5 bg-white">
+        <div class="container text-center">
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i data-lucide="briefcase" class="icon-size"></i></div>
+                        <h3 class="h5 fw-bold mb-3" id="feat-case-management-title">মামলা ব্যবস্থাপনা</h3>
+                        <p class="text-muted" id="feat-case-management-desc">মামলা সংগঠিত করুন, অগ্রগতি ট্র্যাক করুন, নথি পরিচালনা করুন এবং সহজে অনুস্মারক সেট করুন। প্রতিটি মামলার জন্য একটি বিস্তারিত টাইমলাইন এবং স্ট্যাটাস আপডেট সিস্টেম রয়েছে।</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i data-lucide="users" class="icon-size"></i></div>
+                        <h3 class="h5 fw-bold mb-3" id="feat-client-relationship-title">ক্লায়েন্ট সম্পর্ক</h3>
+                        <p class="text-muted" id="feat-client-relationship-desc">বিস্তারিত ক্লায়েন্ট প্রোফাইল, যোগাযোগ লগ এবং সুরক্ষিত ক্লায়েন্ট পোর্টাল বজায় রাখুন। ক্লায়েন্টরা তাদের মামলার অগ্রগতি দেখতে এবং আইনজীবীর সাথে সরাসরি যোগাযোগ করতে পারে।</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i data-lucide="shield-check" class="icon-size"></i></div>
+                        <h3 class="h5 fw-bold mb-3" id="feat-evidence-tracking-title">প্রমাণ ট্র্যাকিং</h3>
+                        <p class="text-muted" id="feat-evidence-tracking-desc">সব ধরনের প্রমাণ নিরাপদে লগ করুন এবং পরিচালনা করুন, চেইন অফ কাস্টডি নিশ্চিত করুন। ছবি, ভিডিও, অডিও এবং নথি আপলোড করার সুবিধা রয়েছে।</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i data-lucide="file-text" class="icon-size"></i></div>
+                        <h3 class="h5 fw-bold mb-3" id="feat-document-automation-title">নথি স্বয়ংক্রিয়করণ</h3>
+                        <p class="text-muted" id="feat-document-automation-desc">কাস্টমাইজযোগ্য টেমপ্লেট সহ দ্রুত আইনি নথি এবং রিপোর্ট তৈরি করুন। চার্জ শীট, এফআইআর, এবং অন্যান্য আইনি নথি স্বয়ংক্রিয়ভাবে তৈরি করা যায়।</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i data-lucide="bar-chart-2" class="icon-size"></i></div>
+                        <h3 class="h5 fw-bold mb-3" id="feat-analytics-reporting-title">বিশ্লেষণ ও প্রতিবেদন</h3>
+                        <p class="text-muted" id="feat-analytics-reporting-desc">শক্তিশালী বিশ্লেষণ এবং কাস্টম রিপোর্টের মাধ্যমে আপনার অনুশীলনের কর্মক্ষমতা সম্পর্কে অন্তর্দৃষ্টি লাভ করুন। মামলার সময়কাল, সাফল্যের হার এবং অন্যান্য মেট্রিক্স ট্র্যাক করুন।</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i data-lucide="gavel" class="icon-size"></i></div>
+                        <h3 class="h5 fw-bold mb-3" id="feat-court-scheduling-title">আদালতের তারিখ নির্ধারণ</h3>
+                        <p class="text-muted" id="feat-court-scheduling-desc">একীভূত ক্যালেন্ডার এবং স্বয়ংক্রিয় আদালতের তারিখ অনুস্মারক সহ কোনো সময়সীমা মিস করবেন না। শুনানি এবং পরামর্শের জন্য সময়সূচী সেট করুন।</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900-custom text-light py-4">
+        <div class="container text-center text-md-start d-md-flex justify-content-between align-items-center">
+            <div class="mb-3 mb-md-0">
+                <p class="mb-0" id="footer-copyright">&copy; <span id="current-year"></span> আইনপ্রহরী. সর্বস্বত্ব সংরক্ষিত।</p>
+            </div>
+            <div class="d-flex justify-content-center gap-4">
+                <a href="#" class="text-light text-decoration-none hover-white" id="footer-privacy">গোপনীয়তা নীতি</a>
+                <a href="#" class="text-light text-decoration-none hover-white" id="footer-terms">পরিষেবার শর্তাবলী</a>
+                <a href="#" class="text-light text-decoration-none hover-white" id="footer-sitemap">সাইটম্যাপ</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS CDN (Bundle with Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!-- Custom JavaScript for Language Switching -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Lucide icons
+            lucide.createIcons();
+
+            // Content object for both English and Bengali
+            const content = {
+                en: {
+                    appName: "AdvocatePro",
+                    nav: {
+                        features: "Features",
+                        roles: "Roles",
+                        contact: "Contact",
+                        login: "Login",
+                        signUp: "Sign Up",
+                    },
+                    pageHeader: {
+                        heading: "Our Key Features",
+                        subheading: "Our system offers a comprehensive suite of tools to manage every aspect of your legal and criminology operations.",
+                    },
+                    features: {
+                        caseManagement: {
+                            title: "Case Management",
+                            description: "Organize cases, track progress, manage documents, and set reminders with ease. Includes a detailed timeline and status update system for each case.",
+                        },
+                        clientRelationship: {
+                            title: "Client Relationship",
+                            description: "Maintain detailed client profiles, communication logs, and secure client portals. Clients can view case progress and communicate directly with their advocate.",
+                        },
+                        evidenceTracking: {
+                            title: "Evidence Tracking",
+                            description: "Securely log and manage all forms of evidence, ensuring chain of custody. Features include uploading images, videos, audio, and documents.",
+                        },
+                        documentAutomation: {
+                            title: "Document Automation",
+                            description: "Generate legal documents and reports quickly with customizable templates. Charge sheets, FIRs, and other legal documents can be automatically generated.",
+                        },
+                        analyticsReporting: {
+                            title: "Analytics & Reporting",
+                            description: "Gain insights into your practice's performance with powerful analytics and custom reports. Track case duration, success rates, and other metrics.",
+                        },
+                        courtScheduling: {
+                            title: "Court Date Scheduling",
+                            description: "Never miss a deadline with integrated calendar and automated court date reminders. Set schedules for hearings and consultations.",
+                        },
+                    },
+                    footer: {
+                        copyright: "Ainprohori. All rights reserved.",
+                        privacyPolicy: "Privacy Policy",
+                        termsOfService: "Terms of Service",
+                        sitemap: "Sitemap",
+                    },
+                },
+                bn: {
+                    appName: "আইনপ্রহরী",
+                    nav: {
+                        features: "বৈশিষ্ট্যসমূহ",
+                        roles: "ভূমিকা",
+                        contact: "যোগাযোগ",
+                        login: "প্রবেশ করুন",
+                        signUp: "নিবন্ধন করুন",
+                    },
+                    pageHeader: {
+                        heading: "আমাদের প্রধান বৈশিষ্ট্যসমূহ",
+                        subheading: "আমাদের সিস্টেম আপনার আইনি ও অপরাধবিদ্যা কার্যক্রম পরিচালনার জন্য একটি বিস্তৃত টুলস সেট অফার করে।",
+                    },
+                    features: {
+                        caseManagement: {
+                            title: "মামলা ব্যবস্থাপনা",
+                            description: "মামলা সংগঠিত করুন, অগ্রগতি ট্র্যাক করুন, নথি পরিচালনা করুন এবং সহজে অনুস্মারক সেট করুন। প্রতিটি মামলার জন্য একটি বিস্তারিত টাইমলাইন এবং স্ট্যাটাস আপডেট সিস্টেম রয়েছে।",
+                        },
+                        clientRelationship: {
+                            title: "ক্লায়েন্ট সম্পর্ক",
+                            description: "বিস্তারিত ক্লায়েন্ট প্রোফাইল, যোগাযোগ লগ এবং সুরক্ষিত ক্লায়েন্ট পোর্টাল বজায় রাখুন। ক্লায়েন্টরা তাদের মামলার অগ্রগতি দেখতে এবং আইনজীবীর সাথে সরাসরি যোগাযোগ করতে পারে।",
+                        },
+                        evidenceTracking: {
+                            title: "প্রমাণ ট্র্যাকিং",
+                            description: "সব ধরনের প্রমাণ নিরাপদে লগ করুন এবং পরিচালনা করুন, চেইন অফ কাস্টডি নিশ্চিত করুন। ছবি, ভিডিও, অডিও এবং নথি আপলোড করার সুবিধা রয়েছে।",
+                        },
+                        documentAutomation: {
+                            title: "নথি স্বয়ংক্রিয়করণ",
+                            description: "কাস্টমাইজযোগ্য টেমপ্লেট সহ দ্রুত আইনি নথি এবং রিপোর্ট তৈরি করুন। চার্জ শীট, এফআইআর, এবং অন্যান্য আইনি নথি স্বয়ংক্রিয়ভাবে তৈরি করা যায়।",
+                        },
+                        analyticsReporting: {
+                            title: "বিশ্লেষণ ও প্রতিবেদন",
+                            description: "শক্তিশালী বিশ্লেষণ এবং কাস্টম রিপোর্টের মাধ্যমে আপনার অনুশীলনের কর্মক্ষমতা সম্পর্কে অন্তর্দৃষ্টি লাভ করুন। মামলার সময়কাল, সাফল্যের হার এবং অন্যান্য মেট্রিক্স ট্র্যাক করুন।",
+                        },
+                        courtScheduling: {
+                            title: "আদালতের তারিখ নির্ধারণ",
+                            description: "একীভূত ক্যালেন্ডার এবং স্বয়ংক্রিয় আদালতের তারিখ অনুস্মারক সহ কোনো সময়সীমা মিস করবেন না। শুনানি এবং পরামর্শের জন্য সময়সূচী সেট করুন।",
+                        },
+                    },
+                    footer: {
+                        copyright: "আইনপ্রহরী. সর্বস্বত্ব সংরক্ষিত।",
+                        privacyPolicy: "গোপনীয়তা নীতি",
+                        termsOfService: "পরিষেবার শর্তাবলী",
+                        sitemap: "সাইটম্যাপ",
+                    },
+                },
+            };
+
+           let currentLang = 'en'; // Initial language
+
+            function updateContent() {
+                const t = content[currentLang];
+
+                // Navbar
+                document.getElementById('app-name').textContent = t.appName;
+                document.getElementById('nav-features').textContent = t.nav.features;
+                document.getElementById('nav-roles').textContent = t.nav.roles;
+                document.getElementById('nav-contact').textContent = t.nav.contact;
+                document.getElementById('nav-login').innerHTML = `<i data-lucide="log-in" class="me-2"></i> ${t.nav.login}`;
+                document.getElementById('nav-signup').innerHTML = `<i data-lucide="user-plus" class="me-2"></i> ${t.nav.signUp}`;
+                document.getElementById('language-toggle').textContent = currentLang === 'en' ? 'বাংলা' : 'English';
+
+                // Page Header
+                document.getElementById('page-heading').textContent = t.pageHeader.heading;
+                document.getElementById('page-subheading').textContent = t.pageHeader.subheading;
+
+                // Features Section
+                document.getElementById('feat-case-management-title').textContent = t.features.caseManagement.title;
+                document.getElementById('feat-case-management-desc').textContent = t.features.caseManagement.description;
+                document.getElementById('feat-client-relationship-title').textContent = t.features.clientRelationship.title;
+                document.getElementById('feat-client-relationship-desc').textContent = t.features.clientRelationship.description;
+                document.getElementById('feat-evidence-tracking-title').textContent = t.features.evidenceTracking.title;
+                document.getElementById('feat-evidence-tracking-desc').textContent = t.features.evidenceTracking.description;
+                document.getElementById('feat-document-automation-title').textContent = t.features.documentAutomation.title;
+                document.getElementById('feat-document-automation-desc').textContent = t.features.documentAutomation.description;
+                document.getElementById('feat-analytics-reporting-title').textContent = t.features.analyticsReporting.title;
+                document.getElementById('feat-analytics-reporting-desc').textContent = t.features.analyticsReporting.description;
+                document.getElementById('feat-court-scheduling-title').textContent = t.features.courtScheduling.title;
+                document.getElementById('feat-court-scheduling-desc').textContent = t.features.courtScheduling.description;
+
+                // Footer
+                document.getElementById('current-year').textContent = new Date().getFullYear();
+                document.getElementById('footer-copyright').textContent = `© ${new Date().getFullYear()} ${t.footer.copyright}`;
+                document.getElementById('footer-privacy').textContent = t.footer.privacyPolicy;
+                document.getElementById('footer-terms').textContent = t.footer.termsOfService;
+                document.getElementById('footer-sitemap').textContent = t.footer.sitemap;
+
+                lucide.createIcons(); // Re-create Lucide icons after content update
+            }
+
+            document.getElementById('language-toggle').addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'bn' : 'en';
+                document.documentElement.lang = currentLang;
+                updateContent();
+            });
+
+            updateContent(); // Initial content load
+        });
+    </script>
+</body>
+</html>

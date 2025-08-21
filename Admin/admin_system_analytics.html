@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Analytics Dashboard - আইনপ্রহরী</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-blue: #1a202c; /* blue-900 equivalent */
+            --secondary-blue: #2c5282; /* blue-700 equivalent */
+            --accent-blue: #3182ce; /* blue-600 equivalent */
+            --light-blue: #ebf8ff; /* blue-50 equivalent */
+            --lighter-blue: #e0f2fe; /* blue-100 equivalent */
+            --text-dark: #2d3748; /* gray-800 equivalent */
+            --text-medium: #4a5568; /* gray-700 equivalent */
+            --text-light: #718096; /* gray-600 equivalent */
+            --bg-light: #f7fafc; /* gray-50 equivalent */
+            --bg-white: #ffffff;
+            --bg-dark: #1a202c; /* gray-900 equivalent */
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            padding-top: 76px; /* Adjust based on navbar height */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+        .navbar {
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+        }
+        .navbar-brand {
+            color: var(--primary-blue) !important;
+            font-weight: 800;
+            font-size: 1.75rem;
+            border-radius: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            transition: background-color 0.3s ease;
+        }
+        .navbar-brand:hover {
+            background-color: var(--light-blue);
+        }
+        .nav-link {
+            color: var(--text-light) !important;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: var(--accent-blue) !important;
+        }
+        .btn-primary-custom {
+            background-color: var(--accent-blue);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+        .btn-primary-custom:hover {
+            background-color: #2b6cb0;
+            transform: translateY(-2px);
+            color: white;
+        }
+        .btn-secondary-outline-custom {
+            background-color: transparent;
+            color: var(--text-medium);
+            border: 1px solid var(--text-light);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary-outline-custom:hover {
+            background-color: var(--light-blue);
+            color: var(--accent-blue);
+            border-color: var(--accent-blue);
+        }
+        .dashboard-container {
+            padding: 3rem 0;
+            background-color: var(--bg-blue-50-custom);
+        }
+        .content-card {
+            background-color: var(--bg-white);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #f0f0f0;
+        }
+        .analytics-metric {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent-blue);
+            line-height: 1;
+        }
+        .analytics-label {
+            font-size: 0.9rem;
+            color: var(--text-medium);
+            font-weight: 500;
+        }
+        .section-header {
+            color: var(--primary-blue);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        .sub-header {
+            color: var(--text-medium);
+            margin-bottom: 1.5rem;
+        }
+        .text-primary-custom {
+            color: var(--accent-blue) !important;
+        }
+        .text-primary-custom-icon {
+            color: var(--primary-blue) !important;
+        }
+        .bg-gray-900-custom {
+            background-color: var(--bg-dark);
+        }
+    /* Footer specific styling */
+        footer a {
+            transition: color 0.3s ease;
+        }
+        footer a:hover {
+            color: white !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <i data-lucide="gavel" class="me-2 text-primary-custom-icon"></i>
+                <span id="app-name">আইনপ্রহরী</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <button class="btn btn-outline-secondary d-flex align-items-center" id="back-to-dashboard">
+                            <i data-lucide="arrow-left" class="me-2"></i> <span id="back-button-text">ড্যাশবোর্ডে ফিরে যান</span>
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="feature.html" id="nav-features">বৈশিষ্ট্যসমূহ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="roles.html" id="nav-roles">ভূমিকা</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html" id="nav-contact">যোগাযোগ</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-outline-primary d-flex align-items-center" href="admin_profile.html" id="nav-profile">
+                            <i data-lucide="user" class="me-2"></i> <span id="user-display-name">ব্যবহারকারী</span>
+                        </a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-primary-custom d-flex align-items-center" href="index.html" id="nav-logout">
+                            <i data-lucide="log-out" class="me-2"></i> লগআউট
+                        </a>
+                    </li>
+                    <li class="nav-item ms-lg-4">
+                        <button class="btn btn-secondary-outline-custom" id="language-toggle">English</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navigation Bar -->
+
+    <!-- Main Content -->
+    <main class="dashboard-container">
+        <div class="container">
+            <div class="content-card">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h2 class="section-header" id="header-analytics">System Analytics</h2>
+                        <p class="sub-header" id="sub-header-desc">Overview of key system metrics.</p>
+                    </div>
+                </div>
+                <!-- Analytics Metrics -->
+                <div class="row text-center mt-4">
+                    <div class="col-md-4 mb-4 mb-md-0">
+                        <i data-lucide="users" class="icon-size text-primary-custom"></i>
+                        <div class="mt-2">
+                            <div class="analytics-metric">2,500</div>
+                            <div class="analytics-label" id="metric-active-users-label">Active Users</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4 mb-md-0">
+                        <i data-lucide="check-square" class="icon-size text-primary-custom"></i>
+                        <div class="mt-2">
+                            <div class="analytics-metric">95%</div>
+                            <div class="analytics-label" id="metric-completion-rate-label">Case Completion Rate</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <i data-lucide="file-text" class="icon-size text-primary-custom"></i>
+                        <div class="mt-2">
+                            <div class="analytics-metric">87</div>
+                            <div class="analytics-label" id="metric-pending-cases-label">Pending Cases</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chart Placeholder -->
+                <h4 class="section-header mt-5" id="chart-title">Case Growth Over Time</h4>
+                <p class="sub-header" id="chart-desc">
+                    This chart shows the number of new cases opened each month.
+                </p>
+                <div class="chart-placeholder" style="background-color: #f0f0f0; height: 300px; border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; color: var(--text-light); border: 1px dashed var(--text-light);">
+                    Chart will be displayed here...
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- End Main Content -->
+
+     <!-- Footer -->
+    <footer class="bg-gray-900-custom text-light py-4">
+        <div class="container text-center text-md-start d-md-flex justify-content-between align-items-center">
+            <div class="mb-3 mb-md-0">
+                <p class="mb-0" id="footer-copyright">&copy; <span id="current-year"></span> আইনপ্রহরী. সর্বস্বত্ব সংরক্ষিত।</p>
+            </div>
+            <div class="d-flex justify-content-center gap-4">
+                <a href="#" class="text-light text-decoration-none hover-white" id="footer-privacy">গোপনীয়তা নীতি</a>
+                <a href="#" class="text-light text-decoration-none hover-white" id="footer-terms">পরিষেবার শর্তাবলী</a>
+                <a href="#" class="text-light text-decoration-none hover-white" id="footer-sitemap">সাইটম্যাপ</a>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Bootstrap JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Language content translations
+            const translations = {
+                en: {
+                    'back-button-text': 'Back to Dashboard',
+                    'app-name': 'Ainprohori',
+                    'nav-features': 'Features',
+                    'nav-roles': 'Roles',
+                    'nav-contact': 'Contact',
+                    'nav-profile': 'Admin Profile',
+                    'nav-logout': 'Logout',
+                    'language-toggle': 'বাংলা',
+                    'header-analytics': 'System Analytics',
+                    'sub-header-desc': 'Overview of key system metrics.',
+                    'metric-active-users-label': 'Active Users',
+                    'metric-completion-rate-label': 'Case Completion Rate',
+                    'metric-pending-cases-label': 'Pending Cases',
+                    'chart-title': 'Case Growth Over Time',
+                    'chart-desc': 'This chart shows the number of new cases opened each month.',
+                    footer: {
+                        copyright: 'All Rights Reserved.',
+                        privacyPolicy: 'Privacy Policy',
+                        termsOfService: 'Terms of Service',
+                        sitemap: 'Sitemap'
+                    }
+                },
+                bn: {
+                    'back-button-text': 'ড্যাশবোর্ডে ফিরে যান',
+                    'app-name': 'আইনপ্রহরী',
+                    'nav-features': 'বৈশিষ্ট্যসমূহ',
+                    'nav-roles': 'ভূমিকা',
+                    'nav-contact': 'যোগাযোগ',
+                    'nav-profile': 'অ্যাডমিন প্রোফাইল',
+                    'nav-logout': 'লগআউট',
+                    'language-toggle': 'English',
+                    'header-analytics': 'সিস্টেম অ্যানালিটিক্স',
+                    'sub-header-desc': 'মূল সিস্টেম মেট্রিক্সের ওভারভিউ।',
+                    'metric-active-users-label': 'সক্রিয় ব্যবহারকারী',
+                    'metric-completion-rate-label': 'মামলা সম্পন্ন হওয়ার হার',
+                    'metric-pending-cases-label': 'চলমান মামলা',
+                    'chart-title': 'সময়ের সাথে মামলার বৃদ্ধি',
+                    'chart-desc': 'এই চার্টটি প্রতি মাসে খোলা নতুন মামলার সংখ্যা দেখায়।',
+                    footer: {
+                        copyright: "আইনপ্রহরী. সর্বস্বত্ব সংরক্ষিত।",
+                        privacyPolicy: "গোপনীয়তা নীতি",
+                        termsOfService: "পরিষেবার শর্তাবলী",
+                        sitemap: "সাইটম্যাপ"
+                    }
+                }
+            };
+
+            let currentLang = 'en';
+
+            function updateContent() {
+                const t = translations[currentLang];
+                document.getElementById('back-button-text').textContent = t['back-button-text'];
+                document.getElementById('app-name').textContent = t['app-name'];
+                document.getElementById('nav-features').textContent = t['nav-features'];
+                document.getElementById('nav-roles').textContent = t['nav-roles'];
+                document.getElementById('nav-contact').textContent = t['nav-contact'];
+                document.getElementById('user-display-name').textContent = t['nav-profile'];
+                document.getElementById('nav-logout').innerHTML = `<i data-lucide="log-out" class="me-2"></i> ${t['nav-logout']}`;
+                document.getElementById('language-toggle').textContent = t['language-toggle'];
+
+                // Update main content
+                document.getElementById('header-analytics').textContent = t['header-analytics'];
+                document.getElementById('sub-header-desc').textContent = t['sub-header-desc'];
+                document.getElementById('metric-active-users-label').textContent = t['metric-active-users-label'];
+                document.getElementById('metric-completion-rate-label').textContent = t['metric-completion-rate-label'];
+                document.getElementById('metric-pending-cases-label').textContent = t['metric-pending-cases-label'];
+                document.getElementById('chart-title').textContent = t['chart-title'];
+                document.getElementById('chart-desc').textContent = t['chart-desc'];
+
+                // Update Footer
+                const currentYear = new Date().getFullYear();
+                document.getElementById('footer-copyright').textContent = `© ${currentYear} ${t.footer.copyright}`;
+                document.getElementById('footer-privacy').textContent = t.footer.privacyPolicy;
+                document.getElementById('footer-terms').textContent = t.footer.termsOfService;
+                document.getElementById('footer-sitemap').textContent = t.footer.sitemap;
+                
+                // Re-render Lucide icons after content update
+                lucide.createIcons();
+            }
+
+            // Event listener for language toggle button
+            const languageToggle = document.getElementById('language-toggle');
+            if (languageToggle) {
+                languageToggle.addEventListener('click', () => {
+                    currentLang = currentLang === 'en' ? 'bn' : 'en';
+                    document.documentElement.lang = currentLang;
+                    updateContent();
+                });
+            }
+
+            // Event listener for the back button
+            const backToDashboardButton = document.getElementById('back-to-dashboard');
+            if (backToDashboardButton) {
+                backToDashboardButton.addEventListener('click', () => {
+                    window.location.href = 'admin_dashboard.html';
+                });
+            }
+
+            // Initial content load
+            updateContent();
+        });
+    </script>
+</body>
+</html>

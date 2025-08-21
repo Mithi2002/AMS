@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Advocate & Criminology Management System - আইনপ্রহরী</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-blue: #1a202c; /* blue-900 equivalent */
+            --secondary-blue: #2c5282; /* blue-700 equivalent */
+            --accent-blue: #3182ce; /* blue-600 equivalent */
+            --light-blue: #ebf8ff; /* blue-50 equivalent */
+            --lighter-blue: #e0f2fe; /* blue-100 equivalent */
+            --text-dark: #2d3748; /* gray-800 equivalent */
+            --text-medium: #4a5568; /* gray-700 equivalent */
+            --text-light: #718096; /* gray-600 equivalent */
+            --bg-light: #f7fafc; /* gray-50 equivalent */
+            --bg-white: #ffffff;
+            --bg-dark: #1a202c; /* gray-900 equivalent */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            padding-top: 76px; /* Adjust based on navbar height */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        .navbar {
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+        }
+
+        .navbar-brand {
+            color: var(--primary-blue) !important;
+            font-weight: 800;
+            font-size: 1.75rem;
+            border-radius: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            transition: background-color 0.3s ease;
+        }
+        .navbar-brand:hover {
+            background-color: var(--light-blue);
+        }
+
+        .nav-link {
+            color: var(--text-light) !important;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: var(--accent-blue) !important;
+        }
+
+        .btn-primary-custom {
+            background-color: var(--accent-blue);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+        .btn-primary-custom:hover {
+            background-color: #2b6cb0;
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        .btn-secondary-custom {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary-custom:hover {
+            background-color: white;
+            color: var(--secondary-blue);
+            transform: translateY(-2px);
+        }
+
+        .btn-light-custom {
+            background-color: white;
+            color: var(--secondary-blue);
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+        .btn-light-custom:hover {
+            background-color: var(--lighter-blue);
+            transform: translateY(-2px);
+            color: var(--secondary-blue);
+        }
+
+        .btn-secondary-outline-custom {
+            background-color: transparent;
+            color: var(--text-medium);
+            border: 1px solid var(--text-light);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary-outline-custom:hover {
+            background-color: var(--light-blue);
+            color: var(--accent-blue);
+            border-color: var(--accent-blue);
+        }
+
+        .section-heading {
+            color: var(--primary-blue);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        .section-subheading {
+            color: var(--text-medium);
+            margin-bottom: 3rem;
+            max-width: 50rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-form-card {
+            background-color: var(--bg-white);
+            padding: 2.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #f0f0f0;
+        }
+        .form-control {
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+        }
+        .form-control:focus {
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 0.25rem rgba(49, 130, 206, 0.25);
+        }
+        .contact-info-card {
+            background-color: var(--lighter-blue);
+            padding: 2.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+            color: var(--text-dark);
+        }
+        .contact-info-card h4 {
+            color: var(--primary-blue);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        .contact-info-card p {
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+        }
+        .contact-info-card p i {
+            margin-right: 0.75rem;
+            color: var(--accent-blue);
+            flex-shrink: 0;
+        }
+        .icon-size {
+            width: 24px;
+            height: 24px;
+        }
+
+        .bg-blue-50-custom {
+            background-color: var(--light-blue);
+        }
+        .bg-gray-900-custom {
+            background-color: var(--bg-dark);
+        }
+
+        /* Footer specific styling */
+        footer a {
+            transition: color 0.3s ease;
+        }
+        footer a:hover {
+            color: white !important;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <i data-lucide="gavel" class="me-2 text-primary-custom-icon"></i>
+                <span id="app-name">আইনপ্রহরী</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="feature.html" id="nav-features">বৈশিষ্ট্যসমূহ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="roles.html" id="nav-roles">ভূমিকা</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html" id="nav-contact">যোগাযোগ</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-primary-custom d-flex align-items-center" href="login.html" id="nav-login">
+                            <i data-lucide="log-in" class="me-2"></i> প্রবেশ করুন
+                        </a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-outline-primary d-flex align-items-center" href="signup.html" id="nav-signup">
+                            <i data-lucide="user-plus" class="me-2"></i> নিবন্ধন করুন
+                        </a>
+                    </li>
+                    <li class="nav-item ms-lg-4">
+                        <button class="btn btn-secondary-outline-custom" id="language-toggle">English</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="py-5 bg-blue-50-custom text-center">
+        <div class="container">
+            <h1 class="display-4 fw-bold section-heading" id="page-heading">যোগাযোগ করুন</h1>
+            <p class="lead section-subheading" id="page-subheading">আমাদের সাথে যোগাযোগ করতে নিচের ফর্মটি পূরণ করুন অথবা সরাসরি যোগাযোগ করুন।</p>
+        </div>
+    </section>
+
+    <!-- Contact Content Section -->
+    <section class="py-5 py-md-5 bg-white">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-7">
+                    <div class="contact-form-card">
+                        <h3 class="h4 fw-bold mb-4" id="form-heading">আমাদের একটি বার্তা পাঠান</h3>
+                        <form>
+                            <div class="mb-3">
+                                <label for="contactName" class="form-label" id="label-name">আপনার নাম</label>
+                                <input type="text" class="form-control" id="contactName" placeholder="আপনার নাম লিখুন" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="contactEmail" class="form-label" id="label-email">আপনার ইমেল</label>
+                                <input type="email" class="form-control" id="contactEmail" placeholder="আপনার ইমেল লিখুন" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="contactSubject" class="form-label" id="label-subject">বিষয়</label>
+                                <input type="text" class="form-control" id="contactSubject" placeholder="বার্তার বিষয়" required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="contactMessage" class="form-label" id="label-message">আপনার বার্তা</label>
+                                <textarea class="form-control" id="contactMessage" rows="5" placeholder="আপনার বার্তা লিখুন" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary-custom w-100" id="btn-send-message">বার্তা পাঠান</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="contact-info-card">
+                        <h4 id="info-heading">যোগাযোগের তথ্য</h4>
+                        <p id="info-email"><i data-lucide="mail" class="icon-size"></i> info@ainprohori.com</p>
+                        <p id="info-phone"><i data-lucide="phone" class="icon-size"></i> +880 1XXXXXXXXX</p>
+                        <p id="info-address"><i data-lucide="map-pin" class="icon-size"></i> ঢাকা, বাংলাদেশ</p>
+                        <p id="info-hours"><i data-lucide="clock" class="icon-size"></i> সোম-শুক্র: সকাল ৯টা - বিকাল ৫টা</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900-custom text-light py-4">
+        <div class="container text-center text-md-start d-md-flex justify-content-between align-items-center">
+            <div class="mb-3 mb-md-0">
+                <p class="mb-0" id="footer-copyright">&copy; <span id="current-year"></span> আইনপ্রহরী. সর্বস্বত্ব সংরক্ষিত।</p>
+            </div>
+            <div class="d-flex justify-content-center gap-4">
+                <a href="#" class="text-light text-decoration-none hover-white" id="footer-privacy">গোপনীয়তা নীতি</a>
+                <a href="#" class="text-light text-decoration-none hover-white" id="footer-terms">পরিষেবার শর্তাবলী</a>
+                <a href="#" class="text-light text-decoration-none hover-white" id="footer-sitemap">সাইটম্যাপ</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS CDN (Bundle with Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!-- Custom JavaScript for Language Switching -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Lucide icons
+            lucide.createIcons();
+
+            // Content object for both English and Bengali
+            const content = {
+                en: {
+                    appName: "AdvocatePro",
+                    nav: {
+                        features: "Features",
+                        roles: "Roles",
+                        contact: "Contact",
+                        login: "Login",
+                        signUp: "Sign Up",
+                    },
+                    pageHeader: {
+                        heading: "Contact Us",
+                        subheading: "Fill out the form below to get in touch with us, or contact us directly.",
+                    },
+                    contactForm: {
+                        formHeading: "Send Us a Message",
+                        labelName: "Your Name",
+                        placeholderName: "Enter your name",
+                        labelEmail: "Your Email",
+                        placeholderEmail: "Enter your email",
+                        labelSubject: "Subject",
+                        placeholderSubject: "Subject of your message",
+                        labelMessage: "Your Message",
+                        placeholderMessage: "Write your message here",
+                        btnSend: "Send Message",
+                    },
+                    contactInfo: {
+                        infoHeading: "Contact Information",
+                        email: "info@ainprohori.com",
+                        phone: "+880 1XXXXXXXXX",
+                        address: "Dhaka, Bangladesh",
+                        hours: "Mon-Fri: 9 AM - 5 PM",
+                    },
+                    footer: {
+                        copyright: "Ainprohori. All rights reserved.",
+                        privacyPolicy: "Privacy Policy",
+                        termsOfService: "Terms of Service",
+                        sitemap: "Sitemap",
+                    },
+                },
+                bn: {
+                    appName: "আইনপ্রহরী",
+                    nav: {
+                        features: "বৈশিষ্ট্যসমূহ",
+                        roles: "ভূমিকা",
+                        contact: "যোগাযোগ",
+                        login: "প্রবেশ করুন",
+                        signUp: "নিবন্ধন করুন",
+                    },
+                    pageHeader: {
+                        heading: "যোগাযোগ করুন",
+                        subheading: "আমাদের সাথে যোগাযোগ করতে নিচের ফর্মটি পূরণ করুন অথবা সরাসরি যোগাযোগ করুন।",
+                    },
+                    contactForm: {
+                        formHeading: "আমাদের একটি বার্তা পাঠান",
+                        labelName: "আপনার নাম",
+                        placeholderName: "আপনার নাম লিখুন",
+                        labelEmail: "আপনার ইমেল",
+                        placeholderEmail: "আপনার ইমেল লিখুন",
+                        labelSubject: "বিষয়",
+                        placeholderSubject: "বার্তার বিষয়",
+                        labelMessage: "আপনার বার্তা",
+                        placeholderMessage: "আপনার বার্তা লিখুন",
+                        btnSend: "বার্তা পাঠান",
+                    },
+                    contactInfo: {
+                        infoHeading: "যোগাযোগের তথ্য",
+                        email: "info@ainprohori.com",
+                        phone: "+880 1XXXXXXXXX",
+                        address: "ঢাকা, বাংলাদেশ",
+                        hours: "সোম-শুক্র: সকাল ৯টা - বিকাল ৫টা",
+                    },
+                    footer: {
+                        copyright: "আইনপ্রহরী. সর্বস্বত্ব সংরক্ষিত।",
+                        privacyPolicy: "গোপনীয়তা নীতি",
+                        termsOfService: "পরিষেবার শর্তাবলী",
+                        sitemap: "সাইটম্যাপ",
+                    },
+                },
+            };
+
+            let currentLang = 'en'; // Initial language
+
+            function updateContent() {
+                const t = content[currentLang];
+
+                // Navbar
+                document.getElementById('app-name').textContent = t.appName;
+                document.getElementById('nav-features').textContent = t.nav.features;
+                document.getElementById('nav-roles').textContent = t.nav.roles;
+                document.getElementById('nav-contact').textContent = t.nav.contact;
+                document.getElementById('nav-login').innerHTML = `<i data-lucide="log-in" class="me-2"></i> ${t.nav.login}`;
+                document.getElementById('nav-signup').innerHTML = `<i data-lucide="user-plus" class="me-2"></i> ${t.nav.signUp}`;
+                document.getElementById('language-toggle').textContent = currentLang === 'en' ? 'বাংলা' : 'English';
+
+                // Page Header
+                document.getElementById('page-heading').textContent = t.pageHeader.heading;
+                document.getElementById('page-subheading').textContent = t.pageHeader.subheading;
+
+                // Contact Form
+                document.getElementById('form-heading').textContent = t.contactForm.formHeading;
+                document.getElementById('label-name').textContent = t.contactForm.labelName;
+                document.getElementById('contactName').placeholder = t.contactForm.placeholderName;
+                document.getElementById('label-email').textContent = t.contactForm.labelEmail;
+                document.getElementById('contactEmail').placeholder = t.contactForm.placeholderEmail;
+                document.getElementById('label-subject').textContent = t.contactForm.labelSubject;
+                document.getElementById('contactSubject').placeholder = t.contactForm.placeholderSubject;
+                document.getElementById('label-message').textContent = t.contactForm.labelMessage;
+                document.getElementById('contactMessage').placeholder = t.contactForm.placeholderMessage;
+                document.getElementById('btn-send-message').textContent = t.contactForm.btnSend;
+
+                // Contact Info
+                document.getElementById('info-heading').textContent = t.contactInfo.infoHeading;
+                document.getElementById('info-email').innerHTML = `<i data-lucide="mail" class="icon-size"></i> ${t.contactInfo.email}`;
+                document.getElementById('info-phone').innerHTML = `<i data-lucide="phone" class="icon-size"></i> ${t.contactInfo.phone}`;
+                document.getElementById('info-address').innerHTML = `<i data-lucide="map-pin" class="icon-size"></i> ${t.contactInfo.address}`;
+                document.getElementById('info-hours').innerHTML = `<i data-lucide="clock" class="icon-size"></i> ${t.contactInfo.hours}`;
+
+
+                // Footer
+                document.getElementById('current-year').textContent = new Date().getFullYear();
+                document.getElementById('footer-copyright').textContent = `© ${new Date().getFullYear()} ${t.footer.copyright}`;
+                document.getElementById('footer-privacy').textContent = t.footer.privacyPolicy;
+                document.getElementById('footer-terms').textContent = t.footer.termsOfService;
+                document.getElementById('footer-sitemap').textContent = t.footer.sitemap;
+
+                lucide.createIcons(); // Re-create Lucide icons after content update
+            }
+
+            document.getElementById('language-toggle').addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'bn' : 'en';
+                document.documentElement.lang = currentLang;
+                updateContent();
+            });
+
+            updateContent(); // Initial content load
+        });
+    </script>
+</body>
+</html>

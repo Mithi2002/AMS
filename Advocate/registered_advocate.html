@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registered Advocate List - Advocate & Criminology Management System - আইনপ্রহরী</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-blue: #1a202c; /* blue-900 equivalent */
+            --secondary-blue: #2c5282; /* blue-700 equivalent */
+            --accent-blue: #3182ce; /* blue-600 equivalent */
+            --light-blue: #ebf8ff; /* blue-50 equivalent */
+            --lighter-blue: #e0f2fe; /* blue-100 equivalent */
+            --text-dark: #2d3748; /* gray-800 equivalent */
+            --text-medium: #4a5568; /* gray-700 equivalent */
+            --text-light: #718096; /* gray-600 equivalent */
+            --bg-light: #f7fafc; /* gray-50 equivalent */
+            --bg-white: #ffffff;
+            --bg-dark: #1a202c; /* gray-900 equivalent */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            padding-top: 76px; /* Adjust based on navbar height */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            min-height: 100vh; /* Ensure full viewport height */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar {
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+        }
+
+        .navbar-brand {
+            color: var(--primary-blue) !important;
+            font-weight: 800;
+            font-size: 1.75rem;
+            border-radius: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            transition: background-color 0.3s ease;
+        }
+        .navbar-brand:hover {
+            background-color: var(--light-blue);
+        }
+
+        .nav-link {
+            color: var(--text-light) !important;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: var(--accent-blue) !important;
+        }
+
+        .btn-primary-custom {
+            background-color: var(--accent-blue);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+        .btn-primary-custom:hover {
+            background-color: #2b6cb0;
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        .btn-secondary-outline-custom {
+            background-color: transparent;
+            color: var(--text-medium);
+            border: 1px solid var(--text-light);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary-outline-custom:hover {
+            background-color: var(--light-blue);
+            color: var(--accent-blue);
+            border-color: var(--accent-blue);
+        }
+
+        .list-container {
+            flex-grow: 1; /* Allows content to push footer down */
+            padding: 3rem 0;
+            background-color: var(--bg-blue-50-custom);
+        }
+
+        .section-header {
+            color: var(--primary-blue);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Advocate Card Styling */
+        .advocate-card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            height: 100%;
+        }
+
+        .advocate-card {
+            background-color: var(--bg-white);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #f0f0f0;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 1.5rem; /* Margin between cards */
+        }
+
+        .advocate-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .advocate-card .profile-icon {
+            font-size: 3rem;
+            color: var(--accent-blue);
+            margin-bottom: 1rem;
+        }
+
+        .advocate-card h5 {
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .advocate-card p {
+            font-size: 0.9rem;
+            color: var(--text-medium);
+            margin-bottom: 0.25rem;
+        }
+
+        .advocate-card .badge {
+            margin-top: 0.5rem;
+            font-size: 0.75rem;
+            padding: 0.3em 0.6em;
+        }
+
+        /* Footer specific styling */
+        footer {
+            margin-top: auto; /* Pushes footer to the bottom */
+        }
+        footer a {
+            transition: color 0.3s ease;
+        }
+        footer a:hover {
+            color: white !important;
+        }
+
+        .bg-blue-50-custom {
+            background-color: var(--light-blue);
+        }
+        .bg-gray-900-custom {
+            background-color: var(--bg-dark);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <i data-lucide="gavel" class="me-2 text-primary-custom-icon"></i>
+                <span id="app-name">আইনপ্রহরী</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                     <li class="nav-item">
+                        <button class="btn btn-outline-secondary d-flex align-items-center" id="back-to-dashboard">
+                            <i data-lucide="arrow-left" class="me-2"></i> <span id="back-button-text">ড্যাশবোর্ডে ফিরে যান</span>
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="feature.html" id="nav-features">বৈশিষ্ট্যসমূহ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="roles.html" id="nav-roles">ভূমিকা</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html" id="nav-contact">যোগাযোগ</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-outline-primary d-flex align-items-center" href="profile.html" id="nav-profile">
+                            <i data-lucide="user" class="me-2"></i> <span id="user-display-name">ব্যবহারকারী</span>
+                        </a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-primary-custom d-flex align-items-center" href="index.html" id="nav-logout">
+                            <i data-lucide="log-out" class="me-2"></i> লগআউট
+                        </a>
+                    </li>
+                    <li class="nav-item ms-lg-4">
+                        <button class="btn btn-secondary-outline-custom" id="language-toggle">English</button>
+                    </li>
+                  
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Registered Advocate List Section -->
+    <section class="list-container">
+        <div class="container">
+            <h2 class="section-header text-center mb-4" id="advocate-list-heading">নিবন্ধিত অ্যাডভোকেট তালিকা</h2>
+            <p class="text-muted text-center mb-5" id="advocate-list-tagline">আমাদের প্ল্যাটফর্মে নিবন্ধিত অ্যাডভোকেটদের তালিকা ব্রাউজ করুন এবং তাদের বিস্তারিত তথ্য দেখুন।</p>
+
+            <div class="row g-4" id="advocate-cards-container">
+                <!-- Advocate cards will be dynamically loaded here -->
+            </div>
+<!-- 
+            <div class="text-center mt-5">
+                <a href="advocate-dashboard.html" class="btn btn-primary-custom" id="back-to-dashboard-button">
+                    <i data-lucide="arrow-left" class="me-2"></i> ড্যাশবোর্ডে ফিরে যান
+                </a>
+            </div> -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900-custom text-light py-4">
+        <div class="container text-center text-md-start d-md-flex justify-content-between align-items-center">
+            <div class="mb-3 mb-md-0">
+                <p class="mb-0" id="footer-copyright">&copy; <span id="current-year"></span> আইনপ্রহরী. সর্বস্বত্ব সংরক্ষিত।</p>
+            </div>
+            <div class="d-flex justify-content-center gap-4">
+                <a href="#" class="text-light text-decoration-none hover-white" id="footer-privacy">গোপনীয়তা নীতি</a>
+                <a href="#" class="text-light text-decoration-none hover-white" id="footer-terms">পরিষেবার শর্তাবলী</a>
+                <a href="#" class="text-light text-decoration-none hover-white" id="footer-sitemap">সাইটম্যাপ</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS CDN (Bundle with Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!-- Custom JavaScript for Language Switching and Data Loading -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+
+            const content = {
+                en: {
+                    appName: "AdvocatePro",
+                    nav: {
+                        backButton: "Back to Dashboard",
+                        features: "Features",
+                        roles: "Roles",
+                        contact: "Contact",
+                        profile: "Profile",
+                        logout: "Logout",
+                    },
+                    listPage: {
+                        advocateListHeading: "Registered Advocate List",
+                        advocateListTagline: "Browse the list of advocates registered on our platform and view their detailed information.",
+                        backToDashboardButton: "Back to Dashboard",
+                        statusActive: "Active",
+                        statusAvailable: "Available",
+                        statusBusy: "Busy",
+                        statusSpecial: "Special",
+                    },
+                    footer: {
+                        copyright: "Ainprohori. All rights reserved.",
+                        privacyPolicy: "Privacy Policy",
+                        termsOfService: "Terms of Service",
+                        sitemap: "Sitemap",
+                    },
+                },
+                bn: {
+                    appName: "আইনপ্রহরী",
+                    nav: {
+                        backButton: "ড্যাশবোর্ডে ফিরে যান",
+                        features: "বৈশিষ্ট্যসমূহ",
+                        roles: "ভূমিকা",
+                        contact: "যোগাযোগ",
+                        profile: "প্রোফাইল",
+                        logout: "লগআউট",
+                    },
+                    listPage: {
+                        advocateListHeading: "নিবন্ধিত অ্যাডভোকেট তালিকা",
+                        advocateListTagline: "আমাদের প্ল্যাটফর্মে নিবন্ধিত অ্যাডভোকেটদের তালিকা ব্রাউজ করুন এবং তাদের বিস্তারিত তথ্য দেখুন।",
+                        backToDashboardButton: "ড্যাশবোর্ডে ফিরে যান",
+                        statusActive: "সক্রিয়",
+                        statusAvailable: "উপলব্ধ",
+                        statusBusy: "ব্যস্ত",
+                        statusSpecial: "বিশেষ",
+                    },
+                    footer: {
+                        copyright: "আইনপ্রহরী. সর্বস্বত্ব সংরক্ষিত।",
+                        privacyPolicy: "গোপনীয়তা নীতি",
+                        termsOfService: "পরিষেবার শর্তাবলী",
+                        sitemap: "সাইটম্যাপ",
+                    },
+                },
+            };
+
+           let currentLang = 'en'; // Initial language
+
+            const elementsToUpdate = {
+                appName: document.getElementById('app-name'),
+                backButtonText: document.getElementById('back-button-text'),
+                navFeatures: document.getElementById('nav-features'),
+                navRoles: document.getElementById('nav-roles'),
+                navContact: document.getElementById('nav-contact'),
+                navProfile: document.getElementById('nav-profile'),
+                userDisplayName: document.getElementById('user-display-name'),
+                navLogout: document.getElementById('nav-logout'),
+                languageToggle: document.getElementById('language-toggle'),
+                 backButtonText: document.getElementById('back-button-text'),
+                  
+
+                advocateListHeading: document.getElementById('advocate-list-heading'),
+                advocateListTagline: document.getElementById('advocate-list-tagline'),
+                advocateCardsContainer: document.getElementById('advocate-cards-container'),
+                // backToDashboardButton: document.getElementById('back-to-dashboard-button'),
+
+                footerCopyright: document.getElementById('footer-copyright'),
+                currentYear: document.getElementById('current-year'),
+                footerPrivacy: document.getElementById('footer-privacy'),
+                footerTerms: document.getElementById('footer-terms'),
+                footerSitemap: document.getElementById('footer-sitemap'),
+            };
+
+            // Dummy advocate data (moved from dashboard to here)
+            const advocates = [
+                {
+                    id: 'adv1',
+                    name: { en: "Advocate Zahid Hasan", bn: "অ্যাডভোকেট জাহিদ হাসান" },
+                    position: { en: "Public Prosecutor (PP)", bn: "পাবলিক প্রসিকিউটর (PP)" },
+                    address: { en: "Dhaka Judge Court, Dhaka", bn: "ঢাকা জজ কোর্ট, ঢাকা" },
+                    contact: { en: "+88017XXXXXXXX", bn: "+88017XXXXXXXX" },
+                    email: { en: "zahid.hasan@example.com", bn: "zahid.hasan@example.com" },
+                    enrollmentDate: { en: "2010-03-15", bn: "২০১০-০৩-১৫" },
+                    specialization: { en: "Criminal Law, Constitutional Law", bn: "ফৌজদারি আইন, সাংবিধানিক আইন" },
+                    status: 'active', // Used for badge styling
+                    icon: 'user-check'
+                },
+                {
+                    id: 'adv2',
+                    name: { en: "Advocate Fatema Akter", bn: "অ্যাডভোকেট ফাতেমা আক্তার" },
+                    position: { en: "Assistant Public Prosecutor (APP)", bn: "সহকারী পাবলিক প্রসিকিউটর (APP)" },
+                    address: { en: "Chattogram Judge Court, Chattogram", bn: "চট্টগ্রাম জজ কোর্ট, চট্টগ্রাম" },
+                    contact: { en: "+88018XXXXXXXX", bn: "+88018XXXXXXXX" },
+                    email: { en: "fatema.akter@example.com", bn: "fatema.akter@example.com" },
+                    enrollmentDate: { en: "2015-08-20", bn: "২০১৫-০৮-২০" },
+                    specialization: { en: "Family Law, Civil Litigation", bn: "পারিবারিক আইন, দেওয়ানি মামলা" },
+                    status: 'available',
+                    icon: 'user'
+                },
+                {
+                    id: 'adv3',
+                    name: { en: "Advocate Rafiqul Islam", bn: "অ্যাডভোকেট রফিকুল ইসলাম" },
+                    position: { en: "Defense Counsel", bn: "ডিফেন্স কাউন্সেল" },
+                    address: { en: "Rajshahi Judge Court, Rajshahi", bn: "রাজশাহী জজ কোর্ট, রাজশাহী" },
+                    contact: { en: "+88019XXXXXXXX", bn: "+88019XXXXXXXX" },
+                    email: { en: "rafiqul.islam@example.com", bn: "rafiqul.islam@example.com" },
+                    enrollmentDate: { en: "2008-11-10", bn: "২০০৮-১১-১০" },
+                    specialization: { en: "Corporate Law, Property Law", bn: "কর্পোরেট আইন, সম্পত্তি আইন" },
+                    status: 'busy',
+                    icon: 'user-minus'
+                },
+                {
+                    id: 'adv4',
+                    name: { en: "Advocate Salma Begum", bn: "অ্যাডভোকেট সালমা বেগম" },
+                    position: { en: "Legal Aid Advocate", bn: "লিগ্যাল এইড অ্যাডভোকেট" },
+                    address: { en: "Khulna Judge Court, Khulna", bn: "খুলনা জজ কোর্ট, খুলনা" },
+                    contact: { en: "+88016XXXXXXXX", bn: "+88016XXXXXXXX" },
+                    email: { en: "salma.begum@example.com", bn: "salma.begum@example.com" },
+                    enrollmentDate: { en: "2018-05-01", bn: "২০১৮-০৫-০১" },
+                    specialization: { en: "Human Rights Law, Environmental Law", bn: "মানবাধিকার আইন, পরিবেশ আইন" },
+                    status: 'active',
+                    icon: 'users'
+                },
+                {
+                    id: 'adv5',
+                    name: { en: "Advocate Kamrul Hasan", bn: "অ্যাডভোকেট কামরুল হাসান" },
+                    position: { en: "Special Public Prosecutor", bn: "বিশেষ পাবলিক প্রসিকিউটর" },
+                    address: { en: "Supreme Court, Dhaka", bn: "সুপ্রিম কোর্ট, ঢাকা" },
+                    contact: { en: "+88015XXXXXXXX", bn: "+88015XXXXXXXX" },
+                    email: { en: "kamrul.hasan@example.com", bn: "kamrul.hasan@example.com" },
+                    enrollmentDate: { en: "2005-01-25", bn: "২০০৫-০১-২৫" },
+                    specialization: { en: "International Law, Cyber Law", bn: "আন্তর্জাতিক আইন, সাইবার আইন" },
+                    status: 'special',
+                    icon: 'award'
+                }
+            ];
+
+            function getStatusBadgeClass(status) {
+                switch (status) {
+                    case 'active': return 'bg-success';
+                    case 'available': return 'bg-info';
+                    case 'busy': return 'bg-warning text-dark';
+                    case 'special': return 'bg-primary';
+                    default: return 'bg-secondary';
+                }
+            }
+
+            function getStatusText(status, lang) {
+                const statusMap = {
+                    en: {
+                        active: "Active",
+                        available: "Available",
+                        busy: "Busy",
+                        special: "Special"
+                    },
+                    bn: {
+                        active: "সক্রিয়",
+                        available: "উপলব্ধ",
+                        busy: "ব্যস্ত",
+                        special: "বিশেষ"
+                    }
+                };
+                return statusMap[lang][status] || status;
+            }
+
+            function renderAdvocateCards() {
+                if (elementsToUpdate.advocateCardsContainer) {
+                    elementsToUpdate.advocateCardsContainer.innerHTML = ''; // Clear existing cards
+                    advocates.forEach(advocate => {
+                        const cardHtml = `
+                            <div class="col-md-6 col-lg-4">
+                                <a href="advocate-details.html?id=${advocate.id}" class="advocate-card-link">
+                                    <div class="advocate-card">
+                                        <i data-lucide="${advocate.icon}" class="profile-icon"></i>
+                                        <h5>${advocate.name[currentLang]}</h5>
+                                        <p>${content[currentLang].detailsPage ? content[currentLang].detailsPage.advocatePosition.split(':')[0] : 'পদবী'}: ${advocate.position[currentLang]}</p>
+                                        <p>${content[currentLang].detailsPage ? content[currentLang].detailsPage.addressLabel.replace(':', '') : 'ঠিকানা'}: ${advocate.address[currentLang]}</p>
+                                        <p>${content[currentLang].detailsPage ? content[currentLang].detailsPage.contactLabel.replace(':', '') : 'যোগাযোগ'}: ${advocate.contact[currentLang]}</p>
+                                        <span class="badge ${getStatusBadgeClass(advocate.status)}">${getStatusText(advocate.status, currentLang)}</span>
+                                    </div>
+                                </a>
+                            </div>
+                        `;
+                        elementsToUpdate.advocateCardsContainer.insertAdjacentHTML('beforeend', cardHtml);
+                    });
+                    lucide.createIcons(); // Re-create Lucide icons for new elements
+                }
+            }
+            function updateContent() {
+                const t = content[currentLang];
+
+                // Navbar
+                if (elementsToUpdate.appName) elementsToUpdate.appName.textContent = t.appName;
+                if (elementsToUpdate.backButtonText) elementsToUpdate.backButtonText.textContent = t.nav.backButton;
+                if (elementsToUpdate.navFeatures) elementsToUpdate.navFeatures.textContent = t.nav.features;
+                if (elementsToUpdate.navRoles) elementsToUpdate.navRoles.textContent = t.nav.roles;
+                if (elementsToUpdate.navContact) elementsToUpdate.navContact.textContent = t.nav.contact;
+                if (elementsToUpdate.navProfile) elementsToUpdate.navProfile.innerHTML = `<i data-lucide="user" class="me-2"></i> <span id="user-display-name">${t.nav.profile}</span>`;
+                if (elementsToUpdate.navLogout) elementsToUpdate.navLogout.innerHTML = `<i data-lucide="log-out" class="me-2"></i> ${t.nav.logout}`;
+                if (elementsToUpdate.languageToggle) elementsToUpdate.languageToggle.textContent = currentLang === 'en' ? 'বাংলা' : 'English';
+
+                // List Page Content
+                if (elementsToUpdate.advocateListHeading) elementsToUpdate.advocateListHeading.textContent = t.listPage.advocateListHeading;
+                if (elementsToUpdate.advocateListTagline) elementsToUpdate.advocateListTagline.textContent = t.listPage.advocateListTagline;
+                if (elementsToUpdate.backToDashboardButton) elementsToUpdate.backToDashboardButton.innerHTML = `<i data-lucide="arrow-left" class="me-2"></i> ${t.listPage.backToDashboardButton}`;
+
+                // Footer
+                if (elementsToUpdate.currentYear) elementsToUpdate.currentYear.textContent = new Date().getFullYear();
+                if (elementsToUpdate.footerCopyright) elementsToUpdate.footerCopyright.textContent = `© ${new Date().getFullYear()} ${t.footer.copyright}`;
+                if (elementsToUpdate.footerPrivacy) elementsToUpdate.footerPrivacy.textContent = t.footer.privacyPolicy;
+                if (elementsToUpdate.footerTerms) elementsToUpdate.footerTerms.textContent = t.footer.termsOfService;
+                if (elementsToUpdate.footerSitemap) elementsToUpdate.footerSitemap.textContent = t.footer.sitemap;
+
+                // Re-render advocate cards with new language
+                renderAdvocateCards();
+                lucide.createIcons();
+            }
+                document.getElementById('back-to-dashboard').addEventListener('click', () => {
+                history.back();
+            });
+
+
+            // Event listener for language toggle button
+            if (elementsToUpdate.languageToggle) {
+                elementsToUpdate.languageToggle.addEventListener('click', () => {
+                    currentLang = currentLang === 'en' ? 'bn' : 'en';
+                    document.documentElement.lang = currentLang;
+                    updateContent();
+                });
+            }
+
+            // Placeholder for User ID and Name (in a real app, this would come from authentication)
+            function setUserIdAndName() {
+                const dummyUserName = "অ্যাডভোকেট জাহিদ হাসান"; // Example dummy name (Bengali)
+                if (elementsToUpdate.userDisplayName) {
+                    elementsToUpdate.userDisplayName.textContent = dummyUserName;
+                }
+            }
+
+            // Initial content load and set dummy user data
+            updateContent();
+            setUserIdAndName();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Filing - Advocate & Criminology Management System - আইনপ্রহরী</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-blue: #1a202c; /* blue-900 equivalent */
+            --secondary-blue: #2c5282; /* blue-700 equivalent */
+            --accent-blue: #3182ce; /* blue-600 equivalent */
+            --light-blue: #ebf8ff; /* blue-50 equivalent */
+            --lighter-blue: #e0f2fe; /* blue-100 equivalent */
+            --text-dark: #2d3748; /* gray-800 equivalent */
+            --text-medium: #4a5568; /* gray-700 equivalent */
+            --text-light: #718096; /* gray-600 equivalent */
+            --bg-light: #f7fafc; /* gray-50 equivalent */
+            --bg-white: #ffffff;
+            --bg-dark: #1a202c; /* gray-900 equivalent */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            padding-top: 76px; /* Adjust based on navbar height */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        .navbar {
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+        }
+
+        .navbar-brand {
+            color: var(--primary-blue) !important;
+            font-weight: 800;
+            font-size: 1.75rem;
+            border-radius: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            transition: background-color 0.3s ease;
+        }
+        .navbar-brand:hover {
+            background-color: var(--light-blue);
+        }
+
+        .nav-link {
+            color: var(--text-light) !important;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: var(--accent-blue) !important;
+        }
+
+        .btn-primary-custom {
+            background-color: var(--accent-blue);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+        .btn-primary-custom:hover {
+            background-color: #2b6cb0;
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        .btn-secondary-outline-custom {
+            background-color: transparent;
+            color: var(--text-medium);
+            border: 1px solid var(--text-light);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary-outline-custom:hover {
+            background-color: var(--light-blue);
+            color: var(--accent-blue);
+            border-color: var(--accent-blue);
+        }
+
+        .main-content-container {
+            padding: 3rem 0;
+            background-color: var(--bg-blue-50-custom);
+        }
+
+        .info-card {
+            background-color: var(--bg-white);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #f0f0f0;
+            margin-bottom: 2rem;
+        }
+        .section-header {
+            color: var(--primary-blue);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        .text-primary-custom {
+            color: var(--accent-blue) !important;
+        }
+        .bg-gray-900-custom {
+            background-color: var(--bg-dark);
+        }
+
+        /* Footer specific styling */
+        footer a {
+            transition: color 0.3s ease;
+        }
+        footer a:hover {
+            color: white !important;
+        }
+
+        .document-item {
+            background-color: var(--bg-white);
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .document-item .icon {
+            color: var(--accent-blue);
+            margin-right: 1rem;
+        }
+        .document-item .content {
+            flex-grow: 1;
+        }
+        .document-item .content h6 {
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-bottom: 0.25rem;
+        }
+        .document-item .content p {
+            font-size: 0.9rem;
+            color: var(--text-medium);
+            margin-bottom: 0;
+        }
+        .document-item .actions {
+            margin-top: 0.5rem;
+            width: 100%;
+            text-align: right;
+        }
+        @media (min-width: 768px) {
+            .document-item .actions {
+                margin-top: 0;
+                width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <i data-lucide="gavel" class="me-2 text-primary-custom-icon"></i>
+                <span id="app-name">আইনপ্রহরী</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <button class="btn btn-outline-secondary d-flex align-items-center" id="back-to-dashboard">
+                            <i data-lucide="arrow-left" class="me-2"></i> <span id="back-button-text">ড্যাশবোর্ডে ফিরে যান</span>
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="feature.html" id="nav-features">বৈশিষ্ট্যসমূহ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="roles.html" id="nav-roles">ভূমিকা</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html" id="nav-contact">যোগাযোগ</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-outline-primary d-flex align-items-center" href="profile.html" id="nav-profile">
+                            <i data-lucide="user" class="me-2"></i> <span id="user-display-name">ব্যবহারকারী</span>
+                        </a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-primary-custom d-flex align-items-center" href="index.html" id="nav-logout">
+                            <i data-lucide="log-out" class="me-2"></i> লগআউট
+                        </a>
+                    </li>
+                    <li class="nav-item ms-lg-4">
+                        <button class="btn btn-secondary-outline-custom" id="language-toggle">English</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Section -->
+    <section class="main-content-container">
+        <div class="container">
+            <div class="info-card text-center">
+                <h1 class="display-5 fw-bold mb-3" id="page-heading">নথি জমা</h1>
+                <p class="lead text-muted mb-4" id="page-description">আপনার মামলার জন্য আইনি নথি আপলোড, পরিচালনা এবং জমা দিন।</p>
+            </div>
+
+            <div class="row g-4 mb-5">
+                <div class="col-lg-12">
+                    <div class="info-card">
+                        <h3 class="section-header" id="upload-document-heading">নথি আপলোড করুন</h3>
+                        <form id="document-upload-form">
+                            <div class="mb-3">
+                                <label for="case-id-select" class="form-label" id="case-id-label">মামলা আইডি নির্বাচন করুন:</label>
+                                <select class="form-select" id="case-id-select" required>
+                                    <option value="" id="select-case-id">একটি মামলা নির্বাচন করুন</option>
+                                    <option value="CR2025-001" id="opt-case-1">CR2025-001: জন বনাম রাজ্য</option>
+                                    <option value="CIV2025-005" id="opt-case-2">CIV2025-005: স্মিথ বনাম জোন্স</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="document-type" class="form-label" id="document-type-label">নথির ধরন:</label>
+                                <select class="form-select" id="document-type" required>
+                                    <option value="" id="select-document-type">নথির ধরন নির্বাচন করুন</option>
+                                    <option value="petition" id="opt-petition">পিটিশন</option>
+                                    <option value="affidavit" id="opt-affidavit">হলফনামা</option>
+                                    <option value="evidence" id="opt-evidence">প্রমাণ</option>
+                                    <option value="legal-notice" id="opt-legal-notice">আইনি নোটিশ</option>
+                                    <option value="other" id="opt-other">অন্যান্য</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="document-file" class="form-label" id="document-file-label">নথি ফাইল:</label>
+                                <input type="file" class="form-control" id="document-file" accept=".pdf,.doc,.docx,.jpg,.png" required>
+                                <small class="form-text text-muted" id="file-format-hint">অনুমোদিত ফরম্যাট: PDF, DOCX, JPG, PNG।</small>
+                            </div>
+                            <div class="mb-4">
+                                <label for="document-description" class="form-label" id="document-description-label">সংক্ষিপ্ত বিবরণ (ঐচ্ছিক):</label>
+                                <textarea class="form-control" id="document-description" rows="3" placeholder="নথি সম্পর্কে একটি সংক্ষিপ্ত বিবরণ দিন"></textarea>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary-custom" id="upload-button"><i data-lucide="upload" class="me-2"></i> নথি আপলোড করুন</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-12">
+                    <div class="info-card">
+                        <h3 class="section-header" id="uploaded-documents-heading">আপলোড করা নথি</h3>
+                        <div id="uploaded-document-list">
+                            <div class="document-item" id="doc-1">
+                                <i data-lucide="file-text" class="icon"></i>
+                                <div class="content">
+                                    <h6>মামলা #CR2025-001: জামিন আবেদন</h6>
+                                    <p class="text-muted">আপলোড করা হয়েছে: 2025-07-10 | ধরন: পিটিশন</p>
+                                </div>
+                                <div class="actions">
+                                    <button class="btn btn-sm btn-outline-primary view-doc-btn" data-doc-id="doc-1" id="view-doc-1"><i data-lucide="eye" class="me-1"></i> দেখুন</button>
+                                    <button class="btn btn-sm btn-outline-danger delete-doc-btn" data-doc-id="doc-1" id="delete-doc-1"><i data-lucide="trash-2" class="me-1"></i> মুছে ফেলুন</button>
+                                </div>
+                            </div>
+                            <div class="document-item" id="doc-2">
+                                <i data-lucide="image" class="icon"></i>
+                                <div class="content">
+                                    <h6>মামলা #CIV2025-005: সাক্ষীর ছবি</h6>
+                                    <p class="text-muted">আপলোড করা হয়েছে: 2025-07-08 | ধরন: প্রমাণ</p>
+                                </div>
+                                <div class="actions">
+                                    <button class="btn btn-sm btn-outline-primary view-doc-btn" data-doc-id="doc-2" id="view-doc-2"><i data-lucide="eye" class="me-1"></i> দেখুন</button>
+                                    <button class="btn btn-sm btn-outline-danger delete-doc-btn" data-doc-id="doc-2" id="delete-doc-2"><i data-lucide="trash-2" class="me-1"></i> মুছে ফেলুন</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-grid gap-2 mt-3">
+                            <button class="btn btn-primary-custom" id="load-more-documents"><i data-lucide="refresh-cw" class="me-2"></i> আরও নথি লোড করুন</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900-custom text-light py-4">
+        <div class="container text-center text-md-start d-md-flex justify-content-between align-items-center">
+            <div class="mb-3 mb-md-0">
+                <p class="mb-0" id="footer-copyright">&copy; <span id="current-year"></span> আইনপ্রহরী. সর্বস্বত্ব সংরক্ষিত।</p>
+            </div>
+            <div class="d-flex justify-content-center gap-4">
+                <a href="#" class="text-light text-decoration-none hover-white" id="footer-privacy">গোপনীয়তা নীতি</a>
+                <a href="#" class="text-light text-decoration-none hover-white" id="footer-terms">পরিষেবার শর্তাবলী</a>
+                <a href="#" class="text-light text-decoration-none hover-white" id="footer-sitemap">সাইটম্যাপ</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS CDN (Bundle with Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!-- Custom JavaScript for Language Switching and Functionality -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Lucide icons
+            lucide.createIcons();
+
+            // Content object for both English and Bengali
+            const content = {
+                en: {
+                    appName: "AdvocatePro",
+                    nav: {
+                        features: "Features",
+                        roles: "Roles",
+                        contact: "Contact",
+                        profile: "Profile",
+                        logout: "Logout",
+                    },
+                    page: {
+                        backButton: "Back to Dashboard",
+                        heading: "Document Filing",
+                        description: "Upload, manage, and submit legal documents for your cases.",
+                        uploadDocumentHeading: "Upload Document",
+                        caseIdLabel: "Select Case ID:",
+                        selectCaseId: "Select a Case",
+                        optCase1: "CR2025-001: John vs. State",
+                        optCase2: "CIV2025-005: Smith vs. Jones",
+                        documentTypeLabel: "Document Type:",
+                        selectDocumentType: "Select Document Type",
+                        optPetition: "Petition",
+                        optAffidavit: "Affidavit",
+                        optEvidence: "Evidence",
+                        optLegalNotice: "Legal Notice",
+                        optOther: "Other",
+                        documentFileLabel: "Document File:",
+                        fileFormatHint: "Allowed formats: PDF, DOCX, JPG, PNG.",
+                        documentDescriptionLabel: "Brief Description (Optional):",
+                        documentDescriptionPlaceholder: "Provide a brief description about the document",
+                        uploadButton: "Upload Document",
+                        uploadedDocumentsHeading: "Uploaded Documents",
+                        doc1Title: "Case #CR2025-001: Bail Application",
+                        doc1Details: "Uploaded: 2025-07-10 | Type: Petition",
+                        view: "View",
+                        delete: "Delete",
+                        doc2Title: "Case #CIV2025-005: Witness Photo",
+                        doc2Details: "Uploaded: 2025-07-08 | Type: Evidence",
+                        loadMoreDocuments: "Load More Documents",
+                    },
+                    footer: {
+                        copyright: "Ainprohori. All rights reserved.",
+                        privacyPolicy: "Privacy Policy",
+                        termsOfService: "Terms of Service",
+                        sitemap: "Sitemap",
+                    },
+                },
+                bn: {
+                    appName: "আইনপ্রহরী",
+                    nav: {
+                        features: "বৈশিষ্ট্যসমূহ",
+                        roles: "ভূমিকা",
+                        contact: "যোগাযোগ",
+                        profile: "প্রোফাইল",
+                        logout: "লগআউট",
+                    },
+                    page: {
+                        backButton: "ড্যাশবোর্ডে ফিরে যান",
+                        heading: "নথি জমা",
+                        description: "আপনার মামলার জন্য আইনি নথি আপলোড, পরিচালনা এবং জমা দিন।",
+                        uploadDocumentHeading: "নথি আপলোড করুন",
+                        caseIdLabel: "মামলা আইডি নির্বাচন করুন:",
+                        selectCaseId: "একটি মামলা নির্বাচন করুন",
+                        optCase1: "CR2025-001: জন বনাম রাজ্য",
+                        optCase2: "CIV2025-005: স্মিথ বনাম জোন্স",
+                        documentTypeLabel: "নথির ধরন:",
+                        selectDocumentType: "নথির ধরন নির্বাচন করুন",
+                        optPetition: "পিটিশন",
+                        optAffidavit: "হলফনামা",
+                        optEvidence: "প্রমাণ",
+                        optLegalNotice: "আইনি নোটিশ",
+                        optOther: "অন্যান্য",
+                        documentFileLabel: "নথি ফাইল:",
+                        fileFormatHint: "অনুমোদিত ফরম্যাট: PDF, DOCX, JPG, PNG।",
+                        documentDescriptionLabel: "সংক্ষিপ্ত বিবরণ (ঐচ্ছিক):",
+                        documentDescriptionPlaceholder: "নথি সম্পর্কে একটি সংক্ষিপ্ত বিবরণ দিন",
+                        uploadButton: "নথি আপলোড করুন",
+                        uploadedDocumentsHeading: "আপলোড করা নথি",
+                        doc1Title: "মামলা #CR2025-001: জামিন আবেদন",
+                        doc1Details: "আপলোড করা হয়েছে: 2025-07-10 | ধরন: পিটিশন",
+                        view: "দেখুন",
+                        delete: "মুছে ফেলুন",
+                        doc2Title: "মামলা #CIV2025-005: সাক্ষীর ছবি",
+                        doc2Details: "আপলোড করা হয়েছে: 2025-07-08 | ধরন: প্রমাণ",
+                        loadMoreDocuments: "আরও নথি লোড করুন",
+                    },
+                    footer: {
+                        copyright: "আইনপ্রহরী. সর্বস্বত্ব সংরক্ষিত।",
+                        privacyPolicy: "গোপনীয়তা নীতি",
+                        termsOfService: "পরিষেবার শর্তাবলী",
+                        sitemap: "সাইটম্যাপ",
+                    },
+                },
+            };
+
+            let currentLang = 'en'; // Initial language
+
+            // Get elements that will be updated
+            const elementsToUpdate = {
+                appName: document.getElementById('app-name'),
+                navFeatures: document.getElementById('nav-features'),
+                navRoles: document.getElementById('nav-roles'),
+                navContact: document.getElementById('nav-contact'),
+                navProfile: document.getElementById('nav-profile'),
+                userDisplayName: document.getElementById('user-display-name'),
+                navLogout: document.getElementById('nav-logout'),
+                languageToggle: document.getElementById('language-toggle'),
+                backButtonText: document.getElementById('back-button-text'),
+
+                pageHeading: document.getElementById('page-heading'),
+                pageDescription: document.getElementById('page-description'),
+                uploadDocumentHeading: document.getElementById('upload-document-heading'),
+                caseIdLabel: document.getElementById('case-id-label'),
+                caseIdSelect: document.getElementById('case-id-select'),
+                selectCaseId: document.getElementById('select-case-id'),
+                optCase1: document.getElementById('opt-case-1'),
+                optCase2: document.getElementById('opt-case-2'),
+                documentTypeLabel: document.getElementById('document-type-label'),
+                documentType: document.getElementById('document-type'),
+                selectDocumentType: document.getElementById('select-document-type'),
+                optPetition: document.getElementById('opt-petition'),
+                optAffidavit: document.getElementById('opt-affidavit'),
+                optEvidence: document.getElementById('opt-evidence'),
+                optLegalNotice: document.getElementById('opt-legal-notice'),
+                optOther: document.getElementById('opt-other'),
+                documentFileLabel: document.getElementById('document-file-label'),
+                documentFileInput: document.getElementById('document-file'),
+                fileFormatHint: document.getElementById('file-format-hint'),
+                documentDescriptionLabel: document.getElementById('document-description-label'),
+                documentDescriptionTextarea: document.getElementById('document-description'),
+                uploadButton: document.getElementById('upload-button'),
+                uploadedDocumentsHeading: document.getElementById('uploaded-documents-heading'),
+                doc1Title: document.getElementById('doc-1').querySelector('h6'),
+                doc1Details: document.getElementById('doc-1').querySelector('p'),
+                viewDoc1: document.getElementById('view-doc-1'),
+                deleteDoc1: document.getElementById('delete-doc-1'),
+                doc2Title: document.getElementById('doc-2').querySelector('h6'),
+                doc2Details: document.getElementById('doc-2').querySelector('p'),
+                viewDoc2: document.getElementById('view-doc-2'),
+                deleteDoc2: document.getElementById('delete-doc-2'),
+                loadMoreDocuments: document.getElementById('load-more-documents'),
+
+                footerCopyright: document.getElementById('footer-copyright'),
+                currentYear: document.getElementById('current-year'),
+                footerPrivacy: document.getElementById('footer-privacy'),
+                footerTerms: document.getElementById('footer-terms'),
+                footerSitemap: document.getElementById('footer-sitemap'),
+            };
+
+            function updateContent() {
+                const t = content[currentLang];
+
+                // Navbar
+                if (elementsToUpdate.appName) elementsToUpdate.appName.textContent = t.appName;
+                if (elementsToUpdate.navFeatures) elementsToUpdate.navFeatures.textContent = t.nav.features;
+                if (elementsToUpdate.navRoles) elementsToUpdate.navRoles.textContent = t.nav.roles;
+                if (elementsToUpdate.navContact) elementsToUpdate.navContact.textContent = t.nav.contact;
+                if (elementsToUpdate.navProfile) elementsToUpdate.navProfile.innerHTML = `<i data-lucide="user" class="me-2"></i> <span id="user-display-name">${t.nav.profile}</span>`;
+                if (elementsToUpdate.navLogout) elementsToUpdate.navLogout.innerHTML = `<i data-lucide="log-out" class="me-2"></i> ${t.nav.logout}`;
+                if (elementsToUpdate.languageToggle) elementsToUpdate.languageToggle.textContent = currentLang === 'en' ? 'বাংলা' : 'English';
+                if (elementsToUpdate.backButtonText) elementsToUpdate.backButtonText.textContent = t.page.backButton;
+
+                // Page Content
+                if (elementsToUpdate.pageHeading) elementsToUpdate.pageHeading.textContent = t.page.heading;
+                if (elementsToUpdate.pageDescription) elementsToUpdate.pageDescription.textContent = t.page.description;
+                if (elementsToUpdate.uploadDocumentHeading) elementsToUpdate.uploadDocumentHeading.textContent = t.page.uploadDocumentHeading;
+                if (elementsToUpdate.caseIdLabel) elementsToUpdate.caseIdLabel.textContent = t.page.caseIdLabel;
+                if (elementsToUpdate.selectCaseId) elementsToUpdate.selectCaseId.textContent = t.page.selectCaseId;
+                if (elementsToUpdate.optCase1) elementsToUpdate.optCase1.textContent = t.page.optCase1;
+                if (elementsToUpdate.optCase2) elementsToUpdate.optCase2.textContent = t.page.optCase2;
+                if (elementsToUpdate.documentTypeLabel) elementsToUpdate.documentTypeLabel.textContent = t.page.documentTypeLabel;
+                if (elementsToUpdate.selectDocumentType) elementsToUpdate.selectDocumentType.textContent = t.page.selectDocumentType;
+                if (elementsToUpdate.optPetition) elementsToUpdate.optPetition.textContent = t.page.optPetition;
+                if (elementsToUpdate.optAffidavit) elementsToUpdate.optAffidavit.textContent = t.page.optAffidavit;
+                if (elementsToUpdate.optEvidence) elementsToUpdate.optEvidence.textContent = t.page.optEvidence;
+                if (elementsToUpdate.optLegalNotice) elementsToUpdate.optLegalNotice.textContent = t.page.optLegalNotice;
+                if (elementsToUpdate.optOther) elementsToUpdate.optOther.textContent = t.page.optOther;
+                if (elementsToUpdate.documentFileLabel) elementsToUpdate.documentFileLabel.textContent = t.page.documentFileLabel;
+                if (elementsToUpdate.fileFormatHint) elementsToUpdate.fileFormatHint.textContent = t.page.fileFormatHint;
+                if (elementsToUpdate.documentDescriptionLabel) elementsToUpdate.documentDescriptionLabel.textContent = t.page.documentDescriptionLabel;
+                if (elementsToUpdate.documentDescriptionTextarea) elementsToUpdate.documentDescriptionTextarea.placeholder = t.page.documentDescriptionPlaceholder;
+                if (elementsToUpdate.uploadButton) elementsToUpdate.uploadButton.innerHTML = `<i data-lucide="upload" class="me-2"></i> ${t.page.uploadButton}`;
+                if (elementsToUpdate.uploadedDocumentsHeading) elementsToUpdate.uploadedDocumentsHeading.textContent = t.page.uploadedDocumentsHeading;
+                if (elementsToUpdate.doc1Title) elementsToUpdate.doc1Title.textContent = t.page.doc1Title;
+                if (elementsToUpdate.doc1Details) elementsToUpdate.doc1Details.textContent = t.page.doc1Details;
+                if (elementsToUpdate.viewDoc1) elementsToUpdate.viewDoc1.innerHTML = `<i data-lucide="eye" class="me-1"></i> ${t.page.view}`;
+                if (elementsToUpdate.deleteDoc1) elementsToUpdate.deleteDoc1.innerHTML = `<i data-lucide="trash-2" class="me-1"></i> ${t.page.delete}`;
+                if (elementsToUpdate.doc2Title) elementsToUpdate.doc2Title.textContent = t.page.doc2Title;
+                if (elementsToUpdate.doc2Details) elementsToUpdate.doc2Details.textContent = t.page.doc2Details;
+                if (elementsToUpdate.viewDoc2) elementsToUpdate.viewDoc2.innerHTML = `<i data-lucide="eye" class="me-1"></i> ${t.page.view}`;
+                if (elementsToUpdate.deleteDoc2) elementsToUpdate.deleteDoc2.innerHTML = `<i data-lucide="trash-2" class="me-1"></i> ${t.page.delete}`;
+                if (elementsToUpdate.loadMoreDocuments) elementsToUpdate.loadMoreDocuments.innerHTML = `<i data-lucide="refresh-cw" class="me-2"></i> ${t.page.loadMoreDocuments}`;
+
+                // Footer
+                if (elementsToUpdate.currentYear) elementsToUpdate.currentYear.textContent = new Date().getFullYear();
+                if (elementsToUpdate.footerCopyright) elementsToUpdate.footerCopyright.textContent = `© ${new Date().getFullYear()} ${t.footer.copyright}`;
+                if (elementsToUpdate.footerPrivacy) elementsToUpdate.footerPrivacy.textContent = t.footer.privacyPolicy;
+                if (elementsToUpdate.footerTerms) elementsToUpdate.footerTerms.textContent = t.footer.termsOfService;
+                if (elementsToUpdate.footerSitemap) elementsToUpdate.footerSitemap.textContent = t.footer.sitemap;
+
+                lucide.createIcons(); // Re-create Lucide icons after content update
+            }
+
+            // Placeholder for User Name (in a real app, this would come from authentication)
+            function setUserName() {
+                const dummyUserName = "অ্যাডভোকেট"; // Example dummy name (Bengali)
+                if (elementsToUpdate.userDisplayName) {
+                    elementsToUpdate.userDisplayName.textContent = dummyUserName;
+                }
+            }
+
+            // Event listener for language toggle button
+            const languageToggleBtn = document.getElementById('language-toggle');
+            if (languageToggleBtn) {
+                languageToggleBtn.addEventListener('click', () => {
+                    currentLang = currentLang === 'en' ? 'bn' : 'en';
+                    document.documentElement.lang = currentLang; // Update html lang attribute
+                    updateContent();
+                });
+            }
+
+            // Initial content load and set dummy user data
+            updateContent();
+            setUserName();
+
+            // Add back button functionality
+            document.getElementById('back-to-dashboard').addEventListener('click', () => {
+                history.back();
+            });
+
+            // Dummy document upload functionality
+            document.getElementById('document-upload-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                const caseId = elementsToUpdate.caseIdSelect.value;
+                const docType = elementsToUpdate.documentType.value;
+                const docFile = elementsToUpdate.documentFileInput.files[0];
+                const docDescription = elementsToUpdate.documentDescriptionTextarea.value;
+
+                if (docFile) {
+                    alert(`Uploading document for Case ID: ${caseId}\nType: ${docType}\nFile: ${docFile.name}\nDescription: ${docDescription || 'N/A'}\n\n(Placeholder for actual file upload and backend processing)`);
+                    this.reset(); // Clear form
+                } else {
+                    alert('Please select a file to upload.');
+                }
+            });
+
+            // Dummy view document functionality
+            document.querySelectorAll('.view-doc-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const docId = this.dataset.docId;
+                    alert(`Viewing document ${docId}! (Placeholder for opening document viewer)`);
+                });
+            });
+
+            // Dummy delete document functionality
+            document.querySelectorAll('.delete-doc-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const docId = this.dataset.docId;
+                    if (confirm(`Are you sure you want to delete document ${docId}?`)) {
+                        alert(`Deleting document ${docId}! (Placeholder for backend deletion)`);
+                        document.getElementById(docId).remove(); // Remove from UI
+                    }
+                });
+            });
+
+            // Dummy load more documents functionality
+            document.getElementById('load-more-documents').addEventListener('click', () => {
+                alert('Loading more documents... (Placeholder action)');
+            });
+        });
+    </script>
+</body>
+</html>

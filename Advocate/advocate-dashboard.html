@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advocate Dashboard - Advocate & Criminology Management System - আইনপ্রহরী</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-blue: #1a202c; /* blue-900 equivalent */
+            --secondary-blue: #2c5282; /* blue-700 equivalent */
+            --accent-blue: #3182ce; /* blue-600 equivalent */
+            --light-blue: #ebf8ff; /* blue-50 equivalent */
+            --lighter-blue: #e0f2fe; /* blue-100 equivalent */
+            --text-dark: #2d3748; /* gray-800 equivalent */
+            --text-medium: #4a5568; /* gray-700 equivalent */
+            --text-light: #718096; /* gray-600 equivalent */
+            --bg-light: #f7fafc; /* gray-50 equivalent */
+            --bg-white: #ffffff;
+            --bg-dark: #1a202c; /* gray-900 equivalent */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            padding-top: 76px; /* Adjust based on navbar height */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        .navbar {
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+        }
+
+        .navbar-brand {
+            color: var(--primary-blue) !important;
+            font-weight: 800;
+            font-size: 1.75rem;
+            border-radius: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            transition: background-color 0.3s ease;
+        }
+        .navbar-brand:hover {
+            background-color: var(--light-blue);
+        }
+
+        .nav-link {
+            color: var(--text-light) !important;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: var(--accent-blue) !important;
+        }
+
+        .btn-primary-custom {
+            background-color: var(--accent-blue);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+        .btn-primary-custom:hover {
+            background-color: #2b6cb0;
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        .btn-secondary-outline-custom {
+            background-color: transparent;
+            color: var(--text-medium);
+            border: 1px solid var(--text-light);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary-outline-custom:hover {
+            background-color: var(--light-blue);
+            color: var(--accent-blue);
+            border-color: var(--accent-blue);
+        }
+
+        .dashboard-container {
+            padding: 3rem 0;
+            background-color: var(--bg-blue-50-custom);
+        }
+
+        .welcome-card, .info-card, .analytics-card { /* Unified card styling */
+            background-color: var(--bg-white);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #f0f0f0;
+            margin-bottom: 2rem;
+        }
+        .info-card, .analytics-card {
+            margin-bottom: 0; /* Adjust margin for grid layout */
+        }
+
+        .action-card {
+            background-color: var(--bg-white);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f0f0f0;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            text-decoration: none; /* Remove underline from links */
+            color: inherit; /* Inherit text color */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            text-align: center;
+        }
+        .action-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        .action-card i {
+            color: var(--accent-blue);
+            margin-bottom: 0.75rem;
+        }
+        .action-card h5 {
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .section-header {
+            color: var(--primary-blue);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .list-group-item {
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid #e2e8f0; /* gray-200 */
+            background-color: var(--bg-white);
+        }
+        .list-group-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .text-primary-custom {
+            color: var(--accent-blue) !important;
+        }
+
+        .bg-blue-50-custom {
+            background-color: var(--light-blue);
+        }
+        .bg-gray-900-custom {
+            background-color: var(--bg-dark);
+        }
+
+        /* Footer specific styling */
+        footer a {
+            transition: color 0.3s ease;
+        }
+        footer a:hover {
+            color: white !important;
+        }
+
+        /* Analytics specific styling */
+        .analytics-metric {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent-blue);
+            line-height: 1;
+        }
+        .analytics-label {
+            font-size: 0.9rem;
+            color: var(--text-medium);
+            font-weight: 500;
+        }
+
+        /* Sub-role panel specific styling */
+        /* Make the entire panel clickable and add hover effects */
+        .sub-role-link {
+            text-decoration: none; /* Remove underline from the link */
+            color: inherit; /* Inherit text color */
+            display: block; /* Make the link fill the column */
+            height: 100%; /* Ensure it takes full height for consistent clickable area */
+        }
+
+        .sub-role-panel {
+            background-color: var(--bg-white);
+            padding: 1.5rem; /* Reduced padding */
+            border-radius: 0.75rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #f0f0f0;
+            margin-bottom: 0; /* Remove margin-bottom as it's now on the col */
+            transition: transform 0.2s ease, box-shadow 0.2s ease; /* Add transition for hover */
+            height: 100%; /* Ensure the panel itself takes full height */
+            display: flex; /* Use flexbox for vertical centering */
+            flex-direction: column;
+            justify-content: center; /* Center content vertically */
+            align-items: center; /* Center content horizontally */
+            text-align: center; /* Center text */
+        }
+        .sub-role-panel:hover {
+            transform: translateY(-5px); /* Lift effect on hover */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Stronger shadow on hover */
+        }
+        .sub-role-panel h4 {
+            color: var(--primary-blue);
+            font-weight: 600;
+            margin-bottom: 0.5rem; /* Reduced margin */
+        }
+        .sub-role-panel p { /* Style for the description */
+            font-size: 0.85rem; /* Smaller font size for description */
+            color: var(--text-medium);
+            margin-bottom: 0; /* Remove margin-bottom */
+        }
+        .sub-role-panel .list-unstyled { /* Ensure no features are displayed */
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <i data-lucide="gavel" class="me-2 text-primary-custom-icon"></i>
+                <span id="app-name">আইনপ্রহরী</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="feature.html" id="nav-features">বৈশিষ্ট্যসমূহ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="roles.html" id="nav-roles">ভূমিকা</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html" id="nav-contact">যোগাযোগ</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-outline-primary d-flex align-items-center" href="advocate_profile.html" id="nav-profile">
+                            <i data-lucide="user" class="me-2"></i> <span id="user-display-name">ব্যবহারকারী</span>
+                        </a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-primary-custom d-flex align-items-center" href="index.html" id="nav-logout">
+                            <i data-lucide="log-out" class="me-2"></i> লগআউট
+                        </a>
+                    </li>
+                    <li class="nav-item ms-lg-4">
+                        <button class="btn btn-secondary-outline-custom" id="language-toggle">English</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Advocate Dashboard Content Section -->
+    <section class="dashboard-container">
+        <div class="container">
+            <div class="welcome-card text-center">
+                <h1 class="display-5 fw-bold mb-3" id="welcome-heading">স্বাগতম, অ্যাডভোকেট!</h1>
+                <p class="lead text-muted mb-2" id="user-id-display">আপনার অ্যাডভোকেট আইডি: <span class="fw-bold text-primary-custom" id="user-id-value">Loading...</span></p>
+                <p class="text-muted" id="dashboard-tagline">আপনার কেসলোড, অ্যাপয়েন্টমেন্ট এবং গুরুত্বপূর্ণ সতর্কতাগুলির একটি সংক্ষিপ্ত বিবরণ।</p>
+            </div>
+
+            <!-- Quick Action Buttons -->
+            <div class="row g-4 mb-5">
+                <div class="col-md-6 col-lg-3">
+                    <a href="advocate_case-management.html" class="action-card">
+                        <i data-lucide="briefcase" class="icon-size"></i>
+                        <h5 id="action-case-management">কেস ব্যবস্থাপনা</h5>
+                    </a>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <a href="advocate_consultation-calendar.html" class="action-card">
+                        <i data-lucide="calendar-check" class="icon-size"></i>
+                        <h5 id="action-consultation-calendar">পরামর্শ ক্যালেন্ডার</h5>
+                    </a>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <a href="advocate_document-filing.html" class="action-card">
+                        <i data-lucide="file-text" class="icon-size"></i>
+                        <h5 id="action-document-filing">নথি জমা</h5>
+                    </a>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <a href="advocate_notifications-advocate.html" class="action-card">
+                        <i data-lucide="bell" class="icon-size"></i>
+                        <h5 id="action-notifications">বিজ্ঞপ্তি ও সতর্কতা</h5>
+                    </a>
+                </div>
+                <!-- Registered Advocate List Card -->
+                <div class="col-md-6 col-lg-3">
+                    <a href="registered_advocate.html" class="action-card">
+                        <i data-lucide="users" class="icon-size"></i>
+                        <h5 id="action-advocate-list">নিবন্ধিত অ্যাডভোকেট তালিকা</h5>
+                    </a>
+                </div>
+                <!-- Updated: Current Cases Card -->
+                <div class="col-md-6 col-lg-3">
+                    <a href="advocate_current-cases.html" class="action-card">
+                        <i data-lucide="folder-open" class="icon-size"></i> <!-- Changed icon -->
+                        <h5 id="action-current-cases">চলমান কেসসমূহ</h5> <!-- Changed text -->
+                    </a>
+                </div>
+            </div>
+
+            <div class="row g-4 mb-5">
+                <!-- Upcoming Hearings -->
+                <div class="col-lg-6">
+                    <div class="info-card">
+                        <h3 class="section-header" id="upcoming-hearings-heading">আসন্ন শুনানি</h3>
+                        <div class="list-group">
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <span id="hearing-item-1">মামলা #CR2025-001: জন বনাম রাজ্য (তারিখ: 2025-07-20)</span>
+                                <span class="badge bg-primary rounded-pill" id="hearing-status-1">আগামীকাল</span>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <span id="hearing-item-2">মামলা #CIV2025-005: স্মিথ বনাম জোন্স (তারিখ: 2025-07-25)</span>
+                                <span class="badge bg-info rounded-pill" id="hearing-status-2">নির্ধারিত</span>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <span id="hearing-item-3">মামলা #FAM2025-010: ডিভোর্স কেস (তারিখ: 2025-08-01)</span>
+                                <span class="badge bg-secondary rounded-pill" id="hearing-status-3">নির্ধারিত</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pending Consultations -->
+                <div class="col-lg-6">
+                    <div class="info-card">
+                        <h3 class="section-header" id="pending-consultations-heading">মুলতবি পরামর্শ</h3>
+                        <div class="list-group">
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <span id="consultation-item-1">ক্লায়েন্ট: ফারহানা বেগম (সময়: 2025-07-14, 10:00 AM)</span>
+                                <span class="badge bg-warning text-dark rounded-pill" id="consultation-status-1">আজ</span>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <span id="consultation-item-2">ক্লায়েন্ট: রানা আহমেদ (সময়: 2025-07-16, 02:30 PM)</span>
+                                <span class="badge bg-info rounded-pill" id="consultation-status-2">নতুন অনুরোধ</span>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <span id="consultation-item-3">ক্লায়েন্ট: তানিয়া সুলতানা (সময়: 2025-07-17, 11:00 AM)</span>
+                                <span class="badge bg-secondary rounded-pill" id="consultation-status-3">নির্ধারিত</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Case Status Overview & Deadlines -->
+            <div class="row g-4 mb-5">
+                <div class="col-lg-6">
+                    <div class="info-card">
+                        <h3 class="section-header" id="case-status-heading">কেস স্থিতি ওভারভিউ</h3>
+                        <div class="list-group">
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <span id="case-status-item-1">সক্রিয় কেস: <span class="fw-bold text-primary-custom" id="active-cases-count">12</span></span>
+                                <span class="badge bg-success rounded-pill" id="active-cases-label">সক্রিয়</span>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <span id="case-status-item-2">তদন্তাধীন কেস: <span class="fw-bold text-primary-custom" id="investigating-cases-count">5</span></span>
+                                <span class="badge bg-warning text-dark rounded-pill" id="investigating-cases-label">তদন্তাধীন</span>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <span id="case-status-item-3">স্থগিত কেস: <span class="fw-bold text-primary-custom" id="suspended-cases-count">1</span></span>
+                                <span class="badge bg-danger rounded-pill" id="suspended-cases-label">স্থগিত</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="info-card">
+                        <h3 class="section-header" id="document-deadlines-heading">আসন্ন নথি জমা দেওয়ার সময়সীমা</h3>
+                        <div class="list-group">
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <span id="deadline-item-1">মামলা #CR2025-001: জামিন আবেদন (2025-07-18)</span>
+                                <span class="badge bg-danger rounded-pill" id="deadline-status-1">২ দিন বাকি</span>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <span id="deadline-item-2">মামলা #CIV2025-005: সাক্ষীর তালিকা (2025-07-22)</span>
+                                <span class="badge bg-warning text-dark rounded-pill" id="deadline-status-2">৬ দিন বাকি</span>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <span id="deadline-item-3">মামলা #FAM2025-010: চূড়ান্ত যুক্তি (2025-08-05)</span>
+                                <span class="badge bg-info rounded-pill" id="deadline-status-3">নির্ধারিত</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics Overview -->
+            <div class="row g-4 mb-5">
+                <div class="col-12">
+                    <div class="analytics-card text-center">
+                        <h3 class="section-header" id="analytics-heading">ড্যাশবোর্ড ওভারভিউ ও বিশ্লেষণ</h3>
+                        <p class="text-muted mb-4" id="analytics-tagline">আপনার কর্মক্ষমতা এবং কেসলোড ব্যবস্থাপনার একটি দ্রুত চিত্র।</p>
+                        <div class="row text-center">
+                            <div class="col-md-4 mb-4 mb-md-0">
+                                <div class="p-3 bg-light rounded-lg">
+                                    <div class="analytics-metric" id="total-cases-metric">25</div>
+                                    <div class="analytics-label" id="total-cases-label">মোট কেস</div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4 mb-md-0">
+                                <div class="p-3 bg-light rounded-lg">
+                                    <div class="analytics-metric" id="avg-duration-metric">90</div>
+                                    <div class="analytics-label" id="avg-duration-label">গড় কেস সময়কাল (দিন)</div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 bg-light rounded-lg">
+                                    <div class="analytics-metric" id="closed-cases-metric">10</div>
+                                    <div class="analytics-label" id="closed-cases-label">বন্ধ কেস</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Advocate Sub-Role Panels (Simplified) -->
+            <div class="row g-4 mb-5">
+                <div class="col-12">
+                    <h2 class="section-header text-center mb-4" id="sub-roles-main-heading">অ্যাডভোকেট উপ-ভূমিকা প্যানেল</h2>
+                    <p class="text-muted text-center mb-5" id="sub-roles-main-tagline">আপনার নির্ধারিত উপ-ভূমিকা নির্বাচন করুন।</p>
+                </div>
+
+                <!-- Public Prosecutor (PP) Panel -->
+                <div class="col-md-6 col-lg-4">
+                    <a href="advocate_pp-dashboard.html" class="sub-role-link">
+                        <div class="sub-role-panel" id="pp-panel">
+                            <h4 id="pp-title">পাবলিক প্রসিকিউটর (PP)</h4>
+                            <p class="text-muted" id="pp-description">সরকার/রাষ্ট্রের পক্ষে ফৌজদারি মামলা পরিচালনা করেন।</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Assistant Public Prosecutor (APP) Panel -->
+                <div class="col-md-6 col-lg-4">
+                    <a href="advocate_app-dashboard.html" class="sub-role-link">
+                        <div class="sub-role-panel" id="app-panel">
+                            <h4 id="app-title">সহকারী পাবলিক প্রসিকিউটর (APP)</h4>
+                            <p class="text-muted" id="app-description">পাবলিক প্রসিকিউটরের তত্ত্বাবধানে কাজ করেন।</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Defense Counsel Panel -->
+                <div class="col-md-6 col-lg-4">
+                    <a href="advocate_defense-counsel-dashboard.html" class="sub-role-link">
+                        <div class="sub-role-panel" id="defense-counsel-panel">
+                            <h4 id="defense-counsel-title">ডিফেন্স কাউন্সেল</h4>
+                            <p class="text-muted" id="defense-counsel-description">ব্যক্তিগত ক্লায়েন্টদের প্রতিনিধিত্ব করেন।</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Legal Aid Advocate Panel -->
+                <div class="col-md-6 col-lg-4">
+                    <a href="advocate_legal-aid-dashboard.html" class="sub-role-link">
+                        <div class="sub-role-panel" id="legal-aid-panel">
+                            <h4 id="legal-aid-title">লিগ্যাল এইড অ্যাডভোকেট</h4>
+                            <p class="text-muted" id="legal-aid-description">অসহায় ক্লায়েন্টদের প্রতিনিধিত্ব করেন।</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Special Public Prosecutor / Tribunal Advocate Panel -->
+                <div class="col-md-6 col-lg-4"> <!-- Centered for single column -->
+                    <a href="advocate_special-pp-dashboard.html" class="sub-role-link">
+                        <div class="sub-role-panel" id="special-pp-panel">
+                            <h4 id="special-pp-title">বিশেষ পাবলিক প্রসিকিউটর / ট্রাইব্যুনাল অ্যাডভোকেট</h4>
+                            <p class="text-muted" id="special-pp-description">উচ্চ-প্রোফাইল মামলার জন্য নিযুক্ত।</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <!-- End Advocate Sub-Role Panels -->
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900-custom text-light py-4">
+        <div class="container text-center text-md-start d-md-flex justify-content-between align-items-center">
+            <div class="mb-3 mb-md-0">
+                <p class="mb-0" id="footer-copyright">&copy; <span id="current-year"></span> আইনপ্রহরী. সর্বস্বত্ব সংরক্ষিত।</p>
+            </div>
+            <div class="d-flex justify-content-center gap-4">
+                <a href="#" class="text-light text-decoration-none hover-white" id="footer-privacy">গোপনীয়তা নীতি</a>
+                <a href="#" class="text-light text-decoration-none hover-white" id="footer-terms">পরিষেবার শর্তাবলী</a>
+                <a href="#" class="text-light text-decoration-none hover-white" id="footer-sitemap">সাইটম্যাপ</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS CDN (Bundle with Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+    <!-- Custom JavaScript for Language Switching -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Lucide icons
+            lucide.createIcons();
+
+            // Content object for both English and Bengali
+            const content = {
+                en: {
+                    appName: "AdvocatePro",
+                    nav: {
+                        features: "Features",
+                        roles: "Roles",
+                        contact: "Contact",
+                        profile: "Profile",
+                        logout: "Logout",
+                    },
+                    dashboard: {
+                        welcomeHeading: "Welcome, Advocate!",
+                        userIdDisplay: "Your Advocate ID:",
+                        dashboardTagline: "A centralized overview of your caseload, appointments, and important alerts.",
+                        actionCaseManagement: "Case Management",
+                        actionConsultationCalendar: "Consultation Calendar",
+                        actionDocumentFiling: "Document Filing",
+                        actionNotifications: "Notifications & Alerts",
+                        actionAdvocateList: "Registered Advocate List",
+                        actionCurrentCases: "Current Cases", // Updated translation
+                        upcomingHearingsHeading: "Upcoming Hearings",
+                        hearingItem1: "Case #CR2025-001: John vs. State (Date: 2025-07-20)",
+                        hearingStatus1: "Tomorrow",
+                        hearingItem2: "Case #CIV2025-005: Smith vs. Jones (Date: 2025-07-25)",
+                        hearingStatus2: "Scheduled",
+                        hearingItem3: "Case #FAM2025-010: Divorce Case (Date: 2025-08-01)",
+                        hearingStatus3: "Scheduled",
+                        pendingConsultationsHeading: "Pending Consultations",
+                        consultationItem1: "Client: Farhana Begum (Time: 2025-07-14, 10:00 AM)",
+                        consultationStatus1: "Today",
+                        consultationItem2: "Client: Rana Ahmed (Time: 2025-07-16, 02:30 PM)",
+                        consultationStatus2: "New Request",
+                        consultationItem3: "Client: Tania Sultana (Time: 2025-07-17, 11:00 AM)",
+                        consultationStatus3: "Scheduled",
+                        caseStatusHeading: "Case Status Overview",
+                        caseStatusItem1: "Active Cases:",
+                        activeCasesCount: "12",
+                        activeCasesLabel: "Active",
+                        caseStatusItem2: "Investigating Cases:",
+                        investigatingCasesCount: "5",
+                        investigatingCasesLabel: "Investigating",
+                        caseStatusItem3: "Suspended Cases:",
+                        suspendedCasesCount: "1",
+                        suspendedCasesLabel: "Suspended",
+                        documentDeadlinesHeading: "Upcoming Document Deadlines",
+                        deadlineItem1: "Case #CR2025-001: Bail Petition (2025-07-18)",
+                        deadlineStatus1: "2 Days Left",
+                        deadlineItem2: "Case #CIV2025-005: Witness List (2025-07-22)",
+                        deadlineStatus2: "6 Days Left",
+                        deadlineItem3: "Case #FAM2025-010: Final Argument (2025-08-05)",
+                        deadlineStatus3: "Scheduled",
+                        analyticsHeading: "Dashboard Overview & Analytics",
+                        analyticsTagline: "A quick snapshot of your performance and caseload management.",
+                        totalCasesMetric: "25",
+                        totalCasesLabel: "Total Cases",
+                        avgDurationMetric: "90",
+                        avgDurationLabel: "Avg. Case Duration (Days)",
+                        closedCasesMetric: "10",
+                        closedCasesLabel: "Closed Cases",
+                        // Sub-role panels
+                        subRolesMainHeading: "Advocate Sub-Role Panels",
+                        subRolesMainTagline: "Select your assigned sub-role.",
+                        pp: {
+                            title: "Public Prosecutor (PP)",
+                            description: "Represents the government/state in criminal prosecutions."
+                        },
+                        app: {
+                            title: "Assistant Public Prosecutor (APP)",
+                            description: "Works under supervision of a Public Prosecutor."
+                        },
+                        defenseCounsel: {
+                            title: "Defense Counsel",
+                            description: "Represents individual clients."
+                        },
+                        legalAid: {
+                            title: "Legal Aid Advocate",
+                            description: "Represents underprivileged clients."
+                        },
+                        specialPp: {
+                            title: "Special Public Prosecutor / Tribunal Advocate",
+                            description: "Assigned for high-profile or tribunal-level cases."
+                        }
+                    },
+                    footer: {
+                        copyright: "Ainprohori. All rights reserved.",
+                        privacyPolicy: "Privacy Policy",
+                        termsOfService: "Terms of Service",
+                        sitemap: "Sitemap",
+                    },
+                },
+                bn: {
+                    appName: "আইনপ্রহরী",
+                    nav: {
+                        features: "বৈশিষ্ট্যসমূহ",
+                        roles: "ভূমিকা",
+                        contact: "যোগাযোগ",
+                        profile: "প্রোফাইল",
+                        logout: "লগআউট",
+                    },
+                    dashboard: {
+                        welcomeHeading: "স্বাগতম, অ্যাডভোকেট!",
+                        userIdDisplay: "আপনার অ্যাডভোকেট আইডি:",
+                        dashboardTagline: "আপনার কেসলোড, অ্যাপয়েন্টমেন্ট এবং গুরুত্বপূর্ণ সতর্কতাগুলির একটি সংক্ষিপ্ত বিবরণ।",
+                        actionCaseManagement: "কেস ব্যবস্থাপনা",
+                        actionConsultationCalendar: "পরামর্শ ক্যালেন্ডার",
+                        actionDocumentFiling: "নথি জমা",
+                        actionNotifications: "বিজ্ঞপ্তি ও সতর্কতা",
+                        actionAdvocateList: "নিবন্ধিত অ্যাডভোকেট তালিকা",
+                        actionCurrentCases: "চলমান কেসসমূহ", // Updated translation
+                        upcomingHearingsHeading: "আসন্ন শুনানি",
+                        hearingItem1: "মামলা #CR2025-001: জন বনাম রাজ্য (তারিখ: 2025-07-20)",
+                        hearingStatus1: "আগামীকাল",
+                        hearingItem2: "মামলা #CIV2025-005: স্মিথ বনাম জোন্স (তারিখ: 2025-07-25)",
+                        hearingStatus2: "নির্ধারিত",
+                        hearingItem3: "মামলা #FAM2025-010: ডিভোর্স কেস (তারিখ: 2025-08-01)",
+                        hearingStatus3: "নির্ধারিত",
+                        pendingConsultationsHeading: "মুলতবি পরামর্শ",
+                        consultationItem1: "ক্লায়েন্ট: ফারহানা বেগম (সময়: 2025-07-14, 10:00 AM)",
+                        consultationStatus1: "আজ",
+                        consultationItem2: "ক্লায়েন্ট: রানা আহমেদ (সময়: 2025-07-16, 02:30 PM)",
+                        consultationStatus2: "নতুন অনুরোধ",
+                        consultationItem3: "ক্লায়েন্ট: তানিয়া সুলতানা (সময়: 2025-07-17, 11:00 AM)",
+                        consultationStatus3: "নির্ধারিত",
+                        caseStatusHeading: "কেস স্থিতি ওভারভিউ",
+                        caseStatusItem1: "সক্রিয় কেস:",
+                        activeCasesCount: "12",
+                        activeCasesLabel: "সক্রিয়",
+                        caseStatusItem2: "তদন্তাধীন কেস:",
+                        investigatingCasesCount: "5",
+                        investigatingCasesLabel: "তদন্তাধীন",
+                        caseStatusItem3: "স্থগিত কেস:",
+                        suspendedCasesCount: "1",
+                        suspendedCasesLabel: "স্থগিত",
+                        documentDeadlinesHeading: "আসন্ন নথি জমা দেওয়ার সময়সীমা",
+                        deadlineItem1: "মামলা #CR2025-001: জামিন আবেদন (2025-07-18)",
+                        deadlineStatus1: "২ দিন বাকি",
+                        deadlineItem2: "মামলা #CIV2025-005: সাক্ষীর তালিকা (2025-07-22)",
+                        deadlineStatus2: "৬ দিন বাকি",
+                        deadlineItem3: "মামলা #FAM2025-010: চূড়ান্ত যুক্তি (2025-08-05)",
+                        deadlineStatus3: "নির্ধারিত",
+                        analyticsHeading: "ড্যাশবোর্ড ওভারভিউ ও বিশ্লেষণ",
+                        analyticsTagline: "আপনার কর্মক্ষমতা এবং কেসলোড ব্যবস্থাপনার একটি দ্রুত চিত্র।",
+                        totalCasesMetric: "25",
+                        totalCasesLabel: "মোট কেস",
+                        avgDurationMetric: "90",
+                        avgDurationLabel: "গড় কেস সময়কাল (দিন)",
+                        closedCasesMetric: "10",
+                        closedCasesLabel: "বন্ধ কেস",
+                        // Sub-role panels
+                        subRolesMainHeading: "অ্যাডভোকেট উপ-ভূমিকা প্যানেল",
+                        subRolesMainTagline: "আপনার নির্ধারিত উপ-ভূমিকা নির্বাচন করুন।",
+                        pp: {
+                            title: "পাবলিক প্রসিকিউটর (PP)",
+                            description: "সরকার/রাষ্ট্রের পক্ষে ফৌজদারি মামলা পরিচালনা করেন।"
+                        },
+                        app: {
+                            title: "সহকারী পাবলিক প্রসিকিউটর (APP)",
+                            description: "পাবলিক প্রসিকিউটরের তত্ত্বাবধানে কাজ করেন।"
+                        },
+                        defenseCounsel: {
+                            title: "ডিফেন্স কাউন্সেল",
+                            description: "ব্যক্তিগত ক্লায়েন্টদের প্রতিনিধিত্ব করেন।"
+                        },
+                        legalAid: {
+                            title: "লিগ্যাল এইড অ্যাডভোকেট",
+                            description: "অসহায় ক্লায়েন্টদের প্রতিনিধিত্ব করেন।"
+                        },
+                        specialPp: {
+                            title: "বিশেষ পাবলিক প্রসিকিউটর / ট্রাইব্যুনাল অ্যাডভোকেট",
+                            description: "উচ্চ-প্রোফাইল মামলার জন্য নিযুক্ত।"
+                        }
+                    },
+                    footer: {
+                        copyright: "আইনপ্রহরী. সর্বস্বত্ব সংরক্ষিত।",
+                        privacyPolicy: "গোপনীয়তা নীতি",
+                        termsOfService: "পরিষেবার শর্তাবলী",
+                        sitemap: "সাইটম্যাপ",
+                    },
+                },
+            };
+
+          let currentLang = 'en'; // Initial language
+
+            // Get elements that will be updated
+            const elementsToUpdate = {
+                appName: document.getElementById('app-name'),
+                navFeatures: document.getElementById('nav-features'),
+                navRoles: document.getElementById('nav-roles'),
+                navContact: document.getElementById('nav-contact'),
+                navProfile: document.getElementById('nav-profile'),
+                userDisplayName: document.getElementById('user-display-name'),
+                navLogout: document.getElementById('nav-logout'),
+                languageToggle: document.getElementById('language-toggle'),
+
+                welcomeHeading: document.getElementById('welcome-heading'),
+                userIdDisplay: document.getElementById('user-id-display'),
+                userIdValue: document.getElementById('user-id-value'),
+                dashboardTagline: document.getElementById('dashboard-tagline'),
+
+                actionCaseManagement: document.querySelector('a[href="advocate_case-management.html"] h5'),
+                actionConsultationCalendar: document.querySelector('a[href="advocate_consultation-calendar.html"] h5'),
+                actionDocumentFiling: document.querySelector('a[href="advocate_document-filing.html"] h5'),
+                actionNotifications: document.querySelector('a[href="advocate_notifications-advocate.html"] h5'),
+                actionAdvocateList: document.getElementById('action-advocate-list'),
+                actionCurrentCases: document.getElementById('action-current-cases'), // Updated element ID
+
+                upcomingHearingsHeading: document.getElementById('upcoming-hearings-heading'),
+                hearingItem1: document.getElementById('hearing-item-1'),
+                hearingStatus1: document.getElementById('hearing-status-1'),
+                hearingItem2: document.getElementById('hearing-item-2'),
+                hearingStatus2: document.getElementById('hearing-status-2'),
+                hearingItem3: document.getElementById('hearing-item-3'),
+                hearingStatus3: document.getElementById('hearing-status-3'),
+
+                pendingConsultationsHeading: document.getElementById('pending-consultations-heading'),
+                consultationItem1: document.getElementById('consultation-item-1'),
+                consultationStatus1: document.getElementById('consultation-status-1'),
+                consultationItem2: document.getElementById('consultation-item-2'),
+                consultationStatus2: document.getElementById('consultation-status-2'),
+                consultationItem3: document.getElementById('consultation-item-3'),
+                consultationStatus3: document.getElementById('consultation-status-3'),
+
+                caseStatusHeading: document.getElementById('case-status-heading'),
+                caseStatusItem1: document.getElementById('case-status-item-1'),
+                activeCasesCount: document.getElementById('active-cases-count'),
+                activeCasesLabel: document.getElementById('active-cases-label'),
+                caseStatusItem2: document.getElementById('case-status-item-2'),
+                investigatingCasesCount: document.getElementById('investigating-cases-count'),
+                investigatingCasesLabel: document.getElementById('investigating-cases-label'),
+                caseStatusItem3: document.getElementById('case-status-item-3'),
+                suspendedCasesCount: document.getElementById('suspended-cases-count'),
+                suspendedCasesLabel: document.getElementById('suspended-cases-label'),
+
+                documentDeadlinesHeading: document.getElementById('document-deadlines-heading'),
+                deadlineItem1: document.getElementById('deadline-item-1'),
+                deadlineStatus1: document.getElementById('deadline-status-1'),
+                deadlineItem2: document.getElementById('deadline-item-2'),
+                deadlineStatus2: document.getElementById('deadline-status-2'),
+                deadlineItem3: document.getElementById('deadline-item-3'),
+                deadlineStatus3: document.getElementById('deadline-status-3'),
+
+                analyticsHeading: document.getElementById('analytics-heading'),
+                analyticsTagline: document.getElementById('analytics-tagline'),
+                totalCasesMetric: document.getElementById('total-cases-metric'),
+                totalCasesLabel: document.getElementById('total-cases-label'),
+                avgDurationMetric: document.getElementById('avg-duration-metric'),
+                avgDurationLabel: document.getElementById('avg-duration-label'),
+                closedCasesMetric: document.getElementById('closed-cases-metric'),
+                closedCasesLabel: document.getElementById('closed-cases-label'),
+
+                // Sub-role panel elements
+                subRolesMainHeading: document.getElementById('sub-roles-main-heading'),
+                subRolesMainTagline: document.getElementById('sub-roles-main-tagline'),
+                ppTitle: document.getElementById('pp-title'),
+                ppDescription: document.getElementById('pp-description'),
+                appTitle: document.getElementById('app-title'),
+                appDescription: document.getElementById('app-description'),
+                defenseCounselTitle: document.getElementById('defense-counsel-title'),
+                defenseCounselDescription: document.getElementById('defense-counsel-description'),
+                legalAidTitle: document.getElementById('legal-aid-title'),
+                legalAidDescription: document.getElementById('legal-aid-description'),
+                specialPpTitle: document.getElementById('special-pp-title'),
+                specialPpDescription: document.getElementById('special-pp-description'),
+
+                footerCopyright: document.getElementById('footer-copyright'),
+                currentYear: document.getElementById('current-year'),
+                footerPrivacy: document.getElementById('footer-privacy'),
+                footerTerms: document.getElementById('footer-terms'),
+                footerSitemap: document.getElementById('footer-sitemap'),
+            };
+
+
+            function updateContent() {
+                const t = content[currentLang];
+
+                // Navbar
+                if (elementsToUpdate.appName) elementsToUpdate.appName.textContent = t.appName;
+                if (elementsToUpdate.navFeatures) elementsToUpdate.navFeatures.textContent = t.nav.features;
+                if (elementsToUpdate.navRoles) elementsToUpdate.navRoles.textContent = t.nav.roles;
+                if (elementsToUpdate.navContact) elementsToUpdate.navContact.textContent = t.nav.contact;
+                if (elementsToUpdate.navProfile) elementsToUpdate.navProfile.innerHTML = `<i data-lucide="user" class="me-2"></i> <span id="user-display-name">${t.nav.profile}</span>`;
+                if (elementsToUpdate.navLogout) elementsToUpdate.navLogout.innerHTML = `<i data-lucide="log-out" class="me-2"></i> ${t.nav.logout}`;
+                if (elementsToUpdate.languageToggle) elementsToUpdate.languageToggle.textContent = currentLang === 'en' ? 'বাংলা' : 'English';
+
+                // Dashboard Content
+                if (elementsToUpdate.welcomeHeading) elementsToUpdate.welcomeHeading.textContent = t.dashboard.welcomeHeading;
+                
+                // Handle userIdDisplay and userIdValue separately for robust translation
+                if (elementsToUpdate.userIdDisplay) {
+                    const currentUserIdText = elementsToUpdate.userIdValue ? elementsToUpdate.userIdValue.textContent : 'Loading...';
+                    elementsToUpdate.userIdDisplay.innerHTML = `${t.dashboard.userIdDisplay} <span class="fw-bold text-primary-custom" id="user-id-value">${currentUserIdText}</span>`;
+                    elementsToUpdate.userIdValue = document.getElementById('user-id-value'); // Re-get the reference
+                }
+                
+                if (elementsToUpdate.dashboardTagline) elementsToUpdate.dashboardTagline.textContent = t.dashboard.dashboardTagline;
+
+                // Action Card Titles
+                if (elementsToUpdate.actionCaseManagement) elementsToUpdate.actionCaseManagement.textContent = t.dashboard.actionCaseManagement;
+                if (elementsToUpdate.actionConsultationCalendar) elementsToUpdate.actionConsultationCalendar.textContent = t.dashboard.actionConsultationCalendar;
+                if (elementsToUpdate.actionDocumentFiling) elementsToUpdate.actionDocumentFiling.textContent = t.dashboard.actionDocumentFiling;
+                if (elementsToUpdate.actionNotifications) elementsToUpdate.actionNotifications.textContent = t.dashboard.actionNotifications;
+                if (elementsToUpdate.actionAdvocateList) elementsToUpdate.actionAdvocateList.textContent = t.dashboard.actionAdvocateList;
+                if (elementsToUpdate.actionCurrentCases) elementsToUpdate.actionCurrentCases.textContent = t.dashboard.actionCurrentCases; // Updated translation
+
+                // Upcoming Hearings
+                if (elementsToUpdate.upcomingHearingsHeading) elementsToUpdate.upcomingHearingsHeading.textContent = t.dashboard.upcomingHearingsHeading;
+                if (elementsToUpdate.hearingItem1) elementsToUpdate.hearingItem1.textContent = t.dashboard.hearingItem1;
+                if (elementsToUpdate.hearingStatus1) elementsToUpdate.hearingStatus1.textContent = t.dashboard.hearingStatus1;
+                if (elementsToUpdate.hearingItem2) elementsToUpdate.hearingItem2.textContent = t.dashboard.hearingItem2;
+                if (elementsToUpdate.hearingStatus2) elementsToUpdate.hearingStatus2.textContent = t.dashboard.hearingStatus2;
+                if (elementsToUpdate.hearingItem3) elementsToUpdate.hearingItem3.textContent = t.dashboard.hearingItem3;
+                if (elementsToUpdate.hearingStatus3) elementsToUpdate.hearingStatus3.textContent = t.dashboard.hearingStatus3;
+
+                // Pending Consultations
+                if (elementsToUpdate.pendingConsultationsHeading) elementsToUpdate.pendingConsultationsHeading.textContent = t.dashboard.pendingConsultationsHeading;
+                if (elementsToUpdate.consultationItem1) elementsToUpdate.consultationItem1.textContent = t.dashboard.consultationItem1;
+                if (elementsToUpdate.consultationStatus1) elementsToUpdate.consultationStatus1.textContent = t.dashboard.consultationStatus1;
+                if (elementsToUpdate.consultationItem2) elementsToUpdate.consultationItem2.textContent = t.dashboard.consultationItem2;
+                if (elementsToUpdate.consultationStatus2) elementsToUpdate.consultationStatus2.textContent = t.dashboard.consultationStatus2;
+                if (elementsToUpdate.consultationItem3) elementsToUpdate.consultationItem3.textContent = t.dashboard.consultationItem3;
+                if (elementsToUpdate.consultationStatus3) elementsToUpdate.consultationStatus3.textContent = t.dashboard.consultationStatus3;
+
+                // Case Status Overview
+                if (elementsToUpdate.caseStatusHeading) elementsToUpdate.caseStatusHeading.textContent = t.dashboard.caseStatusHeading;
+                if (elementsToUpdate.caseStatusItem1) elementsToUpdate.caseStatusItem1.innerHTML = `${t.dashboard.caseStatusItem1} <span class="fw-bold text-primary-custom" id="active-cases-count">${t.dashboard.activeCasesCount}</span>`;
+                if (elementsToUpdate.activeCasesLabel) elementsToUpdate.activeCasesLabel.textContent = t.dashboard.activeCasesLabel;
+                if (elementsToUpdate.caseStatusItem2) elementsToUpdate.caseStatusItem2.innerHTML = `${t.dashboard.caseStatusItem2} <span class="fw-bold text-primary-custom" id="investigating-cases-count">${t.dashboard.investigatingCasesCount}</span>`;
+                if (elementsToUpdate.investigatingCasesLabel) elementsToUpdate.investigatingCasesLabel.textContent = t.dashboard.investigatingCasesLabel;
+                if (elementsToUpdate.caseStatusItem3) elementsToUpdate.caseStatusItem3.innerHTML = `${t.dashboard.caseStatusItem3} <span class="fw-bold text-primary-custom" id="suspended-cases-count">${t.dashboard.suspendedCasesCount}</span>`;
+                if (elementsToUpdate.suspendedCasesLabel) elementsToUpdate.suspendedCasesLabel.textContent = t.dashboard.suspendedCasesLabel;
+
+                // Document Deadlines
+                if (elementsToUpdate.documentDeadlinesHeading) elementsToUpdate.documentDeadlinesHeading.textContent = t.dashboard.documentDeadlinesHeading;
+                if (elementsToUpdate.deadlineItem1) elementsToUpdate.deadlineItem1.textContent = t.dashboard.deadlineItem1;
+                if (elementsToUpdate.deadlineStatus1) elementsToUpdate.deadlineStatus1.textContent = t.dashboard.deadlineStatus1;
+                if (elementsToUpdate.deadlineItem2) elementsToUpdate.deadlineItem2.textContent = t.dashboard.deadlineItem2;
+                if (elementsToUpdate.deadlineStatus2) elementsToUpdate.deadlineStatus2.textContent = t.dashboard.deadlineStatus2;
+                if (elementsToUpdate.deadlineItem3) elementsToUpdate.deadlineItem3.textContent = t.dashboard.deadlineItem3;
+                if (elementsToUpdate.deadlineStatus3) elementsToUpdate.deadlineStatus3.textContent = t.dashboard.deadlineStatus3;
+
+                // Analytics
+                if (elementsToUpdate.analyticsHeading) elementsToUpdate.analyticsHeading.textContent = t.dashboard.analyticsHeading;
+                if (elementsToUpdate.analyticsTagline) elementsToUpdate.analyticsTagline.textContent = t.dashboard.analyticsTagline;
+                if (elementsToUpdate.totalCasesMetric) elementsToUpdate.totalCasesMetric.textContent = t.dashboard.totalCasesMetric;
+                if (elementsToUpdate.totalCasesLabel) elementsToUpdate.totalCasesLabel.textContent = t.dashboard.totalCasesLabel;
+                if (elementsToUpdate.avgDurationMetric) elementsToUpdate.avgDurationMetric.textContent = t.dashboard.avgDurationMetric;
+                if (elementsToUpdate.avgDurationLabel) elementsToUpdate.avgDurationLabel.textContent = t.dashboard.avgDurationLabel;
+                if (elementsToUpdate.closedCasesMetric) elementsToUpdate.closedCasesMetric.textContent = t.dashboard.closedCasesMetric;
+                if (elementsToUpdate.closedCasesLabel) elementsToUpdate.closedCasesLabel.textContent = t.dashboard.closedCasesLabel;
+
+                // Sub-role panels
+                if (elementsToUpdate.subRolesMainHeading) elementsToUpdate.subRolesMainHeading.textContent = t.dashboard.subRolesMainHeading;
+                if (elementsToUpdate.subRolesMainTagline) elementsToUpdate.subRolesMainTagline.textContent = t.dashboard.subRolesMainTagline;
+
+                // PP Panel
+                if (elementsToUpdate.ppTitle) elementsToUpdate.ppTitle.textContent = t.dashboard.pp.title;
+                if (elementsToUpdate.ppDescription) elementsToUpdate.ppDescription.textContent = t.dashboard.pp.description;
+
+                // APP Panel
+                if (elementsToUpdate.appTitle) elementsToUpdate.appTitle.textContent = t.dashboard.app.title;
+                if (elementsToUpdate.appDescription) elementsToUpdate.appDescription.textContent = t.dashboard.app.description;
+
+                // Defense Counsel Panel
+                if (elementsToUpdate.defenseCounselTitle) elementsToUpdate.defenseCounselTitle.textContent = t.dashboard.defenseCounsel.title;
+                if (elementsToUpdate.defenseCounselDescription) elementsToUpdate.defenseCounselDescription.textContent = t.dashboard.defenseCounsel.description;
+
+                // Legal Aid Advocate Panel
+                if (elementsToUpdate.legalAidTitle) elementsToUpdate.legalAidTitle.textContent = t.dashboard.legalAid.title;
+                if (elementsToUpdate.legalAidDescription) elementsToUpdate.legalAidDescription.textContent = t.dashboard.legalAid.description;
+
+                // Special Public Prosecutor / Tribunal Advocate Panel
+                if (elementsToUpdate.specialPpTitle) elementsToUpdate.specialPpTitle.textContent = t.dashboard.specialPp.title;
+                if (elementsToUpdate.specialPpDescription) elementsToUpdate.specialPpDescription.textContent = t.dashboard.specialPp.description;
+
+
+                // Footer
+                if (elementsToUpdate.currentYear) elementsToUpdate.currentYear.textContent = new Date().getFullYear();
+                if (elementsToUpdate.footerCopyright) elementsToUpdate.footerCopyright.textContent = `© ${new Date().getFullYear()} ${t.footer.copyright}`;
+                if (elementsToUpdate.footerPrivacy) elementsToUpdate.footerPrivacy.textContent = t.footer.privacyPolicy;
+                if (elementsToUpdate.footerTerms) elementsToUpdate.footerTerms.textContent = t.footer.termsOfService;
+                if (elementsToUpdate.footerSitemap) elementsToUpdate.footerSitemap.textContent = t.footer.sitemap;
+
+                lucide.createIcons(); // Re-create Lucide icons after content update
+            }
+
+            // Event listener for language toggle button
+            if (elementsToUpdate.languageToggle) {
+                elementsToUpdate.languageToggle.addEventListener('click', () => {
+                    currentLang = currentLang === 'en' ? 'bn' : 'en';
+                    document.documentElement.lang = currentLang; // Update html lang attribute
+                    updateContent();
+                });
+            }
+
+            // Placeholder for User ID and Name (in a real app, this would come from authentication)
+            function setUserIdAndName() {
+                const dummyUserId = "ADV-9876543210FEDCBA"; // Example dummy ID for Advocate
+                const dummyUserName = "অ্যাডভোকেট জাহিদ হাসান"; // Example dummy name (Bengali)
+
+                if (elementsToUpdate.userIdValue) {
+                    elementsToUpdate.userIdValue.textContent = dummyUserId;
+                }
+                if (elementsToUpdate.userDisplayName) {
+                    elementsToUpdate.userDisplayName.textContent = dummyUserName;
+                }
+            }
+
+            // Initial content load and set dummy user data
+            updateContent();
+            setUserIdAndName();
+        });
+    </script>
+</body>
+</html>

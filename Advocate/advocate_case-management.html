@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Management - Advocate & Criminology Management System - আইনপ্রহরী</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-blue: #1a202c; /* blue-900 equivalent */
+            --secondary-blue: #2c5282; /* blue-700 equivalent */
+            --accent-blue: #3182ce; /* blue-600 equivalent */
+            --light-blue: #ebf8ff; /* blue-50 equivalent */
+            --lighter-blue: #e0f2fe; /* blue-100 equivalent */
+            --text-dark: #2d3748; /* gray-800 equivalent */
+            --text-medium: #4a5568; /* gray-700 equivalent */
+            --text-light: #718096; /* gray-600 equivalent */
+            --bg-light: #f7fafc; /* gray-50 equivalent */
+            --bg-white: #ffffff;
+            --bg-dark: #1a202c; /* gray-900 equivalent */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            padding-top: 76px; /* Adjust based on navbar height */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        .navbar {
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+        }
+
+        .navbar-brand {
+            color: var(--primary-blue) !important;
+            font-weight: 800;
+            font-size: 1.75rem;
+            border-radius: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            transition: background-color 0.3s ease;
+        }
+        .navbar-brand:hover {
+            background-color: var(--light-blue);
+        }
+
+        .nav-link {
+            color: var(--text-light) !important;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: var(--accent-blue) !important;
+        }
+
+        .btn-primary-custom {
+            background-color: var(--accent-blue);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+        .btn-primary-custom:hover {
+            background-color: #2b6cb0;
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        .btn-secondary-outline-custom {
+            background-color: transparent;
+            color: var(--text-medium);
+            border: 1px solid var(--text-light);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary-outline-custom:hover {
+            background-color: var(--light-blue);
+            color: var(--accent-blue);
+            border-color: var(--accent-blue);
+        }
+
+        .main-content-container {
+            padding: 3rem 0;
+            background-color: var(--bg-blue-50-custom);
+        }
+
+        .info-card {
+            background-color: var(--bg-white);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #f0f0f0;
+            margin-bottom: 2rem;
+        }
+        .section-header {
+            color: var(--primary-blue);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        .text-primary-custom {
+            color: var(--accent-blue) !important;
+        }
+        .bg-gray-900-custom {
+            background-color: var(--bg-dark);
+        }
+
+        /* Footer specific styling */
+        footer a {
+            transition: color 0.3s ease;
+        }
+        footer a:hover {
+            color: white !important;
+        }
+
+        .case-list-item {
+            background-color: var(--bg-white);
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .case-list-item h5 {
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-bottom: 0.25rem;
+        }
+        .case-list-item .badge {
+            font-size: 0.8rem;
+            padding: 0.4em 0.7em;
+            border-radius: 0.3rem;
+        }
+        .case-list-item .actions button {
+            margin-left: 0.5rem;
+        }
+        @media (max-width: 767px) {
+            .case-list-item .actions {
+                width: 100%;
+                text-align: right;
+                margin-top: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <i data-lucide="gavel" class="me-2 text-primary-custom-icon"></i>
+                <span id="app-name">আইনপ্রহরী</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <button class="btn btn-outline-secondary d-flex align-items-center" id="back-to-dashboard">
+                            <i data-lucide="arrow-left" class="me-2"></i> <span id="back-button-text">ড্যাশবোর্ডে ফিরে যান</span>
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="feature.html" id="nav-features">বৈশিষ্ট্যসমূহ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="roles.html" id="nav-roles">ভূমিকা</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html" id="nav-contact">যোগাযোগ</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-outline-primary d-flex align-items-center" href="profile.html" id="nav-profile">
+                            <i data-lucide="user" class="me-2"></i> <span id="user-display-name">ব্যবহারকারী</span>
+                        </a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-primary-custom d-flex align-items-center" href="index.html" id="nav-logout">
+                            <i data-lucide="log-out" class="me-2"></i> লগআউট
+                        </a>
+                    </li>
+                    <li class="nav-item ms-lg-4">
+                        <button class="btn btn-secondary-outline-custom" id="language-toggle">English</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Section -->
+    <section class="main-content-container">
+        <div class="container">
+            <div class="info-card text-center">
+                <h1 class="display-5 fw-bold mb-3" id="page-heading">কেস ব্যবস্থাপনা</h1>
+                <p class="lead text-muted mb-4" id="page-description">আপনার সমস্ত সক্রিয় এবং বন্ধ মামলার একটি ওভারভিউ দেখুন, এবং মামলার বিবরণ পরিচালনা করুন।</p>
+            </div>
+
+            <div class="row g-4 mb-5">
+                <div class="col-lg-12">
+                    <div class="info-card">
+                        <h3 class="section-header" id="active-cases-heading">সক্রিয় মামলা</h3>
+                        <div id="active-case-list">
+                            <div class="case-list-item" id="active-case-1">
+                                <div>
+                                    <h5>মামলা #CR2025-001: জন বনাম রাজ্য</h5>
+                                    <p class="text-muted mb-0">ক্লায়েন্ট: ফারহানা বেগম | স্থিতি: <span class="badge bg-warning text-dark">তদন্তাধীন</span></p>
+                                </div>
+                                <div class="actions">
+                                    <button class="btn btn-sm btn-outline-primary view-case-btn" data-case-id="CR2025-001" id="view-active-1"><i data-lucide="eye" class="me-1"></i> দেখুন</button>
+                                    <button class="btn btn-sm btn-outline-success update-status-btn" data-case-id="CR2025-001" id="update-active-1"><i data-lucide="edit" class="me-1"></i> স্থিতি আপডেট করুন</button>
+                                    <button class="btn btn-sm btn-outline-info upload-document-btn" data-case-id="CR2025-001" id="upload-active-1"><i data-lucide="upload" class="me-1"></i> নথি আপলোড করুন</button>
+                                </div>
+                            </div>
+                            <div class="case-list-item" id="active-case-2">
+                                <div>
+                                    <h5>মামলা #CIV2025-005: স্মিথ বনাম জোন্স</h5>
+                                    <p class="text-muted mb-0">ক্লায়েন্ট: রানা আহমেদ | স্থিতি: <span class="badge bg-info">শুনানির জন্য নির্ধারিত</span></p>
+                                </div>
+                                <div class="actions">
+                                    <button class="btn btn-sm btn-outline-primary view-case-btn" data-case-id="CIV2025-005" id="view-active-2"><i data-lucide="eye" class="me-1"></i> দেখুন</button>
+                                    <button class="btn btn-sm btn-outline-success update-status-btn" data-case-id="CIV2025-005" id="update-active-2"><i data-lucide="edit" class="me-1"></i> স্থিতি আপডেট করুন</button>
+                                    <button class="btn btn-sm btn-outline-info upload-document-btn" data-case-id="CIV2025-005" id="upload-active-2"><i data-lucide="upload" class="me-1"></i> নথি আপলোড করুন</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-grid gap-2 mt-3">
+                            <button class="btn btn-primary-custom" id="load-more-active-cases"><i data-lucide="refresh-cw" class="me-2"></i> আরও সক্রিয় মামলা লোড করুন</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4 mb-5">
+                <div class="col-lg-12">
+                    <div class="info-card">
+                        <h3 class="section-header" id="closed-cases-heading">বন্ধ মামলা</h3>
+                        <div id="closed-case-list">
+                            <div class="case-list-item" id="closed-case-1">
+                                <div>
+                                    <h5>মামলা #FAM2024-001: ডিভোর্স কেস</h5>
+                                    <p class="text-muted mb-0">ক্লায়েন্ট: তানিয়া সুলতানা | স্থিতি: <span class="badge bg-success">নিষ্পত্তি হয়েছে</span></p>
+                                </div>
+                                <div class="actions">
+                                    <button class="btn btn-sm btn-outline-primary view-case-btn" data-case-id="FAM2024-001" id="view-closed-1"><i data-lucide="eye" class="me-1"></i> দেখুন</button>
+                                    <button class="btn btn-sm btn-outline-secondary archive-case-btn" data-case-id="FAM2024-001" id="archive-closed-1"><i data-lucide="archive" class="me-1"></i> সংরক্ষণাগার</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-grid gap-2 mt-3">
+                            <button class="btn btn-primary-custom" id="load-more-closed-cases"><i data-lucide="refresh-cw" class="me-2"></i> আরও বন্ধ মামলা লোড করুন</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-12">
+                    <div class="info-card">
+                        <h3 class="section-header" id="new-case-heading">নতুন মামলা যোগ করুন</h3>
+                        <form id="add-new-case-form">
+                            <div class="mb-3">
+                                <label for="new-case-title" class="form-label" id="new-case-title-label">মামলার শিরোনাম:</label>
+                                <input type="text" class="form-control" id="new-case-title" placeholder="যেমন: সাইবার জালিয়াতি, জমি বিবাদ" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="new-case-client" class="form-label" id="new-case-client-label">ক্লায়েন্টের নাম:</label>
+                                <input type="text" class="form-control" id="new-case-client" placeholder="ক্লায়েন্টের নাম লিখুন" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="new-case-description" class="form-label" id="new-case-description-label">সংক্ষিপ্ত বিবরণ:</label>
+                                <textarea class="form-control" id="new-case-description" rows="3" placeholder="মামলার একটি সংক্ষিপ্ত বিবরণ দিন" required></textarea>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary-custom" id="add-case-button"><i data-lucide="plus-circle" class="me-2"></i> নতুন মামলা যোগ করুন</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900-custom text-light py-4">
+        <div class="container text-center text-md-start d-md-flex justify-content-between align-items-center">
+            <div class="mb-3 mb-md-0">
+                <p class="mb-0" id="footer-copyright">&copy; <span id="current-year"></span> আইনপ্রহরী. সর্বস্বত্ব সংরক্ষিত।</p>
+            </div>
+            <div class="d-flex justify-content-center gap-4">
+                <a href="#" class="text-light text-decoration-none hover-white" id="footer-privacy">গোপনীয়তা নীতি</a>
+                <a href="#" class="text-light text-decoration-none hover-white" id="footer-terms">পরিষেবার শর্তাবলী</a>
+                <a href="#" class="text-light text-decoration-none hover-white" id="footer-sitemap">সাইটম্যাপ</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS CDN (Bundle with Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!-- Custom JavaScript for Language Switching and Functionality -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Lucide icons
+            lucide.createIcons();
+
+            // Content object for both English and Bengali
+            const content = {
+                en: {
+                    appName: "AdvocatePro",
+                    nav: {
+                        features: "Features",
+                        roles: "Roles",
+                        contact: "Contact",
+                        profile: "Profile",
+                        logout: "Logout",
+                    },
+                    page: {
+                        backButton: "Back to Dashboard",
+                        heading: "Case Management",
+                        description: "View an overview of all your active and closed cases, and manage case details.",
+                        activeCasesHeading: "Active Cases",
+                        caseTitle1: "Case #CR2025-001: John vs. State",
+                        caseClientStatus1: "Client: Farhana Begum | Status: Investigating",
+                        view: "View",
+                        updateStatus: "Update Status",
+                        uploadDocument: "Upload Document",
+                        caseTitle2: "Case #CIV2025-005: Smith vs. Jones",
+                        caseClientStatus2: "Client: Rana Ahmed | Status: Scheduled for Hearing",
+                        loadMoreActiveCases: "Load More Active Cases",
+                        closedCasesHeading: "Closed Cases",
+                        caseTitleClosed1: "Case #FAM2024-001: Divorce Case",
+                        caseClientStatusClosed1: "Client: Tania Sultana | Status: Disposed",
+                        archive: "Archive",
+                        loadMoreClosedCases: "Load More Closed Cases",
+                        newCaseHeading: "Add New Case",
+                        newCaseTitleLabel: "Case Title:",
+                        newCaseTitlePlaceholder: "e.g., Cyber Fraud, Land Dispute",
+                        newCaseClientLabel: "Client Name:",
+                        newCaseClientPlaceholder: "Enter client's name",
+                        newCaseDescriptionLabel: "Brief Description:",
+                        newCaseDescriptionPlaceholder: "Provide a brief description of the case",
+                        addCaseButton: "Add New Case",
+                    },
+                    footer: {
+                        copyright: "Ainprohori. All rights reserved.",
+                        privacyPolicy: "Privacy Policy",
+                        termsOfService: "Terms of Service",
+                        sitemap: "Sitemap",
+                    },
+                },
+                bn: {
+                    appName: "আইনপ্রহরী",
+                    nav: {
+                        features: "বৈশিষ্ট্যসমূহ",
+                        roles: "ভূমিকা",
+                        contact: "যোগাযোগ",
+                        profile: "প্রোফাইল",
+                        logout: "লগআউট",
+                    },
+                    page: {
+                        backButton: "ড্যাশবোর্ডে ফিরে যান",
+                        heading: "কেস ব্যবস্থাপনা",
+                        description: "আপনার সমস্ত সক্রিয় এবং বন্ধ মামলার একটি ওভারভিউ দেখুন, এবং মামলার বিবরণ পরিচালনা করুন।",
+                        activeCasesHeading: "সক্রিয় মামলা",
+                        caseTitle1: "মামলা #CR2025-001: জন বনাম রাজ্য",
+                        caseClientStatus1: "ক্লায়েন্ট: ফারহানা বেগম | স্থিতি: তদন্তাধীন",
+                        view: "দেখুন",
+                        updateStatus: "স্থিতি আপডেট করুন",
+                        uploadDocument: "নথি আপলোড করুন",
+                        caseTitle2: "মামলা #CIV2025-005: স্মিথ বনাম জোন্স",
+                        caseClientStatus2: "ক্লায়েন্ট: রানা আহমেদ | স্থিতি: শুনানির জন্য নির্ধারিত",
+                        loadMoreActiveCases: "আরও সক্রিয় মামলা লোড করুন",
+                        closedCasesHeading: "বন্ধ মামলা",
+                        caseTitleClosed1: "মামলা #FAM2024-001: ডিভোর্স কেস",
+                        caseClientStatusClosed1: "ক্লায়েন্ট: তানিয়া সুলতানা | স্থিতি: নিষ্পত্তি হয়েছে",
+                        archive: "সংরক্ষণাগার",
+                        loadMoreClosedCases: "আরও বন্ধ মামলা লোড করুন",
+                        newCaseHeading: "নতুন মামলা যোগ করুন",
+                        newCaseTitleLabel: "মামলার শিরোনাম:",
+                        newCaseTitlePlaceholder: "যেমন: সাইবার জালিয়াতি, জমি বিবাদ",
+                        newCaseClientLabel: "ক্লায়েন্টের নাম:",
+                        newCaseClientPlaceholder: "ক্লায়েন্টের নাম লিখুন",
+                        newCaseDescriptionLabel: "সংক্ষিপ্ত বিবরণ:",
+                        newCaseDescriptionPlaceholder: "মামলার একটি সংক্ষিপ্ত বিবরণ দিন",
+                        addCaseButton: "নতুন মামলা যোগ করুন",
+                    },
+                    footer: {
+                        copyright: "আইনপ্রহরী. সর্বস্বত্ব সংরক্ষিত।",
+                        privacyPolicy: "গোপনীয়তা নীতি",
+                        termsOfService: "পরিষেবার শর্তাবলী",
+                        sitemap: "সাইটম্যাপ",
+                    },
+                },
+            };
+
+           let currentLang = 'en'; // Initial language
+
+            // Get elements that will be updated
+            const elementsToUpdate = {
+                appName: document.getElementById('app-name'),
+                navFeatures: document.getElementById('nav-features'),
+                navRoles: document.getElementById('nav-roles'),
+                navContact: document.getElementById('nav-contact'),
+                navProfile: document.getElementById('nav-profile'),
+                userDisplayName: document.getElementById('user-display-name'),
+                navLogout: document.getElementById('nav-logout'),
+                languageToggle: document.getElementById('language-toggle'),
+                backButtonText: document.getElementById('back-button-text'),
+                
+
+
+                pageHeading: document.getElementById('page-heading'),
+                pageDescription: document.getElementById('page-description'),
+                activeCasesHeading: document.getElementById('active-cases-heading'),
+                caseTitle1: document.querySelector('#active-case-1 h5'),
+                caseClientStatus1: document.querySelector('#active-case-1 p'),
+                viewActive1: document.getElementById('view-active-1'),
+                updateActive1: document.getElementById('update-active-1'),
+                uploadActive1: document.getElementById('upload-active-1'),
+                caseTitle2: document.querySelector('#active-case-2 h5'),
+                caseClientStatus2: document.querySelector('#active-case-2 p'),
+                viewActive2: document.getElementById('view-active-2'),
+                updateActive2: document.getElementById('update-active-2'),
+                uploadActive2: document.getElementById('upload-active-2'),
+                loadMoreActiveCases: document.getElementById('load-more-active-cases'),
+                closedCasesHeading: document.getElementById('closed-cases-heading'),
+                caseTitleClosed1: document.querySelector('#closed-case-1 h5'),
+                caseClientStatusClosed1: document.querySelector('#closed-case-1 p'),
+                viewClosed1: document.getElementById('view-closed-1'),
+                archiveClosed1: document.getElementById('archive-closed-1'),
+                loadMoreClosedCases: document.getElementById('load-more-closed-cases'),
+                newCaseHeading: document.getElementById('new-case-heading'),
+                newCaseTitleLabel: document.getElementById('new-case-title-label'),
+                newCaseTitleInput: document.getElementById('new-case-title'),
+                newCaseClientLabel: document.getElementById('new-case-client-label'),
+                newCaseClientInput: document.getElementById('new-case-client'),
+                newCaseDescriptionLabel: document.getElementById('new-case-description-label'),
+                newCaseDescriptionTextarea: document.getElementById('new-case-description'),
+                addCaseButton: document.getElementById('add-case-button'),
+
+                footerCopyright: document.getElementById('footer-copyright'),
+                currentYear: document.getElementById('current-year'),
+                footerPrivacy: document.getElementById('footer-privacy'),
+                footerTerms: document.getElementById('footer-terms'),
+                footerSitemap: document.getElementById('footer-sitemap'),
+            };
+
+            function updateContent() {
+                const t = content[currentLang];
+
+                // Navbar
+                if (elementsToUpdate.appName) elementsToUpdate.appName.textContent = t.appName;
+                if (elementsToUpdate.navFeatures) elementsToUpdate.navFeatures.textContent = t.nav.features;
+                if (elementsToUpdate.navRoles) elementsToUpdate.navRoles.textContent = t.nav.roles;
+                if (elementsToUpdate.navContact) elementsToUpdate.navContact.textContent = t.nav.contact;
+                if (elementsToUpdate.navProfile) elementsToUpdate.navProfile.innerHTML = `<i data-lucide="user" class="me-2"></i> <span id="user-display-name">${t.nav.profile}</span>`;
+                if (elementsToUpdate.navLogout) elementsToUpdate.navLogout.innerHTML = `<i data-lucide="log-out" class="me-2"></i> ${t.nav.logout}`;
+                if (elementsToUpdate.languageToggle) elementsToUpdate.languageToggle.textContent = currentLang === 'en' ? 'বাংলা' : 'English';
+                if (elementsToUpdate.backButtonText) elementsToUpdate.backButtonText.textContent = t.page.backButton;
+
+                // Page Content
+                if (elementsToUpdate.pageHeading) elementsToUpdate.pageHeading.textContent = t.page.heading;
+                if (elementsToUpdate.pageDescription) elementsToUpdate.pageDescription.textContent = t.page.description;
+                if (elementsToUpdate.activeCasesHeading) elementsToUpdate.activeCasesHeading.textContent = t.page.activeCasesHeading;
+                if (elementsToUpdate.caseTitle1) elementsToUpdate.caseTitle1.textContent = t.page.caseTitle1;
+                if (elementsToUpdate.caseClientStatus1) elementsToUpdate.caseClientStatus1.innerHTML = t.page.caseClientStatus1.replace('স্থিতি: তদন্তাধীন', `স্থিতি: <span class="badge bg-warning text-dark">${t.page.caseClientStatus1.split(': ')[1]}</span>`);
+                if (elementsToUpdate.viewActive1) elementsToUpdate.viewActive1.innerHTML = `<i data-lucide="eye" class="me-1"></i> ${t.page.view}`;
+                if (elementsToUpdate.updateActive1) elementsToUpdate.updateActive1.innerHTML = `<i data-lucide="edit" class="me-1"></i> ${t.page.updateStatus}`;
+                if (elementsToUpdate.uploadActive1) elementsToUpdate.uploadActive1.innerHTML = `<i data-lucide="upload" class="me-1"></i> ${t.page.uploadDocument}`;
+                if (elementsToUpdate.caseTitle2) elementsToUpdate.caseTitle2.textContent = t.page.caseTitle2;
+                if (elementsToUpdate.caseClientStatus2) elementsToUpdate.caseClientStatus2.innerHTML = t.page.caseClientStatus2.replace('স্থিতি: শুনানির জন্য নির্ধারিত', `স্থিতি: <span class="badge bg-info">${t.page.caseClientStatus2.split(': ')[1]}</span>`);
+                if (elementsToUpdate.viewActive2) elementsToUpdate.viewActive2.innerHTML = `<i data-lucide="eye" class="me-1"></i> ${t.page.view}`;
+                if (elementsToUpdate.updateActive2) elementsToUpdate.updateActive2.innerHTML = `<i data-lucide="edit" class="me-1"></i> ${t.page.updateStatus}`;
+                if (elementsToUpdate.uploadActive2) elementsToUpdate.uploadActive2.innerHTML = `<i data-lucide="upload" class="me-1"></i> ${t.page.uploadDocument}`;
+                if (elementsToUpdate.loadMoreActiveCases) elementsToUpdate.loadMoreActiveCases.innerHTML = `<i data-lucide="refresh-cw" class="me-2"></i> ${t.page.loadMoreActiveCases}`;
+
+                if (elementsToUpdate.closedCasesHeading) elementsToUpdate.closedCasesHeading.textContent = t.page.closedCasesHeading;
+                if (elementsToUpdate.caseTitleClosed1) elementsToUpdate.caseTitleClosed1.textContent = t.page.caseTitleClosed1;
+                if (elementsToUpdate.caseClientStatusClosed1) elementsToUpdate.caseClientStatusClosed1.innerHTML = t.page.caseClientStatusClosed1.replace('স্থিতি: নিষ্পত্তি হয়েছে', `স্থিতি: <span class="badge bg-success">${t.page.caseClientStatusClosed1.split(': ')[1]}</span>`);
+                if (elementsToUpdate.viewClosed1) elementsToUpdate.viewClosed1.innerHTML = `<i data-lucide="eye" class="me-1"></i> ${t.page.view}`;
+                if (elementsToUpdate.archiveClosed1) elementsToUpdate.archiveClosed1.innerHTML = `<i data-lucide="archive" class="me-1"></i> ${t.page.archive}`;
+                if (elementsToUpdate.loadMoreClosedCases) elementsToUpdate.loadMoreClosedCases.innerHTML = `<i data-lucide="refresh-cw" class="me-2"></i> ${t.page.loadMoreClosedCases}`;
+
+                if (elementsToUpdate.newCaseHeading) elementsToUpdate.newCaseHeading.textContent = t.page.newCaseHeading;
+                if (elementsToUpdate.newCaseTitleLabel) elementsToUpdate.newCaseTitleLabel.textContent = t.page.newCaseTitleLabel;
+                if (elementsToUpdate.newCaseTitleInput) elementsToUpdate.newCaseTitleInput.placeholder = t.page.newCaseTitlePlaceholder;
+                if (elementsToUpdate.newCaseClientLabel) elementsToUpdate.newCaseClientLabel.textContent = t.page.newCaseClientLabel;
+                if (elementsToUpdate.newCaseClientInput) elementsToUpdate.newCaseClientInput.placeholder = t.page.newCaseClientPlaceholder;
+                if (elementsToUpdate.newCaseDescriptionLabel) elementsToUpdate.newCaseDescriptionLabel.textContent = t.page.newCaseDescriptionLabel;
+                if (elementsToUpdate.newCaseDescriptionTextarea) elementsToUpdate.newCaseDescriptionTextarea.placeholder = t.page.newCaseDescriptionPlaceholder;
+                if (elementsToUpdate.addCaseButton) elementsToUpdate.addCaseButton.innerHTML = `<i data-lucide="plus-circle" class="me-2"></i> ${t.page.addCaseButton}`;
+
+                // Footer
+                if (elementsToUpdate.currentYear) elementsToUpdate.currentYear.textContent = new Date().getFullYear();
+                if (elementsToUpdate.footerCopyright) elementsToUpdate.footerCopyright.textContent = `© ${new Date().getFullYear()} ${t.footer.copyright}`;
+                if (elementsToUpdate.footerPrivacy) elementsToUpdate.footerPrivacy.textContent = t.footer.privacyPolicy;
+                if (elementsToUpdate.footerTerms) elementsToUpdate.footerTerms.textContent = t.footer.termsOfService;
+                if (elementsToUpdate.footerSitemap) elementsToUpdate.footerSitemap.textContent = t.footer.sitemap;
+
+                lucide.createIcons(); // Re-create Lucide icons after content update
+            }
+
+            // Placeholder for User Name (in a real app, this would come from authentication)
+            function setUserName() {
+                const dummyUserName = "অ্যাডভোকেট"; // Example dummy name (Bengali)
+                if (elementsToUpdate.userDisplayName) {
+                    elementsToUpdate.userDisplayName.textContent = dummyUserName;
+                }
+            }
+
+            // Event listener for language toggle button
+            const languageToggleBtn = document.getElementById('language-toggle');
+            if (languageToggleBtn) {
+                languageToggleBtn.addEventListener('click', () => {
+                    currentLang = currentLang === 'en' ? 'bn' : 'en';
+                    document.documentElement.lang = currentLang; // Update html lang attribute
+                    updateContent();
+                });
+            }
+
+            // Initial content load and set dummy user data
+            updateContent();
+            setUserName();
+
+            // Add back button functionality
+            document.getElementById('back-to-dashboard').addEventListener('click', () => {
+                history.back();
+            });
+
+            // Dummy functionality for buttons
+            document.querySelectorAll('.view-case-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const caseId = this.dataset.caseId;
+                    alert(`Viewing details for Case ID: ${caseId} (Placeholder action)`);
+                });
+            });
+
+            document.querySelectorAll('.update-status-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const caseId = this.dataset.caseId;
+                    const newStatus = prompt(`Enter new status for Case ID: ${caseId}`);
+                    if (newStatus) {
+                        alert(`Updating status for Case ID: ${caseId} to "${newStatus}" (Placeholder action)`);
+                        // In a real app, you'd update the UI and backend
+                    }
+                });
+            });
+
+            document.querySelectorAll('.upload-document-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const caseId = this.dataset.caseId;
+                    alert(`Opening document upload for Case ID: ${caseId} (Placeholder action)`);
+                    // In a real app, this would open a file upload dialog
+                });
+            });
+
+            document.querySelectorAll('.archive-case-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const caseId = this.dataset.caseId;
+                    if (confirm(`Are you sure you want to archive Case ID: ${caseId}?`)) {
+                        alert(`Archiving Case ID: ${caseId} (Placeholder action)`);
+                        // In a real app, this would move the case to an archive
+                    }
+                });
+            });
+
+            document.getElementById('load-more-active-cases').addEventListener('click', () => {
+                alert('Loading more active cases... (Placeholder action)');
+            });
+
+            document.getElementById('load-more-closed-cases').addEventListener('click', () => {
+                alert('Loading more closed cases... (Placeholder action)');
+            });
+
+            document.getElementById('add-new-case-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                const title = elementsToUpdate.newCaseTitleInput.value;
+                const client = elementsToUpdate.newCaseClientInput.value;
+                const description = elementsToUpdate.newCaseDescriptionTextarea.value;
+
+                alert(`Adding New Case:\nTitle: ${title}\nClient: ${client}\nDescription: ${description}\n\n(Placeholder for adding to backend)`);
+                // In a real app, this would send data to a backend to create a new case
+                this.reset(); // Clear the form
+            });
+        });
+    </script>
+</body>
+</html>

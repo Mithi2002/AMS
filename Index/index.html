@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en"> <!-- Default language set to English -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advocate & Criminology Management System - আইনপ্রহরী</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-blue: #1a202c; /* blue-900 equivalent */
+            --secondary-blue: #2c5282; /* blue-700 equivalent */
+            --accent-blue: #3182ce; /* blue-600 equivalent */
+            --light-blue: #ebf8ff; /* blue-50 equivalent */
+            --lighter-blue: #e0f2fe; /* blue-100 equivalent */
+            --text-dark: #2d3748; /* gray-800 equivalent */
+            --text-medium: #4a5568; /* gray-700 equivalent */
+            --text-light: #718096; /* gray-600 equivalent */
+            --bg-light: #f7fafc; /* gray-50 equivalent */
+            --bg-white: #ffffff;
+            --bg-dark: #1a202c; /* gray-900 equivalent */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            padding-top: 76px; /* Adjust based on navbar height */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        .navbar {
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08); /* Slightly more pronounced shadow */
+        }
+
+        .navbar-brand {
+            color: var(--primary-blue) !important;
+            font-weight: 800;
+            font-size: 1.75rem;
+            border-radius: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            transition: background-color 0.3s ease;
+        }
+        .navbar-brand:hover {
+            background-color: var(--light-blue);
+        }
+
+        .nav-link {
+            color: var(--text-light) !important;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: var(--accent-blue) !important;
+        }
+
+        .btn-primary-custom {
+            background-color: var(--accent-blue);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px; /* rounded-full */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Stronger shadow for buttons */
+            transition: all 0.3s ease;
+        }
+        .btn-primary-custom:hover {
+            background-color: #2b6cb0; /* Slightly darker blue */
+            transform: translateY(-2px); /* Lift effect */
+            color: white;
+        }
+
+        .btn-secondary-custom {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px; /* rounded-full */
+            transition: all 0.3s ease;
+        }
+        .btn-secondary-custom:hover {
+            background-color: white;
+            color: var(--secondary-blue);
+            transform: translateY(-2px); /* Lift effect */
+        }
+
+        .btn-light-custom {
+            background-color: white;
+            color: var(--secondary-blue);
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px; /* rounded-full */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Stronger shadow for buttons */
+            transition: all 0.3s ease;
+        }
+        .btn-light-custom:hover {
+            background-color: var(--lighter-blue);
+            transform: translateY(-2px); /* Lift effect */
+            color: var(--secondary-blue);
+        }
+
+        .btn-secondary-outline-custom {
+            background-color: transparent;
+            color: var(--text-medium);
+            border: 1px solid var(--text-light); /* Subtle border */
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary-outline-custom:hover {
+            background-color: var(--light-blue);
+            color: var(--accent-blue);
+            border-color: var(--accent-blue);
+        }
+
+        .hero-section {
+            background: linear-gradient(to right, var(--primary-blue), var(--secondary-blue));
+            position: relative;
+            overflow: hidden;
+            padding: 8rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            /* background-image: url('https://placehold.co/1920x1080/0A192F/E0E7FF?text=Abstract+Geometric+Pattern'); */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.15;
+            z-index: 0;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        .hero-headline .highlight {
+            color: #bfdbfe; /* blue-200 equivalent */
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-down { animation: fadeInDown 0.8s ease-out forwards; }
+        .animate-fade-in-up { animation: fadeInUp 0.8s ease-out 0.2s forwards; }
+
+        .feature-card, .role-card {
+            background-color: var(--bg-white);
+            padding: 2rem;
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); /* Refined shadow */
+            border: 1px solid #f0f0f0; /* gray-100 equivalent */
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            height: 100%;
+        }
+        .feature-card:hover, .role-card:hover {
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12); /* More pronounced hover shadow */
+            transform: translateY(-5px); /* Subtle lift on hover */
+        }
+
+        .feature-icon, .role-icon {
+            background-color: var(--lighter-blue);
+            padding: 1rem;
+            border-radius: 9999px;
+            margin-bottom: 1.5rem;
+            color: var(--accent-blue);
+        }
+        .icon-size {
+            width: 36px;
+            height: 36px;
+        }
+
+        .role-card ul {
+            list-style: none;
+            padding-left: 0;
+            text-align: left;
+            width: 100%;
+            max-width: 20rem;
+            margin-top: 1rem;
+        }
+        .role-card ul li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            color: var(--text-medium);
+        }
+        .role-card ul li svg {
+            color: var(--accent-blue);
+            margin-right: 0.5rem;
+            flex-shrink: 0;
+        }
+        .text-primary-custom-icon { /* For checkmarks in role cards */
+            color: var(--accent-blue) !important;
+        }
+
+        .bg-blue-800-custom {
+            background-color: #2b6cb0;
+        }
+        .bg-blue-50-custom {
+            background-color: var(--light-blue);
+        }
+        .bg-gray-900-custom {
+            background-color: var(--bg-dark);
+        }
+
+        /* Footer specific styling */
+        footer a {
+            transition: color 0.3s ease;
+        }
+        footer a:hover {
+            color: white !important;
+        }
+
+        /* Responsive adjustments */
+        @media (min-width: 768px) {
+            .hero-section {
+                padding: 12rem 0;
+            }
+        }
+
+        /* New styles for hover dropdown */
+        .nav-item.dropdown-hover {
+            position: relative; /* Needed for absolute positioning of dropdown */
+        }
+
+        .role-dropdown-menu {
+            display: none; /* Hidden by default */
+            position: absolute;
+            top: 100%; /* Position right below the nav item */
+            left: 50%; /* Center horizontally relative to parent */
+            transform: translateX(-50%); /* Adjust for centering */
+            background-color: var(--bg-white);
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            padding: 1rem;
+            min-width: 200px; /* Adjust as needed */
+            z-index: 1000; /* Ensure it's above other content */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            white-space: nowrap; /* Prevent wrapping of role names */
+        }
+
+        .nav-item.dropdown-hover:hover .role-dropdown-menu {
+            display: block; /* Show on hover */
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .role-dropdown-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            border-radius: 0.375rem; /* rounded-md */
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+        .role-dropdown-item:hover {
+            background-color: var(--light-blue);
+            color: var(--accent-blue);
+        }
+        .role-dropdown-item i {
+            margin-right: 0.75rem;
+            color: var(--text-medium); /* Default icon color */
+            transition: color 0.2s ease;
+        }
+        .role-dropdown-item:hover i {
+            color: var(--accent-blue); /* Icon color on hover */
+        }
+
+        /* Ensure dropdown is hidden on small screens */
+        @media (max-width: 991.98px) { /* Bootstrap's lg breakpoint - 1px */
+            .nav-item.dropdown-hover .role-dropdown-menu {
+                display: none !important; /* Hide dropdown on smaller screens */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <i data-lucide="gavel" class="me-2 text-primary-custom-icon"></i>
+                <span id="app-name">আইনপ্রহরী</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="feature.html" id="nav-features">বৈশিষ্ট্যসমূহ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="roles.html" id="nav-roles">ভূমিকা</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html" id="nav-contact">যোগাযোগ</a>
+                    </li>
+                   
+
+
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-primary-custom d-flex align-items-center" href="login.html" id="nav-login">
+                            <i data-lucide="log-in" class="me-2"></i> প্রবেশ করুন
+                        </a>
+                    </li>
+                       
+                        
+                  
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-outline-primary d-flex align-items-center" href="signup.html" id="nav-signup">
+                            <i data-lucide="user-plus" class="me-2"></i> নিবন্ধন করুন
+                        </a>
+                    </li>
+                    <li class="nav-item ms-lg-4">
+                        <button class="btn btn-secondary-outline-custom" id="language-toggle">English</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-section text-white">
+        <div class="container hero-content">
+            <h1 class="display-4 fw-bold mb-4 animate-fade-in-down" id="hero-headline">
+                আইন ও অপরাধ ব্যবস্থাপনায় <span class="highlight">আধুনিক সমাধান</span>
+            </h1>
+            <p class="lead mb-5 opacity-90 animate-fade-in-up" id="hero-tagline">
+                আইনজীবী এবং অপরাধবিদ্যা পেশাদারদের জন্য তৈরি একটি সমন্বিত প্ল্যাটফর্ম, যা দক্ষতা, স্বচ্ছতা এবং জবাবদিহিতা নিশ্চিত করে।
+            </p>
+            <div class="d-flex justify-content-center flex-wrap gap-3">
+                <a class="btn btn-primary-custom d-flex align-items-center" href="signup.html" id="hero-btn-get-started">
+                    <i data-lucide="user-plus" class="me-2"></i> এখনই শুরু করুন
+                </a>
+                <a class="btn btn-secondary-custom d-flex align-items-center" href="features.html" id="hero-btn-learn-more">
+                    <i data-lucide="bell" class="me-2"></i> আরও জানুন
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section id="features" class="py-5 py-md-5 bg-white">
+        <div class="container text-center">
+            <h2 class="display-5 fw-bold text-primary-custom mb-3" id="features-heading">আমাদের প্রধান বৈশিষ্ট্যসমূহ</h2>
+            <p class="lead text-muted mb-5 mx-auto" style="max-width: 50rem;" id="features-subheading">
+                আপনার আইনি ও অপরাধবিদ্যা কার্যক্রম পরিচালনার জন্য আমরা একটি বিস্তৃত টুলস সেট অফার করি।
+            </p>
+
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i data-lucide="briefcase" class="icon-size"></i></div>
+                        <h3 class="h5 fw-bold mb-3" id="feat-case-management-title">মামলা ব্যবস্থাপনা</h3>
+                        <p class="text-muted" id="feat-case-management-desc">মামলা সংগঠিত করুন, অগ্রগতি ট্র্যাক করুন, নথি পরিচালনা করুন এবং সহজে অনুস্মারক সেট করুন।</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i data-lucide="users" class="icon-size"></i></div>
+                        <h3 class="h5 fw-bold mb-3" id="feat-client-relationship-title">ক্লায়েন্ট সম্পর্ক</h3>
+                        <p class="text-muted" id="feat-client-relationship-desc">বিস্তারিত ক্লায়েন্ট প্রোফাইল, যোগাযোগ লগ এবং সুরক্ষিত ক্লায়েন্ট পোর্টাল বজায় রাখুন।</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i data-lucide="shield-check" class="icon-size"></i></div>
+                        <h3 class="h5 fw-bold mb-3" id="feat-evidence-tracking-title">প্রমাণ ট্র্যাকিং</h3>
+                        <p class="text-muted" id="feat-evidence-tracking-desc">সব ধরনের প্রমাণ নিরাপদে লগ করুন এবং পরিচালনা করুন, চেইন অফ কাস্টডি নিশ্চিত করুন।</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i data-lucide="file-text" class="icon-size"></i></div>
+                        <h3 class="h5 fw-bold mb-3" id="feat-document-automation-title">নথি স্বয়ংক্রিয়করণ</h3>
+                        <p class="text-muted" id="feat-document-automation-desc">কাস্টমাইজযোগ্য টেমপ্লেট সহ দ্রুত আইনি নথি এবং রিপোর্ট তৈরি করুন।</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i data-lucide="bar-chart-2" class="icon-size"></i></div>
+                        <h3 class="h5 fw-bold mb-3" id="feat-analytics-reporting-title">বিশ্লেষণ ও প্রতিবেদন</h3>
+                        <p class="text-muted" id="feat-analytics-reporting-desc">শক্তিশালী বিশ্লেষণ এবং কাস্টম রিপোর্টের মাধ্যমে আপনার অনুশীলনের কর্মক্ষমতা সম্পর্কে অন্তর্দৃষ্টি লাভ করুন।</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i data-lucide="gavel" class="icon-size"></i></div>
+                        <h3 class="h5 fw-bold mb-3" id="feat-court-scheduling-title">আদালতের তারিখ নির্ধারণ</h3>
+                        <p class="text-muted" id="feat-court-scheduling-desc">একীভূত ক্যালেন্ডার এবং স্বয়ংক্রিয় আদালতের তারিখ অনুস্মারক সহ কোনো সময়সীমা মিস করবেন না।</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roles Section -->
+    <section id="roles" class="py-5 py-md-5 bg-blue-50-custom">
+        <div class="container text-center">
+            <h2 class="display-5 fw-bold text-primary-custom mb-3" id="roles-heading">আমাদের ব্যবহারকারী ভূমিকা</h2>
+            <p class="lead text-muted mb-5 mx-auto" style="max-width: 50rem;" id="roles-subheading">
+                আইনপ্রহরী বিভিন্ন ব্যবহারকারীর প্রয়োজন মেটাতে ডিজাইন করা হয়েছে, প্রতিটি ভূমিকার জন্য নির্দিষ্ট কার্যকারিতা সহ।
+            </p>
+
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-6 col-lg-4">
+                    <div class="role-card">
+                        <div class="role-icon" style="color: #28a745;"><i data-lucide="user-check" class="icon-size"></i></div>
+                        <h3 class="h5 fw-bold mb-3" id="role-admin-title">প্রশাসক (Admin)</h3>
+                        <p class="text-muted mb-4" id="role-admin-desc">ব্যবহারকারী ব্যবস্থাপনা, সিস্টেম ডেটা অখণ্ডতা, ভূমিকা নির্ধারণ এবং প্ল্যাটফর্মের মসৃণ অপারেশন তত্ত্বাবধান করেন।</p>
+                        <ul class="list-unstyled text-start w-100" id="role-admin-features">
+                            <li><i data-lucide="check" class="me-2 text-primary-custom-icon"></i> ব্যবহারকারী নিবন্ধন ও যাচাইকরণ</li>
+                            <li><i data-lucide="check" class="me-2 text-primary-custom-icon"></i> মামলা ও অপরাধ স্থিতি ব্যবস্থাপনা</li>
+                            <li><i data-lucide="check" class="me-2 text-primary-custom-icon"></i> সিস্টেম লগ ও বিশ্লেষণ</li>
+                            <li><i data-lucide="check" class="me-2 text-primary-custom-icon"></i> আইন তালিকা ও আইনি রেফারেন্স ব্যবস্থাপনা</li>
+                            <li><i data-lucide="check" class="me-2 text-primary-custom-icon"></i> বিজ্ঞপ্তি ও যোগাযোগ ব্যবস্থাপনা</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="role-card">
+                        <div class="role-icon" style="color: #6f42c1;"><i data-lucide="scale" class="icon-size"></i></div>
+                        <h3 class="h5 fw-bold mb-3" id="role-advocate-title">আইনজীবী (Advocate)</h3>
+                        <p class="text-muted mb-4" id="role-advocate-desc">আইনি পেশাদার যারা ক্লায়েন্টদের আইনি বিষয়ে প্রতিনিধিত্ব করেন, ডিজিটাল সরঞ্জাম ব্যবহার করে কাজ পরিচালনা করেন।</p>
+                        <ul class="list-unstyled text-start w-100" id="role-advocate-features">
+                            <li><i data-lucide="check" class="me-2 text-primary-custom-icon"></i> ব্যবহারকারী নিবন্ধন ও প্রোফাইল ব্যবস্থাপনা</li>
+                            <li><i data-lucide="check" class="me-2 text-primary-custom-icon"></i> পরামর্শ বুকিং ও ক্যালেন্ডার ব্যবস্থাপনা</li>
+                            <li><i data-lucide="check" class="me-2 text-primary-custom-icon"></i> মামলা ব্যবস্থাপনা ও কার্যভার</li>
+                            <li><i data-lucide="check" class="me-2 text-primary-custom-icon"></i> বিজ্ঞপ্তি ও অনুস্মারক সিস্টেম</li>
+                            <li><i data-lucide="check" class="me-2 text-primary-custom-icon"></i> নথি আপলোড ও আইনি ফাইল করা</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="role-card">
+                        <div class="role-icon" style="color: #dc3545;"><i data-lucide="clipboard-list" class="icon-size"></i></div>
+                        <h3 class="h5 fw-bold mb-3" id="role-police-title">পুলিশ কর্মকর্তা (Police Officer)</h3>
+                        <p class="text-muted mb-4" id="role-police-desc">অপরাধের তদন্ত করেন, রিপোর্ট জমা দেন এবং মামলার অগ্রগতি ট্র্যাক করেন।</p>
+                        <ul class="list-unstyled text-start w-100" id="role-police-features">
+                            <li><i data-lucide="check" class="me-2 text-primary-custom-icon"></i> অফিসার তালিকা ও ব্যবস্থাপনা</li>
+                            <li><i data-lucide="check" class="me-2 text-primary-custom-icon"></i> মামলার তথ্য ব্যবস্থাপনা</li>
+                            <li><i data-lucide="check" class="me-2 text-primary-custom-icon"></i> তদন্তের বিভাগ ও রিপোর্ট জমা</li>
+                            <li><i data-lucide="check" class="me-2 text-primary-custom-icon"></i> অপরাধ দৃশ্য পর্যবেক্ষণ</li>
+                            <li><i data-lucide="check" class="me-2 text-primary-custom-icon"></i> চূড়ান্ত প্রতিবেদন ও চার্জ শীট</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="role-card">
+                        <div class="role-icon" style="color: #ffc107;"><i data-lucide="book-open" class="icon-size"></i></div>
+                        <h3 class="h5 fw-bold mb-3" id="role-judge-title">বিচারক (Judge)</h3>
+                        <p class="text-muted mb-4" id="role-judge-desc">মামলার কার্যক্রম পরিচালনা করেন, শুনানি নির্ধারণ করেন এবং ডিজিটাল রায় প্রদান করেন।</p>
+                        <ul class="list-unstyled text-start w-100" id="role-judge-features">
+                            <li><i data-lucide="check" class="me-2 text-primary-custom-icon"></i> প্রমাণীকরণ ও সুরক্ষিত অ্যাক্সেস</li>
+                            <li><i data-lucide="check" class="me-2 text-primary-custom-icon"></i> বিচারক ড্যাশবোর্ড</li>
+                            <li><i data-lucide="check" class="me-2 text-primary-custom-icon"></i> মামলা পর্যালোচনা প্যানেল</li>
+                            <li><i data-lucide="check" class="me-2 text-primary-custom-icon"></i> শুনানি সময়সূচী ব্যবস্থাপনা</li>
+                            <li><i data-lucide="check" class="me-2 text-primary-custom-icon"></i> রায় জমা প্যানেল</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="role-card">
+                        <div class="role-icon" style="color: #20c997;"><i data-lucide="message-square" class="icon-size"></i></div>
+                        <h3 class="h5 fw-bold mb-3" id="role-citizen-title">নাগরিক (Citizen)</h3>
+                        <p class="text-muted mb-4" id="role-citizen-desc">আইনি পরিষেবা অ্যাক্সেস করেন, অপরাধের রিপোর্ট করেন এবং তাদের মামলার অগ্রগতি ট্র্যাক করেন।</p>
+                        <ul class="list-unstyled text-start w-100" id="role-citizen-features">
+                            <li><i data-lucide="check" class="me-2 text-primary-custom-icon"></i> নিরাপদ নিবন্ধন ও লগইন</li>
+                            <li><i data-lucide="check" class="me-2 text-primary-custom-icon"></i> আইনি পরামর্শ বুকিং</li>
+                            <li><i data-lucide="check" class="me-2 text-primary-custom-icon"></i> অপরাধ রিপোর্টিং পোর্টাল</li>
+                            <li><i data-lucide="check" class="me-2 text-primary-custom-icon"></i> মামলা ও রিপোর্ট স্থিতি ট্র্যাকিং</li>
+                            <li><i data-lucide="check" class="me-2 text-primary-custom-icon"></i> বিজ্ঞপ্তি ও সতর্কতা</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="bg-blue-800-custom text-white py-5 py-md-5 text-center">
+        <div class="container">
+            <h2 class="display-5 fw-bold mb-3" id="cta-heading">আপনার আইনি অনুশীলনকে রূপান্তরিত করতে প্রস্তুত?</h2>
+            <p class="lead opacity-90 mb-4 mx-auto" style="max-width: 50rem;" id="cta-tagline">
+                শত শত আইনি পেশাদারদের সাথে যোগ দিন যারা ইতিমধ্যেই একটি সুসংহত এবং দক্ষ ব্যবস্থাপনা সিস্টেমের সুবিধা উপভোগ করছেন।
+            </p>
+            <a class="btn btn-light-custom d-flex align-items-center justify-content-center mx-auto" href="signup.html" id="cta-start-trial">
+                <i data-lucide="user-plus" class="me-2"></i> আজই আপনার বিনামূল্যে ট্রায়াল শুরু করুন
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900-custom text-light py-4">
+        <div class="container text-center text-md-start d-md-flex justify-content-between align-items-center">
+            <div class="mb-3 mb-md-0">
+                <p class="mb-0" id="footer-copyright">&copy; <span id="current-year"></span> আইনপ্রহরী. সর্বস্বত্ব সংরক্ষিত।</p>
+            </div>
+            <div class="d-flex justify-content-center gap-4">
+                <a href="#" class="text-light text-decoration-none hover-white" id="footer-privacy">গোপনীয়তা নীতি</a>
+                <a href="#" class="text-light text-decoration-none hover-white" id="footer-terms">পরিষেবার শর্তাবলী</a>
+                <a href="#" class="text-light text-decoration-none hover-white" id="footer-sitemap">সাইটম্যাপ</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS CDN (Bundle with Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!-- Custom JavaScript for Language Switching -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Lucide icons
+            lucide.createIcons();
+
+            // Content object for both English and Bengali
+            const content = {
+                en: {
+                    appName: "AdvocatePro",
+                    nav: {
+                        features: "Features",
+                        roles: "Roles",
+                        contact: "Contact",
+                        login: "Login",
+                        signUp: "Sign Up",
+                    },
+                    hero: {
+                        headline: "Streamline Your Legal Practice with Precision",
+                        highlight: "Precision",
+                        tagline: "The ultimate management system for advocates and criminology professionals, designed to enhance efficiency, accuracy, and client satisfaction.",
+                        getStarted: "Get Started Free",
+                        learnMore: "Learn More",
+                    },
+                    features: {
+                        heading: "Key Features Designed for You",
+                        subheading: "Our system offers a comprehensive suite of tools to manage every aspect of your legal and criminology operations.",
+                        caseManagement: {
+                            title: "Case Management",
+                            description: "Organize cases, track progress, manage documents, and set reminders with ease.",
+                        },
+                        clientRelationship: {
+                            title: "Client Relationship",
+                            description: "Maintain detailed client profiles, communication logs, and secure client portals.",
+                        },
+                        evidenceTracking: {
+                            title: "Evidence Tracking",
+                            description: "Securely log and manage all forms of evidence, ensuring chain of custody.",
+                        },
+                        documentAutomation: {
+                            title: "Document Automation",
+                            description: "Generate legal documents and reports quickly with customizable templates.",
+                        },
+                        analyticsReporting: {
+                            title: "Analytics & Reporting",
+                            description: "Gain insights into your practice's performance with powerful analytics and custom reports.",
+                        },
+                        courtScheduling: {
+                            title: "Court Date Scheduling",
+                            description: "Never miss a deadline with integrated calendar and automated court date reminders.",
+                        },
+                    },
+                    roles: {
+                        heading: "Our User Roles",
+                        subheading: "Ainprohori is designed to meet the needs of various users, with specific functionalities for each role.",
+                        admin: {
+                            title: "Administrator (Admin)",
+                            description: "Oversees user management, system data integrity, role assignment, and smooth platform operations.",
+                            features: [
+                                "User Registration & Verification",
+                                "Case & Crime Status Management",
+                                "System Logs & Analytics",
+                                "Law List & Legal Reference Management",
+                                "Notification & Communication Management",
+                            ],
+                        },
+                        advocate: {
+                            title: "Advocate",
+                            description: "Licensed legal professionals who represent clients in legal matters, managing tasks with digital tools.",
+                            features: [
+                                "User Registration & Profile Management",
+                                "Consultation Booking & Calendar Management",
+                                "Case Management & Assignment Handling",
+                                "Notification & Reminder System",
+                                "Document Upload & Legal Filing",
+                            ],
+                        },
+                        police: {
+                            title: "Police Officer",
+                            description: "Investigate crimes, submit reports, and track case progress.",
+                            features: [
+                                "Officer List & Management",
+                                "Case Information Management",
+                                "Investigation Categories & Report Submission",
+                                "Crime Scene Monitoring",
+                                "Final Report & Charge Sheet",
+                            ],
+                        },
+                        judge: {
+                            title: "Judge",
+                            description: "Manages case proceedings, schedules hearings, and delivers digital verdicts.",
+                            features: [
+                                "Authentication & Secure Access",
+                                "Judge Dashboard",
+                                "Case Review Panel",
+                                "Hearing Schedule Management",
+                                "Verdict Submission Panel",
+                            ],
+                        },
+                        citizen: {
+                            title: "Citizen",
+                            description: "Accesses legal services, reports crimes, and tracks case progress.",
+                            features: [
+                                "Secure Registration & Login",
+                                "Book Legal Consultations",
+                                "Crime Reporting Portal",
+                                "Case & Report Status Tracking",
+                                "Notifications & Alerts",
+                            ],
+                        },
+                    },
+                    cta: {
+                        heading: "Ready to Transform Your Practice?",
+                        tagline: "Join hundreds of legal professionals who are already experiencing the benefits of a streamlined and efficient management system.",
+                        startTrial: "Start Your Free Trial Today",
+                    },
+                    footer: {
+                        copyright: "Ainprohori. All rights reserved.",
+                        privacyPolicy: "Privacy Policy",
+                        termsOfService: "Terms of Service",
+                        sitemap: "Sitemap",
+                    },
+                    dropdown: { // New translations for the dropdown
+                        header: "Select Role for Login",
+                        citizen: "Citizen",
+                        advocate: "Advocate",
+                        police: "Police Officer",
+                        judge: "Judge",
+                        admin: "Administrator",
+                    }
+                },
+                bn: {
+                    appName: "আইনপ্রহরী",
+                    nav: {
+                        features: "বৈশিষ্ট্যসমূহ",
+                        roles: "ভূমিকা",
+                        contact: "যোগাযোগ",
+                        login: "প্রবেশ করুন",
+                        signUp: "নিবন্ধন করুন",
+                    },
+                    hero: {
+                        headline: "আইন ও অপরাধ ব্যবস্থাপনায় আধুনিক সমাধান",
+                        highlight: "আধুনিক সমাধান",
+                        tagline: "আইনজীবী এবং অপরাধবিদ্যা পেশাদারদের জন্য তৈরি একটি সমন্বিত প্ল্যাটফর্ম, যা দক্ষতা, স্বচ্ছতা এবং জবাবদিহিতা নিশ্চিত করে।",
+                        getStarted: "এখনই শুরু করুন",
+                        learnMore: "আরও জানুন",
+                    },
+                    features: {
+                        heading: "আমাদের প্রধান বৈশিষ্ট্যসমূহ",
+                        subheading: "আপনার আইনি ও অপরাধবিদ্যা কার্যক্রম পরিচালনার জন্য আমরা একটি বিস্তৃত টুলস সেট অফার করি।",
+                        caseManagement: {
+                            title: "মামলা ব্যবস্থাপনা",
+                            description: "মামলা সংগঠিত করুন, অগ্রগতি ট্র্যাক করুন, নথি পরিচালনা করুন এবং সহজে অনুস্মারক সেট করুন।",
+                        },
+                        clientRelationship: {
+                            title: "ক্লায়েন্ট সম্পর্ক",
+                            description: "বিস্তারিত ক্লায়েন্ট প্রোফাইল, যোগাযোগ লগ এবং সুরক্ষিত ক্লায়েন্ট পোর্টাল বজায় রাখুন।",
+                        },
+                        evidenceTracking: {
+                            title: "প্রমাণ ট্র্যাকিং",
+                            description: "সব ধরনের প্রমাণ নিরাপদে লগ করুন এবং পরিচালনা করুন, চেইন অফ কাস্টডি নিশ্চিত করুন।",
+                        },
+                        documentAutomation: {
+                            title: "নথি স্বয়ংক্রিয়করণ",
+                            description: "কাস্টমাইজযোগ্য টেমপ্লেট সহ দ্রুত আইনি নথি এবং রিপোর্ট তৈরি করুন।",
+                        },
+                        analyticsReporting: {
+                            title: "বিশ্লেষণ ও প্রতিবেদন",
+                            description: "শক্তিশালী বিশ্লেষণ এবং কাস্টম রিপোর্টের মাধ্যমে আপনার অনুশীলনের কর্মক্ষমতা সম্পর্কে অন্তর্দৃষ্টি লাভ করুন।",
+                        },
+                        courtScheduling: {
+                            title: "আদালতের তারিখ নির্ধারণ",
+                            description: "একীভূত ক্যালেন্ডার এবং স্বয়ংক্রিয় আদালতের তারিখ অনুস্মারক সহ কোনো সময়সীমা মিস করবেন না।",
+                        },
+                    },
+                    roles: {
+                        heading: "আমাদের ব্যবহারকারী ভূমিকা",
+                        subheading: "আইনপ্রহরী বিভিন্ন ব্যবহারকারীর প্রয়োজন মেটাতে ডিজাইন করা হয়েছে, প্রতিটি ভূমিকার জন্য নির্দিষ্ট কার্যকারিতা সহ।",
+                        admin: {
+                            title: "প্রশাসক (Admin)",
+                            description: "ব্যবহারকারী ব্যবস্থাপনা, সিস্টেম ডেটা অখণ্ডতা, ভূমিকা নির্ধারণ এবং প্ল্যাটফর্মের মসৃণ অপারেশন তত্ত্বাবধান করেন।",
+                            features: [
+                                "ব্যবহারকারী নিবন্ধন ও যাচাইকরণ",
+                                "মামলা ও অপরাধ স্থিতি ব্যবস্থাপনা",
+                                "সিস্টেম লগ ও বিশ্লেষণ",
+                                "আইন তালিকা ও আইনি রেফারেন্স ব্যবস্থাপনা",
+                                "বিজ্ঞপ্তি ও যোগাযোগ ব্যবস্থাপনা",
+                            ],
+                        },
+                        advocate: {
+                            title: "আইনজীবী (Advocate)",
+                            description: "আইনি পেশাদার যারা ক্লায়েন্টদের আইনি বিষয়ে প্রতিনিধিত্ব করেন, ডিজিটাল সরঞ্জাম ব্যবহার করে কাজ পরিচালনা করেন।",
+                            features: [
+                                "ব্যবহারকারী নিবন্ধন ও প্রোফাইল ব্যবস্থাপনা",
+                                "পরামর্শ বুকিং ও ক্যালেন্ডার ব্যবস্থাপনা",
+                                "মামলা ব্যবস্থাপনা ও কার্যভার",
+                                "বিজ্ঞপ্তি ও অনুস্মারক সিস্টেম",
+                                "নথি আপলোড ও আইনি ফাইল করা",
+                            ],
+                        },
+                        police: {
+                            title: "পুলিশ কর্মকর্তা (Police Officer)",
+                            description: "অপরাধের তদন্ত করেন, রিপোর্ট জমা দেন এবং মামলার অগ্রগতি ট্র্যাক করেন।",
+                            features: [
+                                "অফিসার তালিকা ও ব্যবস্থাপনা",
+                                "মামলার তথ্য ব্যবস্থাপনা",
+                                "তদন্তের বিভাগ ও রিপোর্ট জমা",
+                                "অপরাধ দৃশ্য পর্যবেক্ষণ",
+                                "চূড়ান্ত প্রতিবেদন ও চার্জ শীট",
+                            ],
+                        },
+                        judge: {
+                            title: "বিচারক (Judge)",
+                            description: "মামলার কার্যক্রম পরিচালনা করেন, শুনানি নির্ধারণ করেন এবং ডিজিটাল রায় প্রদান করেন।",
+                            features: [
+                                "প্রমাণীকরণ ও সুরক্ষিত অ্যাক্সেস",
+                                "বিচারক ড্যাশবোর্ড",
+                                "মামলা পর্যালোচনা প্যানেল",
+                                "শুনানি সময়সূচী ব্যবস্থাপনা",
+                                "রায় জমা প্যানেল",
+                            ],
+                        },
+                        citizen: {
+                            title: "নাগরিক (Citizen)",
+                            description: "আইনি পরিষেবা অ্যাক্সেস করেন, অপরাধের রিপোর্ট করেন এবং তাদের মামলার অগ্রগতি ট্র্যাক করেন।",
+                            features: [
+                                "নিরাপদ নিবন্ধন ও লগইন",
+                                "আইনি পরামর্শ বুকিং",
+                                "অপরাধ রিপোর্টিং পোর্টাল",
+                                "মামলা ও রিপোর্ট স্থিতি ট্র্যাকিং",
+                                "বিজ্ঞপ্তি ও সতর্কতা",
+                            ],
+                        },
+                    },
+                    cta: {
+                        heading: "আপনার আইনি অনুশীলনকে রূপান্তরিত করতে প্রস্তুত?",
+                        tagline: "শত শত আইনি পেশাদারদের সাথে যোগ দিন যারা ইতিমধ্যেই একটি সুসংহত এবং দক্ষ ব্যবস্থাপনা সিস্টেমের সুবিধা উপভোগ করছেন।",
+                        startTrial: "আজই আপনার বিনামূল্যে ট্রায়াল শুরু করুন",
+                    },
+                    footer: {
+                        copyright: "আইনপ্রহরী. সর্বস্বত্ব সংরক্ষিত।",
+                        privacyPolicy: "গোপনীয়তা নীতি",
+                        termsOfService: "পরিষেবার শর্তাবলী",
+                        sitemap: "সাইটম্যাপ",
+                    },
+                    dropdown: { // New translations for the dropdown
+                        header: "লগইন করার জন্য ভূমিকা নির্বাচন করুন",
+                        citizen: "নাগরিক",
+                        advocate: "আইনজীবী",
+                        police: "পুলিশ কর্মকর্তা",
+                        judge: "বিচারক",
+                        admin: "প্রশাসক",
+                    }
+                },
+            };
+
+            let currentLang = 'en'; // Initial language
+
+            // Get elements that will be updated
+            const elementsToUpdate = {
+                appName: document.getElementById('app-name'),
+                navFeatures: document.getElementById('nav-features'),
+                navRoles: document.getElementById('nav-roles'),
+                navContact: document.getElementById('nav-contact'),
+                navLogin: document.getElementById('nav-login'),
+                navSignup: document.getElementById('nav-signup'),
+                languageToggle: document.getElementById('language-toggle'),
+
+                heroHeadline: document.getElementById('hero-headline'),
+                heroTagline: document.getElementById('hero-tagline'),
+                heroBtnGetStarted: document.getElementById('hero-btn-get-started'),
+                heroBtnLearnMore: document.getElementById('hero-btn-learn-more'),
+
+                featuresHeading: document.getElementById('features-heading'),
+                featuresSubheading: document.getElementById('features-subheading'),
+                featCaseManagementTitle: document.getElementById('feat-case-management-title'),
+                featCaseManagementDesc: document.getElementById('feat-case-management-desc'),
+                featClientRelationshipTitle: document.getElementById('feat-client-relationship-title'),
+                featClientRelationshipDesc: document.getElementById('feat-client-relationship-desc'),
+                featEvidenceTrackingTitle: document.getElementById('feat-evidence-tracking-title'),
+                featEvidenceTrackingDesc: document.getElementById('feat-evidence-tracking-desc'),
+                featDocumentAutomationTitle: document.getElementById('feat-document-automation-title'),
+                featDocumentAutomationDesc: document.getElementById('feat-document-automation-desc'),
+                featAnalyticsReportingTitle: document.getElementById('feat-analytics-reporting-title'),
+                featAnalyticsReportingDesc: document.getElementById('feat-analytics-reporting-desc'),
+                featCourtSchedulingTitle: document.getElementById('feat-court-scheduling-title'),
+                featCourtSchedulingDesc: document.getElementById('feat-court-scheduling-desc'),
+
+                rolesHeading: document.getElementById('roles-heading'),
+                rolesSubheading: document.getElementById('roles-subheading'),
+                roleAdminTitle: document.getElementById('role-admin-title'),
+                roleAdminDesc: document.getElementById('role-admin-desc'),
+                roleAdvocateTitle: document.getElementById('role-advocate-title'),
+                roleAdvocateDesc: document.getElementById('role-advocate-desc'),
+                rolePoliceTitle: document.getElementById('role-police-title'),
+                rolePoliceDesc: document.getElementById('role-police-desc'),
+                roleJudgeTitle: document.getElementById('role-judge-title'),
+                roleJudgeDesc: document.getElementById('role-judge-desc'),
+                roleCitizenTitle: document.getElementById('role-citizen-title'),
+                roleCitizenDesc: document.getElementById('role-citizen-desc'),
+
+                ctaHeading: document.getElementById('cta-heading'),
+                ctaTagline: document.getElementById('cta-tagline'),
+                ctaStartTrial: document.getElementById('cta-start-trial'),
+
+                footerCopyright: document.getElementById('footer-copyright'),
+                currentYear: document.getElementById('current-year'),
+                footerPrivacy: document.getElementById('footer-privacy'),
+                footerTerms: document.getElementById('footer-terms'),
+                footerSitemap: document.getElementById('footer-sitemap'),
+
+                // New dropdown elements
+                dropdownHeaderText: document.getElementById('dropdown-header-text'),
+                dropdownCitizen: document.getElementById('dropdown-citizen'),
+                dropdownAdvocate: document.getElementById('dropdown-advocate'),
+                dropdownPolice: document.getElementById('dropdown-police'),
+                dropdownJudge: document.getElementById('dropdown-judge'),
+                dropdownAdmin: document.getElementById('dropdown-admin'),
+                dropdownTextCitizen: document.getElementById('dropdown-text-citizen'),
+                dropdownTextAdvocate: document.getElementById('dropdown-text-advocate'),
+                dropdownTextPolice: document.getElementById('dropdown-text-police'),
+                dropdownTextJudge: document.getElementById('dropdown-text-judge'),
+                dropdownTextAdmin: document.getElementById('dropdown-text-admin'),
+            };
+
+            function updateContent() {
+                const t = content[currentLang];
+
+                // Navbar
+                if (elementsToUpdate.appName) elementsToUpdate.appName.textContent = t.appName;
+                if (elementsToUpdate.navFeatures) elementsToUpdate.navFeatures.textContent = t.nav.features;
+                if (elementsToUpdate.navRoles) elementsToUpdate.navRoles.textContent = t.nav.roles;
+                if (elementsToUpdate.navContact) elementsToUpdate.navContact.textContent = t.nav.contact;
+                if (elementsToUpdate.navLogin) elementsToUpdate.navLogin.innerHTML = `<i data-lucide="log-in" class="me-2"></i> ${t.nav.login}`;
+                if (elementsToUpdate.navSignup) elementsToUpdate.navSignup.innerHTML = `<i data-lucide="user-plus" class="me-2"></i> ${t.nav.signUp}`;
+                if (elementsToUpdate.languageToggle) elementsToUpdate.languageToggle.textContent = currentLang === 'en' ? 'বাংলা' : 'English';
+
+                // Hero Section
+                if (elementsToUpdate.heroHeadline) {
+                    const headlineParts = t.hero.headline.split(t.hero.highlight);
+                    elementsToUpdate.heroHeadline.innerHTML = `${headlineParts[0]}<span class="highlight">${t.hero.highlight}</span>${headlineParts[1]}`;
+                }
+                if (elementsToUpdate.heroTagline) elementsToUpdate.heroTagline.textContent = t.hero.tagline;
+                if (elementsToUpdate.heroBtnGetStarted) elementsToUpdate.heroBtnGetStarted.innerHTML = `<i data-lucide="user-plus" class="me-2"></i> ${t.hero.getStarted}`;
+                if (elementsToUpdate.heroBtnLearnMore) elementsToUpdate.heroBtnLearnMore.innerHTML = `<i data-lucide="bell" class="me-2"></i> ${t.hero.learnMore}`;
+
+                // Features Section
+                if (elementsToUpdate.featuresHeading) elementsToUpdate.featuresHeading.textContent = t.features.heading;
+                if (elementsToUpdate.featuresSubheading) elementsToUpdate.featuresSubheading.textContent = t.features.subheading;
+                if (elementsToUpdate.featCaseManagementTitle) elementsToUpdate.featCaseManagementTitle.textContent = t.features.caseManagement.title;
+                if (elementsToUpdate.featCaseManagementDesc) elementsToUpdate.featCaseManagementDesc.textContent = t.features.caseManagement.description;
+                if (elementsToUpdate.featClientRelationshipTitle) elementsToUpdate.featClientRelationshipTitle.textContent = t.features.clientRelationship.title;
+                if (elementsToUpdate.featClientRelationshipDesc) elementsToUpdate.featClientRelationshipDesc.textContent = t.features.clientRelationship.description;
+                if (elementsToUpdate.featEvidenceTrackingTitle) elementsToUpdate.featEvidenceTrackingTitle.textContent = t.features.evidenceTracking.title;
+                if (elementsToUpdate.featEvidenceTrackingDesc) elementsToUpdate.featEvidenceTrackingDesc.textContent = t.features.evidenceTracking.description;
+                if (elementsToUpdate.featDocumentAutomationTitle) elementsToUpdate.featDocumentAutomationTitle.textContent = t.features.documentAutomation.title;
+                if (elementsToUpdate.featDocumentAutomationDesc) elementsToUpdate.featDocumentAutomationDesc.textContent = t.features.documentAutomation.description;
+                if (elementsToUpdate.featAnalyticsReportingTitle) elementsToUpdate.featAnalyticsReportingTitle.textContent = t.features.analyticsReporting.title;
+                if (elementsToUpdate.featAnalyticsReportingDesc) elementsToUpdate.featAnalyticsReportingDesc.textContent = t.features.analyticsReporting.description;
+                if (elementsToUpdate.featCourtSchedulingTitle) elementsToUpdate.featCourtSchedulingTitle.textContent = t.features.courtScheduling.title;
+                if (elementsToUpdate.featCourtSchedulingDesc) elementsToUpdate.featCourtSchedulingDesc.textContent = t.features.courtScheduling.description;
+
+                // Roles Section
+                if (elementsToUpdate.rolesHeading) elementsToUpdate.rolesHeading.textContent = t.roles.heading;
+                if (elementsToUpdate.rolesSubheading) elementsToUpdate.rolesSubheading.textContent = t.roles.subheading;
+                if (elementsToUpdate.roleAdminTitle) elementsToUpdate.roleAdminTitle.textContent = t.roles.admin.title;
+                if (elementsToUpdate.roleAdminDesc) elementsToUpdate.roleAdminDesc.textContent = t.roles.admin.description;
+                if (elementsToUpdate.roleAdvocateTitle) elementsToUpdate.roleAdvocateTitle.textContent = t.roles.advocate.title;
+                if (elementsToUpdate.roleAdvocateDesc) elementsToUpdate.roleAdvocateDesc.textContent = t.roles.advocate.description;
+                if (elementsToUpdate.rolePoliceTitle) elementsToUpdate.rolePoliceTitle.textContent = t.roles.police.title;
+                if (elementsToUpdate.rolePoliceDesc) elementsToUpdate.rolePoliceDesc.textContent = t.roles.police.description;
+                if (elementsToUpdate.roleJudgeTitle) elementsToUpdate.roleJudgeTitle.textContent = t.roles.judge.title;
+                if (elementsToUpdate.roleJudgeDesc) elementsToUpdate.roleJudgeDesc.textContent = t.roles.judge.description;
+                if (elementsToUpdate.roleCitizenTitle) elementsToUpdate.roleCitizenTitle.textContent = t.roles.citizen.title;
+                if (elementsToUpdate.roleCitizenDesc) elementsToUpdate.roleCitizenDesc.textContent = t.roles.citizen.description;
+
+                // Update role features lists
+                const updateRoleFeatures = (roleKey, featuresArray) => {
+                    const ulElement = document.getElementById(`role-${roleKey}-features`);
+                    if (ulElement) {
+                        ulElement.innerHTML = ''; // Clear existing features
+                        featuresArray.forEach(feature => {
+                            const li = document.createElement('li');
+                            li.innerHTML = `<i data-lucide="check" class="me-2 text-primary-custom-icon"></i> ${feature}`;
+                            ulElement.appendChild(li);
+                        });
+                    }
+                };
+                updateRoleFeatures('admin', t.roles.admin.features);
+                updateRoleFeatures('advocate', t.roles.advocate.features);
+                updateRoleFeatures('police', t.roles.police.features);
+                updateRoleFeatures('judge', t.roles.judge.features);
+                updateRoleFeatures('citizen', t.roles.citizen.features);
+
+
+                // CTA Section
+                if (elementsToUpdate.ctaHeading) elementsToUpdate.ctaHeading.textContent = t.cta.heading;
+                if (elementsToUpdate.ctaTagline) elementsToUpdate.ctaTagline.textContent = t.cta.tagline;
+                if (elementsToUpdate.ctaStartTrial) elementsToUpdate.ctaStartTrial.innerHTML = `<i data-lucide="user-plus" class="me-2"></i> ${t.cta.startTrial}`;
+
+                // Footer
+                if (elementsToUpdate.currentYear) elementsToUpdate.currentYear.textContent = new Date().getFullYear();
+                if (elementsToUpdate.footerCopyright) elementsToUpdate.footerCopyright.textContent = `© ${new Date().getFullYear()} ${t.footer.copyright}`;
+                if (elementsToUpdate.footerPrivacy) elementsToUpdate.footerPrivacy.textContent = t.footer.privacyPolicy;
+                if (elementsToUpdate.footerTerms) elementsToUpdate.footerTerms.textContent = t.footer.termsOfService;
+                if (elementsToUpdate.footerSitemap) elementsToUpdate.footerSitemap.textContent = t.footer.sitemap;
+
+                // Dropdown translations
+                if (elementsToUpdate.dropdownHeaderText) elementsToUpdate.dropdownHeaderText.textContent = t.dropdown.header;
+                if (elementsToUpdate.dropdownTextCitizen) elementsToUpdate.dropdownTextCitizen.textContent = t.dropdown.citizen;
+                if (elementsToUpdate.dropdownTextAdvocate) elementsToUpdate.dropdownTextAdvocate.textContent = t.dropdown.advocate;
+                if (elementsToUpdate.dropdownTextPolice) elementsToUpdate.dropdownTextPolice.textContent = t.dropdown.police;
+                if (elementsToUpdate.dropdownTextJudge) elementsToUpdate.dropdownTextJudge.textContent = t.dropdown.judge;
+                if (elementsToUpdate.dropdownTextAdmin) elementsToUpdate.dropdownTextAdmin.textContent = t.dropdown.admin;
+
+
+                lucide.createIcons(); // Re-create Lucide icons after content update
+            }
+
+            // Event listener for language toggle button
+            if (elementsToUpdate.languageToggle) {
+                elementsToUpdate.languageToggle.addEventListener('click', () => {
+                    currentLang = currentLang === 'en' ? 'bn' : 'en';
+                    document.documentElement.lang = currentLang; // Update html lang attribute
+                    updateContent();
+                });
+            }
+
+            // Role dropdown logic
+            const loginDropdownWrapper = document.getElementById('login-dropdown-wrapper');
+            const roleDropdownMenu = loginDropdownWrapper ? loginDropdownWrapper.querySelector('.role-dropdown-menu') : null;
+
+            if (loginDropdownWrapper && roleDropdownMenu) {
+                // Handle click on dropdown items
+                roleDropdownMenu.querySelectorAll('.role-dropdown-item').forEach(item => {
+                    item.addEventListener('click', (event) => {
+                        event.preventDefault(); // Prevent default link behavior
+                        const selectedRole = item.dataset.role;
+                        // Redirect to login.html with the selected role
+                        window.location.href = `login.html?role=${selectedRole}`;
+                    });
+                });
+            }
+
+            // Initial content load
+            updateContent();
+        });
+    </script>
+</body>
+</html>
